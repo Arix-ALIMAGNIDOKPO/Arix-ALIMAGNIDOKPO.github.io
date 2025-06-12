@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Award, Users, Code } from 'lucide-react';
+import { ExternalLink, Award, Users, Code, Github } from 'lucide-react';
 
 const WorkSection = () => {
   const projects = [

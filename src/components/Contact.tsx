@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin as LinkedIn, Github, Mail, Globe, MapPin, Calendar } from 'lucide-react';
+import { Linkedin as LinkedIn, Github, Mail, Globe, MapPin, Calendar, BookOpen, Users } from 'lucide-react';
 
 const Contact = () => {
   return (
