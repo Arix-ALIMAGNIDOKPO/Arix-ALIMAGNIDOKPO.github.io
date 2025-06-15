@@ -107,7 +107,7 @@ const ResearchSection = () => {
           </p>
 
           {/* Research Areas Cards */}
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-12">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
             {researchAreas.map((area, index) => (
               <div key={index} className={`bg-gradient-to-r ${area.color} rounded-xl p-4 md:p-6 text-white hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl`}>
                 <div className="text-base md:text-lg font-bold mb-2">{area.title}</div>
