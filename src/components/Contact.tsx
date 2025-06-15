@@ -71,7 +71,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-8">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 md:p-8 text-left hover:bg-white/70 transition-all duration-300 hover:shadow-lg">
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 flex items-center">
               <div className="w-2 h-8 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full mr-3"></div>
@@ -99,10 +99,6 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        
-        <p className="text-sm text-gray-600">
-          {t('builtWith')} <span className="text-blue-600 font-medium">React & Tailwind CSS</span>
-        </p>
       </div>
     </section>
   );

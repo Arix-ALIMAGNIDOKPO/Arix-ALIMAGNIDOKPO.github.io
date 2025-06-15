@@ -16,14 +16,10 @@ const Header = () => {
   return (
     <header className="w-full px-4 md:px-12 py-4 md:py-6 bg-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo - Design sophistiqué */}
+        {/* Logo - Nom en italique simple */}
         <div className="text-2xl md:text-3xl font-serif text-gray-900 tracking-wide">
-          <span className="font-light bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
-            Arix
-          </span>
-          <span className="mx-2 text-blue-600 font-bold text-3xl md:text-4xl">•</span>
-          <span className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Alimagnidokpo
+          <span className="italic font-medium bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
+            Arix Alimagnidokpo
           </span>
         </div>
         

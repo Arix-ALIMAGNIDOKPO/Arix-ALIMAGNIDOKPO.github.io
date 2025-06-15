@@ -1,6 +1,7 @@
 import React from 'react';
 import { Download, Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import profileImage from '../assets/WhatsApp Image 2025-06-15 à 02.26.39_af9588da.jpg';
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -14,25 +15,19 @@ const Hero = () => {
       </div>
       
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        {/* Nom avec design ultra sophistiqué */}
-        <div className="mb-8 md:mb-12">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif leading-tight mb-4">
-            <span className="block md:inline font-light bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 bg-clip-text text-transparent tracking-wide">
-              Arix
-            </span>
-            <span className="mx-2 md:mx-4 text-blue-600 font-bold text-5xl sm:text-6xl md:text-8xl lg:text-9xl inline-block animate-pulse">
-              •
-            </span>
-            <span className="block md:inline font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide">
-              Alimagnidokpo
-            </span>
-          </h1>
-          
-          {/* Sparkle decoration */}
-          <div className="flex justify-center items-center space-x-2 mt-4">
-            <Sparkles className="text-blue-400 w-4 h-4 md:w-5 md:h-5 animate-pulse" />
-            <div className="h-px w-16 md:w-24 bg-gradient-to-r from-transparent via-blue-400 to-transparent"></div>
-            <Sparkles className="text-purple-400 w-4 h-4 md:w-5 md:h-5 animate-pulse" style={{ animationDelay: '0.5s' }} />
+        {/* Photo de profil */}
+        <div className="mb-8 md:mb-12 flex justify-center">
+          <div className="relative">
+            <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105">
+              <img 
+                src={profileImage} 
+                alt="Arix Alimagnidokpo" 
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            {/* Decoration autour de la photo */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl animate-pulse"></div>
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full border-2 border-white animate-bounce"></div>
           </div>
         </div>
         

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, BookOpen, Users, ExternalLink } from 'lucide-react';
+import { Award, BookOpen, Users, Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const ResearchSection = () => {
@@ -122,9 +122,13 @@ const ResearchSection = () => {
             </div>
             
             <div className="flex justify-center lg:justify-start">
-              <a href="https://arix-alimagnidokpo.github.io" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl text-sm md:text-base">
-                <ExternalLink size={16} className="mr-2" />
-                {t('completePortfolio')}
+              <a 
+                href="/cv-arix-alimagnidokpo.pdf" 
+                download
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl text-sm md:text-base"
+              >
+                <Download size={16} className="mr-2" />
+                {t('downloadCV')}
               </a>
             </div>
           </div>
