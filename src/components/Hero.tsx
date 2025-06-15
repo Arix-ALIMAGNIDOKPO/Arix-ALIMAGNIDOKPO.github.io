@@ -10,8 +10,8 @@ const Hero = () => {
     <section id="home" className="w-full px-4 md:px-12 py-16 md:py-24 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-20 -right-20 w-60 h-60 sm:-top-40 sm:-right-40 sm:w-80 sm:h-80 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 -left-20 w-60 h-60 sm:-bottom-40 sm:-left-40 sm:w-80 sm:h-80 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
       </div>
       
       <div className="max-w-5xl mx-auto text-center relative z-10">
@@ -23,7 +23,7 @@ const Hero = () => {
             <div className="absolute -inset-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl"></div>
             
             {/* Photo principale - format rectangulaire pour afficher toute la photo */}
-            <div className="relative w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-88 rounded-3xl overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-105 group-hover:rotate-1">
+            <div className="relative w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 lg:w-72 lg:h-88 rounded-3xl overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-105 group-hover:rotate-1">
               <img 
                 src={profileImage} 
                 alt="Arix Alimagnidokpo" 
