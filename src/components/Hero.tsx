@@ -45,7 +45,7 @@ const Hero = () => {
           {t('heroDescription')}
           <span className="mx-2 text-2xl">🤖 🌍</span> 
           <br className="hidden sm:block" />
-          <span className="text-blue-600 font-medium">Basé à Cotonou, Bénin.</span>
+          <span className="text-blue-600 font-medium">{t('basedIn')}</span>
         </p>
         
         <p className="text-base md:text-lg text-gray-600 mb-8 md:mb-10 font-medium">
