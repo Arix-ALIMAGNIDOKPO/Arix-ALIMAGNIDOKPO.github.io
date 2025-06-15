@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award, BookOpen, Users, Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import brusselsImage from '../assets/WhatsApp Image 2025-06-15 à 02.46.40_1cd266d6.jpg';
 
 const ResearchSection = () => {
   const { t } = useLanguage();
@@ -12,7 +13,9 @@ const ResearchSection = () => {
       description: "ARES-Belgium funded project on automated scheduling systems using constraint programming",
       descriptionFr: "Projet financé par ARES-Belgique sur les systèmes de planification automatisée utilisant la programmation par contraintes",
       icon: "💰",
-      year: "2024-2025"
+      year: "2024-2025",
+      image: brusselsImage,
+      imageAlt: "Équipe de recherche à Bruxelles"
     },
     {
       title: "Deep Learning Indaba 2024",
@@ -20,7 +23,9 @@ const ResearchSection = () => {
       description: "Participant at Africa's largest AI conference in Dakar, Senegal",
       descriptionFr: "Participant à la plus grande conférence IA d'Afrique à Dakar, Sénégal",
       icon: "🌍",
-      year: "2024"
+      year: "2024",
+      image: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageAlt: "Conférence Deep Learning Indaba"
     },
     {
       title: "SENIA 2024 Hackathon",
@@ -28,7 +33,9 @@ const ResearchSection = () => {
       description: "2nd Place for Alodometo - Multimodal AI for Fon language",
       descriptionFr: "2ème Place pour Alodometo - IA Multimodale pour la langue Fon",
       icon: "🥈",
-      year: "2024"
+      year: "2024",
+      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageAlt: "Hackathon SENIA 2024"
     },
     {
       title: "Teckbot Robotics Challenge",
@@ -36,7 +43,9 @@ const ResearchSection = () => {
       description: "1st Place for autonomous waste collection robot",
       descriptionFr: "1ère Place pour robot autonome de collecte de déchets",
       icon: "🥇",
-      year: "2024"
+      year: "2024",
+      image: "https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageAlt: "Défi Robotique Teckbot"
     }
   ];
 
@@ -104,18 +113,40 @@ const ResearchSection = () => {
               {t('researchDescription')}
             </p>
             
-            <div className="space-y-4 md:space-y-6 mb-8">
+            <div className="space-y-6 md:space-y-8 mb-8">
               {achievements.map((achievement, index) => (
-                <div key={index} className="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-white/70 rounded-xl hover:bg-white/90 transition-all duration-300 hover:shadow-md">
-                  <div className="text-2xl md:text-3xl mt-1 hover:animate-bounce">{achievement.icon}</div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-gray-800 text-sm md:text-base">
-                      {t('language') === 'fr' ? achievement.titleFr : achievement.title}
+                <div key={index} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 hover:bg-white/95 transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1">
+                  <div className="flex items-start space-x-4 md:space-x-6">
+                    {/* Image */}
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                        <img 
+                          src={achievement.image} 
+                          alt={achievement.imageAlt}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
                     </div>
-                    <div className="text-gray-600 text-xs md:text-sm leading-relaxed">
-                      {t('language') === 'fr' ? achievement.descriptionFr : achievement.description}
+                    
+                    {/* Contenu */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="font-bold text-gray-800 text-sm md:text-base leading-tight">
+                          {t('language') === 'fr' ? achievement.titleFr : achievement.title}
+                        </div>
+                        <div className="text-2xl md:text-3xl ml-2 group-hover:animate-bounce flex-shrink-0">
+                          {achievement.icon}
+                        </div>
+                      </div>
+                      
+                      <div className="text-gray-600 text-xs md:text-sm leading-relaxed mb-2">
+                        {t('language') === 'fr' ? achievement.descriptionFr : achievement.description}
+                      </div>
+                      
+                      <div className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">
+                        {achievement.year}
+                      </div>
                     </div>
-                    <div className="text-blue-600 text-xs font-medium mt-1">{achievement.year}</div>
                   </div>
                 </div>
               ))}
