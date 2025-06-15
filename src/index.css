@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply overflow-x-hidden;
+  html,
+  body,
+  #root {
+    @apply max-w-full overflow-x-hidden;
+  }
+
+  img {
+    @apply max-w-full h-auto;
   }
 
   img {
