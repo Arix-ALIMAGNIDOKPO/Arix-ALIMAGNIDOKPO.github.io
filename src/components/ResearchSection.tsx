@@ -116,19 +116,8 @@ const ResearchSection = () => {
             <div className="space-y-6 md:space-y-8 mb-8">
               {achievements.map((achievement, index) => (
                 <div key={index} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 hover:bg-white/95 transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1">
-                  <div className="flex items-start space-x-4 md:space-x-6">
-                    {/* Image */}
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                        <img 
-                          src={achievement.image} 
-                          alt={achievement.imageAlt}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
-                    </div>
-                    
-                    {/* Contenu */}
+                  {/* Contenu principal */}
+                  <div className="flex items-start space-x-4 md:space-x-6 mb-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between mb-2">
                         <div className="font-bold text-gray-800 text-sm md:text-base leading-tight">
@@ -139,7 +128,7 @@ const ResearchSection = () => {
                         </div>
                       </div>
                       
-                      <div className="text-gray-600 text-xs md:text-sm leading-relaxed mb-2">
+                      <div className="text-gray-600 text-xs md:text-sm leading-relaxed mb-3">
                         {t('language') === 'fr' ? achievement.descriptionFr : achievement.description}
                       </div>
                       
@@ -147,6 +136,26 @@ const ResearchSection = () => {
                         {achievement.year}
                       </div>
                     </div>
+                  </div>
+                  
+                  {/* Image en bas - mise en valeur spéciale pour Bruxelles */}
+                  <div className={`w-full ${index === 0 ? 'h-48 md:h-56' : 'h-32 md:h-40'} rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500`}>
+                    <img 
+                      src={achievement.image} 
+                      alt={achievement.imageAlt}
+                      className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${
+                        index === 0 ? 'object-center' : 'object-center'
+                      }`}
+                    />
+                    {/* Overlay avec titre pour l'image de Bruxelles */}
+                    {index === 0 && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                        <div className="p-4 text-white">
+                          <div className="text-sm font-semibold">Bruxelles Central Station</div>
+                          <div className="text-xs opacity-90">Équipe de recherche ARES-Belgium</div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

@@ -15,28 +15,29 @@ const Hero = () => {
       </div>
       
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        {/* Photo de profil améliorée */}
+        {/* Photo de profil - affichage complet optimisé */}
         <div className="mb-12 md:mb-16 flex justify-center">
           <div className="relative group">
             {/* Cercles décoratifs en arrière-plan */}
-            <div className="absolute -inset-8 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-full blur-2xl animate-pulse"></div>
-            <div className="absolute -inset-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-xl"></div>
+            <div className="absolute -inset-8 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-3xl blur-2xl animate-pulse"></div>
+            <div className="absolute -inset-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl"></div>
             
-            {/* Photo principale */}
-            <div className="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-110 group-hover:rotate-2">
+            {/* Photo principale - format rectangulaire pour afficher toute la photo */}
+            <div className="relative w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-88 rounded-3xl overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-105 group-hover:rotate-1">
               <img 
                 src={profileImage} 
                 alt="Arix Alimagnidokpo" 
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
               />
               {/* Overlay subtil au survol */}
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             
             {/* Éléments décoratifs flottants */}
             <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full shadow-lg animate-bounce delay-100"></div>
             <div className="absolute -bottom-2 -left-4 w-6 h-6 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg animate-bounce delay-300"></div>
-            <div className="absolute top-1/2 -right-6 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg animate-pulse"></div>
+            <div className="absolute top-1/3 -right-6 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg animate-pulse"></div>
+            <div className="absolute bottom-1/3 -left-6 w-5 h-5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full shadow-lg animate-bounce delay-500"></div>
           </div>
         </div>
         
