@@ -72,9 +72,10 @@ const Hero = () => {
 
         {/* CTA Button avec design premium */}
         <div className="flex justify-center">
-          <a 
-            href="/cv-arix-alimagnidokpo.pdf" 
-            download
+          <a
+            href={`${import.meta.env.BASE_URL}cv-arix-alimagnidokpo.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-lg md:text-xl font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-xl hover:shadow-2xl"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
