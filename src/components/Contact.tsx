@@ -6,15 +6,15 @@ const Contact = () => {
     <section id="about" className="w-full px-6 md:px-12 py-20 bg-gradient-to-b from-blue-100 to-blue-200">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-          Let's collaborate
+          Collaborons ensemble
         </h2>
         
         <p className="text-lg md:text-xl text-gray-700 mb-12 leading-relaxed">
-          Interested in AI research, collaboration opportunities, or discussing technology for social impact? I'd love to connect!
+          Intéressé par la recherche en IA, les opportunités de collaboration, ou discuter de technologie pour l'impact social ? J'aimerais échanger avec vous !
         </p>
         
         <a href="mailto:arixalim@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-200 transform hover:scale-105 mb-16 inline-block">
-          Get in touch
+          Contactez-moi
         </a>
         
         <div className="flex justify-center space-x-8 mb-12">
@@ -40,49 +40,49 @@ const Contact = () => {
           <div className="bg-white/50 rounded-lg p-4">
             <div className="font-semibold text-gray-800 flex items-center justify-center mb-2">
               <BookOpen size={16} className="mr-2" />
-              Research Interests
+              Intérêts de Recherche
             </div>
-            <div className="text-gray-600">NLP • Ethical AI • Low-resource Languages</div>
+            <div className="text-gray-600">NLP • IA Éthique • Langues à Faibles Ressources</div>
           </div>
           <div className="bg-white/50 rounded-lg p-4">
             <div className="font-semibold text-gray-800 flex items-center justify-center mb-2">
               <MapPin size={16} className="mr-2" />
-              Current Focus
+              Focus Actuel
             </div>
-            <div className="text-gray-600">AI for Diplomacy • Government Innovation</div>
+            <div className="text-gray-600">IA pour la Diplomatie • Innovation Gouvernementale</div>
           </div>
           <div className="bg-white/50 rounded-lg p-4">
             <div className="font-semibold text-gray-800 flex items-center justify-center mb-2">
               <Users size={16} className="mr-2" />
-              Community
+              Communauté
             </div>
-            <div className="text-gray-600">FRIARE Africa • Isheero • AI Education</div>
+            <div className="text-gray-600">FRIARE Africa • Masakhane • IMAC Bénin • Isheero</div>
           </div>
         </div>
 
         <div className="bg-white/30 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Current Position</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Poste Actuel</h3>
           <div className="text-gray-700">
             <div className="font-semibold">AI Developer & Project Lead</div>
-            <div>Ministry of Foreign Affairs of Benin</div>
-            <div className="text-sm text-gray-600 mt-2">May 2025 - Present</div>
-            <div className="text-sm mt-2">Leading strategic intelligence tool development with AI integration, focusing on NLP, LLMs, and security architecture.</div>
+            <div>Ministère des Affaires Étrangères du Bénin</div>
+            <div className="text-sm text-gray-600 mt-2">Mai 2025 - Présent</div>
+            <div className="text-sm mt-2">Direction du développement d'outils d'intelligence stratégique avec intégration IA, focus sur NLP, LLMs, et architecture de sécurité.</div>
           </div>
         </div>
 
         <div className="bg-white/30 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Education</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Formation</h3>
           <div className="text-gray-700">
-            <div className="font-semibold">Bachelor's in Computer Science</div>
-            <div>Specialization in Artificial Intelligence and Applications</div>
-            <div>University of Abomey-Calavi, Benin</div>
-            <div className="text-sm text-gray-600 mt-2">Sept 2022 - Dec 2025 (Expected)</div>
-            <div className="text-sm mt-2">Student representative for AI promotion (2022-2025)</div>
+            <div className="font-semibold">Licence en Informatique</div>
+            <div>Spécialisation en Intelligence Artificielle et Applications</div>
+            <div>Université d'Abomey-Calavi, Bénin</div>
+            <div className="text-sm text-gray-600 mt-2">Sept 2022 - Déc 2025 (Prévu)</div>
+            <div className="text-sm mt-2">Représentant étudiant pour la promotion de l'IA (2022-2025)</div>
           </div>
         </div>
         
         <p className="text-sm text-gray-600">
-          Portfolio built with <span className="text-blue-600 font-medium">React & Tailwind CSS</span>
+          Portfolio construit avec <span className="text-blue-600 font-medium">React & Tailwind CSS</span>
         </p>
       </div>
     </section>

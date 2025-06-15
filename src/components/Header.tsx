@@ -5,8 +5,10 @@ const Header = () => {
   return (
     <header className="w-full px-6 md:px-12 py-6 bg-slate-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="text-4xl md:text-5xl font-serif italic text-gray-800">
-          Arix Alimagnidokpo
+        <div className="text-3xl md:text-4xl font-serif text-gray-800 tracking-wide">
+          <span className="font-light">Arix</span>
+          <span className="mx-2 text-blue-600">•</span>
+          <span className="font-medium">Alimagnidokpo</span>
         </div>
         
         <nav className="flex items-center space-x-8">

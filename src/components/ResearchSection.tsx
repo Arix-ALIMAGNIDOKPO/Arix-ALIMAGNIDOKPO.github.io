@@ -56,7 +56,7 @@ const ResearchSection = () => {
               <div className="space-y-4">
                 {/* Research Visualization */}
                 <div className="bg-gray-900 rounded-2xl p-6 text-white">
-                  <div className="text-sm mb-4 text-purple-300">Research Focus Areas</div>
+                  <div className="text-sm mb-4 text-purple-300">Domaines de Recherche</div>
                   <div className="grid grid-cols-1 gap-3">
                     {researchAreas.map((area, index) => (
                       <div key={index} className={`bg-gradient-to-r ${area.color} rounded-lg p-3`}>
@@ -69,7 +69,7 @@ const ResearchSection = () => {
                 
                 {/* Awards showcase */}
                 <div className="bg-white rounded-2xl p-4">
-                  <div className="text-sm font-semibold text-gray-800 mb-3">Recent Achievements</div>
+                  <div className="text-sm font-semibold text-gray-800 mb-3">Réalisations Récentes</div>
                   <div className="space-y-2">
                     {achievements.slice(0, 3).map((achievement, index) => (
                       <div key={index} className="flex items-center justify-between text-xs">
@@ -85,11 +85,11 @@ const ResearchSection = () => {
           
           <div className="order-1 md:order-2">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 flex items-center">
-              Research & Impact <span className="ml-3">🔬</span>
+              Recherche & Impact <span className="ml-3">🔬</span>
             </h2>
             
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              Bridging the gap between cutting-edge AI research and real-world applications for African communities. My work focuses on making AI accessible, ethical, and culturally relevant.
+              Passionné par la recherche en IA, je travaille à combler le fossé entre la recherche de pointe et les applications concrètes pour les communautés africaines. Mon travail se concentre sur rendre l'IA accessible, éthique et culturellement pertinente.
             </p>
             
             <div className="space-y-4 mb-8">
@@ -106,13 +106,9 @@ const ResearchSection = () => {
             </div>
             
             <div className="flex flex-wrap gap-4">
-              <a href="https://scholar.google.com" className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-200 transform hover:scale-105 inline-flex items-center">
-                <BookOpen size={18} className="mr-2" />
-                View Publications
-              </a>
-              <a href="https://arix-alimagnidokpo.github.io" className="bg-white hover:bg-gray-50 text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-full font-medium transition-all duration-200 transform hover:scale-105 inline-flex items-center">
+              <a href="https://arix-alimagnidokpo.github.io" className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-200 transform hover:scale-105 inline-flex items-center">
                 <ExternalLink size={18} className="mr-2" />
-                Research Portfolio
+                Portfolio Complet
               </a>
             </div>
           </div>
