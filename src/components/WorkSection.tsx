@@ -16,8 +16,8 @@ const WorkSection = () => {
       tech: ["NLP", "Multimodal AI", "Low-Resource Languages"],
       techFr: ["NLP", "IA Multimodale", "Langues à Faibles Ressources"],
       links: {
-        demo: "https://alodometo-demo.example.com",
-        article: "https://senia2024-article.example.com"
+        demo: "https://asin.bj/article/18/hackathon-challenge-multimodal-multilingue-benin-laureats-competition-presentiel-connus/",
+        article: "https://lablab.ai/event/benin-multimodal-ai-hackathon/aida/al%C9%94-do-m%C9%9B-t%C9%94-assistant-vocal-multifonctionnel"
       }
     },
     {
@@ -29,9 +29,7 @@ const WorkSection = () => {
       achievementFr: "🏛️ Projet d'Innovation Gouvernementale",
       tech: ["LLMs", "NLP", "Security", "Government Tech"],
       techFr: ["LLMs", "NLP", "Sécurité", "Tech Gouvernementale"],
-      links: {
-        website: "https://diplomatie.gouv.bj"
-      }
+      links: {}
     },
     {
       title: "FarmAdvisor - AI for Agriculture",
@@ -56,8 +54,7 @@ const WorkSection = () => {
       tech: ["Computer Vision", "Robotics", "Machine Learning"],
       techFr: ["Vision par Ordinateur", "Robotique", "Apprentissage Automatique"],
       links: {
-        website: "https://trc.tekbot.io",
-        video: "https://robotics-demo.example.com"
+        video: "https://www.instagram.com/reel/C16igYCtHJl/"
       }
     }
   ];
@@ -68,7 +65,7 @@ const WorkSection = () => {
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 flex items-center justify-center flex-wrap">
             <span>{t('featuredProjects')}</span>
-            <span className="ml-3 text-4xl md:text-5xl">🚀</span>
+            <span className="ml-3 text-4xl md:text-5xl">💡</span>
           </h2>
           
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
@@ -108,25 +105,25 @@ const WorkSection = () => {
               
               <div className="flex flex-wrap gap-3">
                 {project.links.demo && (
-                  <a href={project.links.demo} className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                  <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
                     <ExternalLink size={14} className="mr-1" />
                     {t('demo')}
                   </a>
                 )}
                 {project.links.website && (
-                  <a href={project.links.website} className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                  <a href={project.links.website} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
                     <ExternalLink size={14} className="mr-1" />
                     {t('website')}
                   </a>
                 )}
                 {project.links.article && (
-                  <a href={project.links.article} className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                  <a href={project.links.article} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
                     <ExternalLink size={14} className="mr-1" />
                     {t('article')}
                   </a>
                 )}
                 {project.links.video && (
-                  <a href={project.links.video} className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                  <a href={project.links.video} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
                     <ExternalLink size={14} className="mr-1" />
                     {t('video')}
                   </a>
@@ -137,7 +134,7 @@ const WorkSection = () => {
         </div>
 
         <div className="text-center mt-12 md:mt-16">
-          <a href="https://github.com/arix-alimagnidokpo" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl">
+          <a href="https://github.com/Arix-ALIMAGNIDOKPO" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl">
             <Github size={18} className="mr-2" />
             {t('viewAllProjects')}
           </a>

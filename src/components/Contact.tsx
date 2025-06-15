@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin as LinkedIn, Github, Mail, Globe, MapPin, BookOpen, Users } from 'lucide-react';
+import { Linkedin as LinkedIn, Github, Mail, MapPin, BookOpen, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Contact = () => {
@@ -21,13 +21,13 @@ const Contact = () => {
         </a>
         
         <div className="flex justify-center space-x-6 md:space-x-8 mb-12">
-          <a href="https://linkedin.com/in/alimagnidokpo" className="text-gray-700 hover:text-blue-600 transition-all duration-300 flex flex-col items-center group">
+          <a href="https://linkedin.com/in/arix-alimagnidokpo" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-all duration-300 flex flex-col items-center group">
             <div className="p-3 rounded-full bg-white/70 group-hover:bg-white group-hover:shadow-lg transition-all duration-300">
               <LinkedIn size={20} />
             </div>
             <span className="text-sm mt-2 font-medium">LinkedIn</span>
           </a>
-          <a href="https://github.com/arix-alimagnidokpo" className="text-gray-700 hover:text-blue-600 transition-all duration-300 flex flex-col items-center group">
+          <a href="https://github.com/Arix-ALIMAGNIDOKPO" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-all duration-300 flex flex-col items-center group">
             <div className="p-3 rounded-full bg-white/70 group-hover:bg-white group-hover:shadow-lg transition-all duration-300">
               <Github size={20} />
             </div>
@@ -38,12 +38,6 @@ const Contact = () => {
               <Mail size={20} />
             </div>
             <span className="text-sm mt-2 font-medium">Email</span>
-          </a>
-          <a href="https://arix-alimagnidokpo.github.io" className="text-gray-700 hover:text-blue-600 transition-all duration-300 flex flex-col items-center group">
-            <div className="p-3 rounded-full bg-white/70 group-hover:bg-white group-hover:shadow-lg transition-all duration-300">
-              <Globe size={20} />
-            </div>
-            <span className="text-sm mt-2 font-medium">Portfolio</span>
           </a>
         </div>
         

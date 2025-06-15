@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Linkedin as LinkedIn, Github, Mail, Globe, Menu, X, Languages } from 'lucide-react';
+import { Linkedin as LinkedIn, Github, Mail, Menu, X, Languages } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Header = () => {
@@ -55,17 +55,14 @@ const Header = () => {
             </button>
             
             {/* Social Links */}
-            <a href="https://linkedin.com/in/alimagnidokpo" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
+            <a href="https://linkedin.com/in/arix-alimagnidokpo" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
               <LinkedIn size={18} />
             </a>
-            <a href="https://github.com/arix-alimagnidokpo" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
+            <a href="https://github.com/Arix-ALIMAGNIDOKPO" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
               <Github size={18} />
             </a>
             <a href="mailto:arixalim@gmail.com" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
               <Mail size={18} />
-            </a>
-            <a href="https://arix-alimagnidokpo.github.io" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
-              <Globe size={18} />
             </a>
           </div>
         </nav>
@@ -128,17 +125,14 @@ const Header = () => {
             
             <div className="pt-4 border-t border-gray-200">
               <div className="flex justify-center space-x-6">
-                <a href="https://linkedin.com/in/alimagnidokpo" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
+                <a href="https://linkedin.com/in/arix-alimagnidokpo" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
                   <LinkedIn size={20} />
                 </a>
-                <a href="https://github.com/arix-alimagnidokpo" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
+                <a href="https://github.com/Arix-ALIMAGNIDOKPO" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
                   <Github size={20} />
                 </a>
                 <a href="mailto:arixalim@gmail.com" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
                   <Mail size={20} />
-                </a>
-                <a href="https://arix-alimagnidokpo.github.io" className="text-gray-700 hover:text-blue-600 transition-all duration-300 p-2 rounded-full hover:bg-blue-50">
-                  <Globe size={20} />
                 </a>
               </div>
             </div>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Download } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import brusselsImage from '../assets/WhatsApp Image 2025-06-15 à 02.46.40_1cd266d6.jpg';
 import indabaImage from '../assets/WhatsApp Image 2025-06-15 à 03.24.40_7986c49f.jpg';
@@ -8,6 +8,7 @@ import tekbotImage from '../assets/WhatsApp Image 2025-06-15 à 03.25.46_d4b0f08
 
 const ResearchSection = () => {
   const { t } = useLanguage();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const achievements = [
     {
@@ -19,7 +20,10 @@ const ResearchSection = () => {
       year: "2024-2025",
       image: brusselsImage,
       imageAlt: "Équipe de recherche à Bruxelles",
-      location: "Brussels, Belgium"
+      location: "Brussels, Belgium",
+      links: {
+        report: "https://drive.google.com/file/d/1-Gvfhg6tx0iJ2oLRCVQDFB3oLtd_2TlI/view?usp=sharing"
+      }
     },
     {
       title: "Deep Learning Indaba 2024",
@@ -41,7 +45,10 @@ const ResearchSection = () => {
       year: "2024",
       image: seniaImage,
       imageAlt: "Équipe SENIA 2024 Hackathon",
-      location: "Cotonou, Benin"
+      location: "Cotonou, Benin",
+      links: {
+        article: "https://asin.bj/article/18/hackathon-challenge-multimodal-multilingue-benin-laureats-competition-presentiel-connus/"
+      }
     },
     {
       title: "Teckbot Robotics Challenge",
@@ -52,7 +59,10 @@ const ResearchSection = () => {
       year: "2024",
       image: tekbotImage,
       imageAlt: "Teckbot Robotics Challenge 2024",
-      location: "Cotonou, Benin"
+      location: "Cotonou, Benin",
+      links: {
+        video: "https://www.instagram.com/reel/C16igYCtHJl/"
+      }
     }
   ];
 
@@ -73,6 +83,14 @@ const ResearchSection = () => {
       color: "from-purple-600 to-purple-700"
     }
   ];
+
+  const openImageModal = (imageSrc: string) => {
+    setSelectedImage(imageSrc);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <section id="research" className="w-full px-4 md:px-12 py-16 md:py-20 bg-gradient-to-br from-blue-50 to-purple-50">
@@ -100,7 +118,7 @@ const ResearchSection = () => {
         </div>
 
         {/* Achievements Section - Full Width */}
-        <div className="space-y-6 md:space-y-8 mb-12">
+        <div className="space-y-6 md:space-y-8">
           {achievements.map((achievement, index) => (
             <div key={index} className="group bg-white/90 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 hover:bg-white transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-blue-100/50">
               {/* Achievement Header */}
@@ -129,16 +147,49 @@ const ResearchSection = () => {
                   <div className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
                     {t('language') === 'fr' ? achievement.descriptionFr : achievement.description}
                   </div>
+
+                  {/* Links */}
+                  {achievement.links && (
+                    <div className="flex flex-wrap gap-3 mb-4">
+                      {achievement.links.report && (
+                        <a href={achievement.links.report} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                          <ExternalLink size={14} className="mr-1" />
+                          {t('language') === 'fr' ? 'Rapport' : 'Report'}
+                        </a>
+                      )}
+                      {achievement.links.article && (
+                        <a href={achievement.links.article} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                          <ExternalLink size={14} className="mr-1" />
+                          {t('language') === 'fr' ? 'Article' : 'Article'}
+                        </a>
+                      )}
+                      {achievement.links.video && (
+                        <a href={achievement.links.video} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium transition-all duration-300 hover:underline">
+                          <ExternalLink size={14} className="mr-1" />
+                          {t('language') === 'fr' ? 'Vidéo' : 'Video'}
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               
-              {/* Achievement Image - Full Width */}
-              <div className="w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 relative">
+              {/* Achievement Image - Clickable with better face visibility */}
+              <div 
+                className="w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 relative cursor-pointer"
+                onClick={() => openImageModal(achievement.image)}
+              >
                 <img 
                   src={achievement.image} 
                   alt={achievement.imageAlt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                 />
+                {/* Click indicator */}
+                <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3">
+                    <ExternalLink size={24} className="text-gray-700" />
+                  </div>
+                </div>
                 {/* Image Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
                   <div className="p-6 text-white w-full">
@@ -152,19 +203,27 @@ const ResearchSection = () => {
             </div>
           ))}
         </div>
-
-        {/* CTA Button */}
-        <div className="text-center">
-          <a 
-            href="/cv-arix-alimagnidokpo.pdf" 
-            download
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-lg md:text-xl font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl"
-          >
-            <Download size={20} className="mr-3" />
-            {t('downloadCV')}
-          </a>
-        </div>
       </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closeImageModal}>
+          <div className="relative max-w-4xl max-h-full">
+            <button
+              onClick={closeImageModal}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors duration-300"
+            >
+              <X size={32} />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Image agrandie"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
