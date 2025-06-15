@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, BookOpen, Users, Download } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import brusselsImage from '../assets/WhatsApp Image 2025-06-15 à 02.46.40_1cd266d6.jpg';
 import indabaImage from '../assets/WhatsApp Image 2025-06-15 à 03.24.40_7986c49f.jpg';
@@ -99,121 +99,70 @@ const ResearchSection = () => {
           </div>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-          {/* Left Column - Achievements List */}
-          <div className="order-2 lg:order-1">
-            <div className="space-y-6 md:space-y-8">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="group bg-white/90 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 hover:bg-white transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-blue-100/50">
-                  {/* Achievement Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="font-bold text-gray-800 text-lg md:text-xl leading-tight">
-                          {t('language') === 'fr' ? achievement.titleFr : achievement.title}
-                        </div>
-                        <div className="text-3xl md:text-4xl ml-4 group-hover:animate-bounce flex-shrink-0">
-                          {achievement.icon}
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center space-x-3 mb-3">
-                        <div className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                          {achievement.year}
-                        </div>
-                        {achievement.location && (
-                          <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
-                            📍 {achievement.location}
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
-                        {t('language') === 'fr' ? achievement.descriptionFr : achievement.description}
-                      </div>
+        {/* Achievements Section - Full Width */}
+        <div className="space-y-6 md:space-y-8 mb-12">
+          {achievements.map((achievement, index) => (
+            <div key={index} className="group bg-white/90 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 hover:bg-white transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-blue-100/50">
+              {/* Achievement Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="font-bold text-gray-800 text-lg md:text-xl leading-tight">
+                      {t('language') === 'fr' ? achievement.titleFr : achievement.title}
+                    </div>
+                    <div className="text-3xl md:text-4xl ml-4 group-hover:animate-bounce flex-shrink-0">
+                      {achievement.icon}
                     </div>
                   </div>
                   
-                  {/* Achievement Image */}
-                  <div className="w-full h-48 md:h-56 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 relative">
-                    <img 
-                      src={achievement.image} 
-                      alt={achievement.imageAlt}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    {/* Image Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                      <div className="p-4 text-white w-full">
-                        <div className="text-sm font-semibold">{achievement.imageAlt}</div>
-                        {achievement.location && (
-                          <div className="text-xs opacity-90">{achievement.location}</div>
-                        )}
-                      </div>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                      {achievement.year}
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Right Column - Research Visualization */}
-          <div className="order-1 lg:order-2 sticky top-8">
-            <div className="bg-gradient-to-br from-purple-200 to-blue-200 rounded-2xl md:rounded-3xl p-6 md:p-8 transform hover:rotate-1 transition-transform duration-500 shadow-xl hover:shadow-2xl">
-              <div className="space-y-6 md:space-y-8">
-                {/* Research Dashboard */}
-                <div className="bg-gray-900 rounded-xl md:rounded-2xl p-6 md:p-8 text-white">
-                  <div className="text-lg md:text-xl mb-6 text-purple-300 font-bold flex items-center">
-                    <span className="mr-2">📊</span>
-                    {t('researchAreas')}
-                  </div>
-                  <div className="grid grid-cols-1 gap-4">
-                    {researchAreas.map((area, index) => (
-                      <div key={index} className={`bg-gradient-to-r ${area.color} rounded-lg p-4 hover:scale-105 transition-transform duration-300`}>
-                        <div className="text-base md:text-lg font-semibold mb-1">{area.title}</div>
-                        <div className="text-sm md:text-base opacity-80">{area.description}</div>
+                    {achievement.location && (
+                      <div className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                        📍 {achievement.location}
                       </div>
-                    ))}
+                    )}
+                  </div>
+                  
+                  <div className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+                    {t('language') === 'fr' ? achievement.descriptionFr : achievement.description}
                   </div>
                 </div>
-                
-                {/* Stats Card */}
-                <div className="bg-white rounded-xl md:rounded-2xl p-6 md:p-8">
-                  <div className="text-lg md:text-xl font-bold text-gray-800 mb-6 flex items-center">
-                    <span className="mr-2">🏆</span>
-                    {t('recentAchievements')}
+              </div>
+              
+              {/* Achievement Image - Full Width */}
+              <div className="w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 relative">
+                <img 
+                  src={achievement.image} 
+                  alt={achievement.imageAlt}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                {/* Image Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div className="p-6 text-white w-full">
+                    <div className="text-lg font-semibold">{achievement.imageAlt}</div>
+                    {achievement.location && (
+                      <div className="text-sm opacity-90">{achievement.location}</div>
+                    )}
                   </div>
-                  <div className="space-y-4">
-                    {achievements.map((achievement, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors duration-300">
-                        <div className="flex items-center space-x-3">
-                          <span className="text-2xl">{achievement.icon}</span>
-                          <div>
-                            <div className="font-medium text-sm md:text-base text-gray-800">
-                              {(t('language') === 'fr' ? achievement.titleFr : achievement.title).split(' ').slice(0, 3).join(' ')}
-                            </div>
-                            <div className="text-xs text-gray-500">{achievement.year}</div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* CTA Button */}
-                <div className="text-center">
-                  <a 
-                    href="/cv-arix-alimagnidokpo.pdf" 
-                    download
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl text-sm md:text-base"
-                  >
-                    <Download size={18} className="mr-2" />
-                    {t('downloadCV')}
-                  </a>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center">
+          <a 
+            href="/cv-arix-alimagnidokpo.pdf" 
+            download
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-lg md:text-xl font-semibold transition-all duration-300 transform hover:scale-105 inline-flex items-center shadow-lg hover:shadow-xl"
+          >
+            <Download size={20} className="mr-3" />
+            {t('downloadCV')}
+          </a>
         </div>
       </div>
     </section>
