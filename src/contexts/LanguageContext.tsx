@@ -20,6 +20,7 @@ const translations = {
     heroDescription: 'AI Developer passionné par le NLP pour les langues à faibles ressources et les applications d\'IA éthique. Je construis des technologies qui comblent les écarts culturels et autonomisent les communautés africaines.',
     currentPosition: 'Actuellement AI Developer & Project Lead @',
     ministry: 'Ministère des Affaires Étrangères du Bénin',
+    basedIn: 'Basé à Cotonou, Bénin.',
     downloadCV: 'Télécharger CV',
     
     // Tags
@@ -92,6 +93,7 @@ const translations = {
     heroDescription: 'AI Developer passionate about NLP for low-resource languages and ethical AI applications. Building technology that bridges cultural gaps and empowers African communities.',
     currentPosition: 'Currently AI Developer & Project Lead @',
     ministry: 'Ministry of Foreign Affairs of Benin',
+    basedIn: 'Based in Cotonou, Benin.',
     downloadCV: 'Download CV',
     
     // Tags
