@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen">
+      <div className="min-h-screen overflow-x-hidden">
         <Header />
         <Hero />
         <WorkSection />
