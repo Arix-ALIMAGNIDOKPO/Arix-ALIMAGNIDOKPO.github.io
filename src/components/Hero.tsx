@@ -23,11 +23,11 @@ const Hero = () => {
             <div className="absolute -inset-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl blur-xl"></div>
             
             {/* Photo principale - format rectangulaire pour afficher toute la photo */}
-            <div className="relative w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 lg:w-72 lg:h-88 rounded-3xl overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-105 group-hover:rotate-1">
-              <img 
-                src={profileImage} 
-                alt="Arix Alimagnidokpo" 
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+            <div className="relative w-48 aspect-[4/3] sm:w-56 md:w-64 lg:w-72 rounded-3xl overflow-hidden border-4 border-white shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-105 group-hover:rotate-1">
+              <img
+                src={profileImage}
+                alt="Arix Alimagnidokpo"
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110 md:object-contain md:object-center"
               />
               {/* Overlay subtil au survol */}
               <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
