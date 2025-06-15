@@ -175,14 +175,14 @@ const ResearchSection = () => {
               </div>
               
               {/* Achievement Image - Clickable with better face visibility */}
-              <div 
-                className="w-full h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 relative cursor-pointer"
+              <div
+                className="w-full aspect-[4/3] rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 relative cursor-pointer"
                 onClick={() => openImageModal(achievement.image)}
               >
-                <img 
-                  src={achievement.image} 
+                <img
+                  src={achievement.image}
                   alt={achievement.imageAlt}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110 md:object-contain md:object-center"
                 />
                 {/* Click indicator */}
                 <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
