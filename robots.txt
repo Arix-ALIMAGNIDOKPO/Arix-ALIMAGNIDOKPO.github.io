@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arix-alimagnidokpo.github.io/sitemap.xml
