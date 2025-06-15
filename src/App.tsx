@@ -1,4 +1,5 @@
 import React from 'react';
+import { LanguageProvider } from './contexts/LanguageContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import WorkSection from './components/WorkSection';
@@ -7,13 +8,15 @@ import Contact from './components/Contact';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <WorkSection />
-      <ResearchSection />
-      <Contact />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen">
+        <Header />
+        <Hero />
+        <WorkSection />
+        <ResearchSection />
+        <Contact />
+      </div>
+    </LanguageProvider>
   );
 }
 
