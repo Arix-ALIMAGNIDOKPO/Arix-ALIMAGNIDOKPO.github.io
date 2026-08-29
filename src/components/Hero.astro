@@ -1,0 +1,179 @@
+---
+import Icon from '@/components/Icon.astro';
+import { SITE, SOCIAL } from '@/data/site';
+import { MISSION } from '@/data/profile';
+import type { Locale } from '@/data/types';
+import { path, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const socials = [
+  { label: t('social.github'), href: SOCIAL.github, icon: 'github' as const, external: true },
+  { label: t('social.linkedin'), href: SOCIAL.linkedin, icon: 'linkedin' as const, external: true },
+  { label: t('social.email'), href: SOCIAL.email, icon: 'mail' as const, external: false },
+  { label: t('social.aida'), href: SOCIAL.aida, icon: 'globe' as const, external: true },
+];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <h1 id="hero-title" class="visually-hidden">{SITE.name} — {t('hero.line1')} {t('hero.line2')}</h1>
+
+  <div class="hero__grid">
+    <div class="hero__row hero__row--top">
+      <p class="display hero__line hero__line--one" aria-hidden="true">{t('hero.line1')}</p>
+
+      <div class="hero__cta">
+        <a class="pill pill--solid" href={`${path('/', locale)}#ventures`}>{t('hero.cta')}</a>
+        <a class="icon-btn" href={`${path('/', locale)}#ventures`} aria-label={t('hero.ctaAria')}>
+          <Icon name="arrow-right" />
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__row hero__row--bottom">
+      <p class="lede hero__lede">{MISSION[locale]}</p>
+
+      <p class="display hero__line hero__line--two" aria-hidden="true">{t('hero.line2')}</p>
+    </div>
+  </div>
+
+  <div class="hero__meta">
+    <span class="chip"><span class="hero__dot" aria-hidden="true"></span>{t('hero.available')}</span>
+    <a class="pill pill--ghost" href={SITE.cv} download>
+      <Icon name="download" class="pill__icon" />
+      {t('hero.cv')}
+    </a>
+  </div>
+
+  <ul class="hero__socials">
+    {
+      socials.map((item) => (
+        <li>
+          <a
+            class="pill"
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+          >
+            <Icon name={item.icon} class="pill__icon" />
+            <span>{item.label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .hero {
+    padding-block-start: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
+  }
+
+  .hero__line {
+    color: var(--ink);
+  }
+
+  .hero__lede {
+    max-width: 42ch;
+  }
+
+  .hero__cta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  }
+
+  .hero__dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-inline-end: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent-b);
+    box-shadow: 0 0 0 3px rgba(127, 227, 208, 0.16);
+  }
+
+  .hero__socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-block-start: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  }
+
+  /* Below the breakpoint the rows dissolve so the four pieces stack in a
+     reading order that makes sense on a phone: both headline lines, then the
+     description, then the call to action. */
+  @media (max-width: 55.999rem) {
+    .hero__row {
+      display: contents;
+    }
+
+    .hero__line--one {
+      order: 1;
+    }
+
+    .hero__line--two {
+      order: 2;
+    }
+
+    .hero__lede {
+      order: 3;
+      margin-block-start: 0.5rem;
+    }
+
+    .hero__cta {
+      order: 4;
+    }
+  }
+
+  /* The reference layout: headline left with the call to action opposite it,
+     then the description left with the second headline line dropping right. */
+  @media (min-width: 56rem) {
+    .hero__grid {
+      gap: clamp(1.5rem, 0.8rem + 2.6vw, 3rem);
+    }
+
+    .hero__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(1.5rem, 1rem + 3vw, 4rem);
+    }
+
+    .hero__row--bottom {
+      align-items: flex-end;
+    }
+
+    /* Each line is a single unbroken statement, never re-wrapped by its column. */
+    .hero__line {
+      white-space: nowrap;
+    }
+
+    .hero__line--two {
+      text-align: right;
+    }
+
+    .hero__lede {
+      padding-block-end: 0.35rem;
+    }
+  }
+</style>

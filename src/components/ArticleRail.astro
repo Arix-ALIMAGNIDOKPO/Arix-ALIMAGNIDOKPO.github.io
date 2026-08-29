@@ -1,0 +1,306 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '@/components/Icon.astro';
+import type { Article } from '@/lib/articles';
+import { readingTime } from '@/lib/articles';
+import { formatArticleDate } from '@/lib/dates';
+import type { Locale } from '@/data/types';
+import { path, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  articles: readonly Article[];
+}
+
+const { locale, articles } = Astro.props;
+const t = useTranslations(locale);
+const articlesHref = path('/articles/', locale);
+---
+
+<section class="section" id="articles" aria-labelledby="articles-heading">
+  <div class="section-head">
+    <p class="eyebrow">{t('articles.eyebrow')}</p>
+    <div>
+      <h2 id="articles-heading" class="rail__heading mono">{t('articles.index.title')}</h2>
+      <p class="lede">{t('articles.index.intro')}</p>
+    </div>
+  </div>
+
+  {
+    articles.length === 0 ? (
+      <p class="rail__empty mono">{t('articles.empty')}</p>
+    ) : (
+      <div class="rail" data-rail>
+        <div class="rail__controls no-print">
+          <button class="icon-btn" type="button" data-rail-prev aria-label={t('articles.prev')} disabled>
+            <Icon name="arrow-left" />
+          </button>
+          <button class="icon-btn" type="button" data-rail-next aria-label={t('articles.next')}>
+            <Icon name="arrow-right" />
+          </button>
+        </div>
+
+        <ul class="rail__track scroller" data-rail-track>
+          {articles.map((article, index) => {
+            const href = `${articlesHref}${article.id}/`;
+            const minutes = readingTime(article.body);
+            return (
+              <li class="rail__item">
+                <article class="rail__card">
+                  <div class={`rail__media rail__media--${index % 3}`}>
+                    {article.data.cover !== undefined ? (
+                      <Image
+                        src={article.data.cover}
+                        alt={article.data.coverAlt ?? ''}
+                        widths={[320, 640]}
+                        sizes="(min-width: 56rem) 14rem, 40vw"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <span class="rail__glyph mono" aria-hidden="true">
+                        {article.data.tags[0] ?? '{ }'}
+                      </span>
+                    )}
+                  </div>
+
+                  <div class="rail__body">
+                    <p class="rail__meta mono">
+                      <time datetime={article.data.date.toISOString()}>
+                        {formatArticleDate(article.data.date, locale)}
+                      </time>
+                      <span aria-hidden="true"> · </span>
+                      <span>
+                        {minutes} {t('articles.readingTime')}
+                      </span>
+                    </p>
+
+                    <h3 class="rail__title mono">
+                      <a href={href}>
+                        <span class="rail__stretch">{article.data.title}</span>
+                      </a>
+                    </h3>
+
+                    <p class="rail__excerpt">{article.data.description}</p>
+
+                    <span class="rail__action">
+                      <span class="pill pill--solid">{t('articles.readMore')}</span>
+                      <span class="icon-btn" aria-hidden="true">
+                        <Icon name="arrow-right" />
+                      </span>
+                    </span>
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    )
+  }
+
+  <p class="rail__all">
+    <a class="pill" href={articlesHref}>
+      {t('articles.all')}
+      <Icon name="arrow-up-right" class="pill__icon" />
+    </a>
+  </p>
+</section>
+
+<script>
+  /**
+   * Progressive enhancement only: without JS the rail is still a normal
+   * horizontally scrollable list, so no content is ever unreachable.
+   */
+  const rails = document.querySelectorAll<HTMLElement>('[data-rail]');
+
+  for (const rail of rails) {
+    const track = rail.querySelector<HTMLElement>('[data-rail-track]');
+    const prev = rail.querySelector<HTMLButtonElement>('[data-rail-prev]');
+    const next = rail.querySelector<HTMLButtonElement>('[data-rail-next]');
+    if (!track || !prev || !next) continue;
+
+    const step = (): number => {
+      const item = track.querySelector<HTMLElement>('.rail__item');
+      return item ? item.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
+    };
+
+    const sync = (): void => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    };
+
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
+    sync();
+  }
+</script>
+
+<style>
+  .rail__heading {
+    font-size: var(--step-3);
+    letter-spacing: -0.03em;
+    margin-block-end: 0.75rem;
+  }
+
+  .rail__empty {
+    margin-block-start: 2rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  .rail {
+    position: relative;
+    margin-block-start: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  }
+
+  .rail__controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-block-end: 1rem;
+  }
+
+  .rail__track {
+    display: flex;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+    padding-block-end: 0.75rem;
+    /* Let cards bleed to the panel edge the way the reference layout does. */
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+
+  .rail__item {
+    flex: 0 0 auto;
+    width: min(86vw, 32rem);
+    scroll-snap-align: start;
+  }
+
+  .rail__card {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    height: 100%;
+    padding: 1rem;
+    background: var(--panel-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      translate 220ms ease;
+  }
+
+  .rail__card:hover {
+    border-color: var(--line-strong);
+    background: var(--panel-hover);
+    translate: 0 -2px;
+  }
+
+  .rail__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    border-radius: calc(var(--radius-card) - 0.35rem);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--accent-a), var(--accent-c) 45%, var(--accent-b));
+  }
+
+  .rail__media--1 {
+    background: linear-gradient(135deg, var(--accent-b), #4f7fd6 55%, var(--accent-a));
+  }
+
+  .rail__media--2 {
+    background: linear-gradient(135deg, #ffb86b, var(--accent-c) 50%, var(--accent-a));
+  }
+
+  .rail__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .rail__glyph {
+    font-size: var(--step--1);
+    font-weight: 700;
+    color: rgba(10, 10, 11, 0.68);
+    padding: 0.3rem 0.7rem;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-pill);
+  }
+
+  .rail__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .rail__meta {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .rail__title {
+    font-size: var(--step-1);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .rail__title a {
+    text-decoration: none;
+  }
+
+  /* One click target covering the whole card, without nesting interactive
+     elements inside each other. */
+  .rail__stretch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .rail__excerpt {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .rail__action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block-start: auto;
+    padding-block-start: 0.5rem;
+  }
+
+  .rail__action .icon-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .rail__all {
+    margin-block-start: 1.5rem;
+  }
+
+  @media (min-width: 56rem) {
+    .rail__card {
+      grid-template-columns: 14rem minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .rail__media {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 12rem;
+    }
+  }
+</style>

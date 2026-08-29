@@ -1,0 +1,123 @@
+---
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/inter';
+import '@/styles/global.css';
+
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import { META_DESCRIPTION, SITE, TITLE } from '@/data/site';
+import type { Locale } from '@/data/types';
+import { HTML_LANG, OG_LOCALE, absolute, alternateUrl, getLocale, otherLocale, path, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  /** Page title, without the site suffix. Omit on the homepage. */
+  title?: string;
+  description?: string;
+  /** Extra JSON-LD to embed, already shaped as a schema.org node. */
+  schema?: Record<string, unknown>;
+  /** `article` for blog posts, `website` everywhere else. */
+  ogType?: 'website' | 'article';
+  /** Set on pages that should not be indexed. */
+  noindex?: boolean;
+  /** Hides the in-page section nav on secondary pages. */
+  compactHeader?: boolean;
+  /**
+   * Where the language switcher and the hreflang link should point.
+   * Defaults to the same path under the other locale, which is right for every
+   * page whose URL is a straight mirror. Article pages pass their translation's
+   * own slug instead, because the slugs differ between languages.
+   */
+  alternatePath?: string;
+}
+
+const locale: Locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+
+const {
+  title,
+  description = META_DESCRIPTION[locale],
+  schema,
+  ogType = 'website',
+  noindex = false,
+  compactHeader = false,
+  alternatePath,
+} = Astro.props;
+
+const siteTitle = `${SITE.name} — ${TITLE[locale]}`;
+const pageTitle = title === undefined ? siteTitle : `${title} — ${SITE.name}`;
+
+const canonical = absolute(Astro.url.pathname);
+const other = otherLocale(locale);
+const alternateHref = alternatePath ?? alternateUrl(Astro.url, other);
+const alternate = absolute(alternateHref);
+const self = absolute(Astro.url.pathname);
+---
+
+<!doctype html>
+<html lang={HTML_LANG[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Never leak a full referring URL to another origin. -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#070708" />
+
+    <link rel="alternate" hreflang={HTML_LANG[locale]} href={self} />
+    <link rel="alternate" hreflang={HTML_LANG[other]} href={alternate} />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={locale === SITE.defaultLocale ? self : alternate}
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.name} — ${t('articles.label')}`}
+      href={absolute(path('rss.xml', locale).replace(/\/$/, ''))}
+    />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={OG_LOCALE[locale]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[other]} />
+    <meta property="og:image" content={absolute('/og.png')} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={siteTitle} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absolute('/og.png')} />
+
+    {schema !== undefined && <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{t('nav.skipToContent')}</a>
+
+    <div class="shell">
+      <div class="panel">
+        <SiteHeader locale={locale} compact={compactHeader} alternateHref={alternateHref} />
+        <main id="main" tabindex="-1">
+          <slot />
+        </main>
+        <SiteFooter locale={locale} />
+      </div>
+    </div>
+  </body>
+</html>

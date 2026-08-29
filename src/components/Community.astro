@@ -1,0 +1,120 @@
+---
+import Icon from '@/components/Icon.astro';
+import { COMMUNITY } from '@/data/profile';
+import type { Locale } from '@/data/types';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="section" id="community" aria-labelledby="community-heading">
+  <div class="section-head">
+    <p class="eyebrow">{t('community.eyebrow')}</p>
+    <div>
+      <h2 id="community-heading" class="community__heading mono">{t('community.label')}</h2>
+      <p class="lede">
+        {
+          locale === 'fr'
+            ? 'Enseigner, organiser, et rendre à l’écosystème qui m’a formé.'
+            : 'Teaching, organising, and giving back to the ecosystem that trained me.'
+        }
+      </p>
+    </div>
+  </div>
+
+  <ul class="community__list">
+    {
+      COMMUNITY.map((item) => (
+        <li class="community__item">
+          <p class="community__period mono">{item.period[locale]}</p>
+
+          <div class="community__body">
+            <h3 class="community__role">{item.role[locale]}</h3>
+            <p class="community__org mono">
+              {item.orgUrl !== undefined ? (
+                <a href={item.orgUrl} target="_blank" rel="noopener noreferrer">
+                  {item.org}
+                  <Icon name="arrow-up-right" size={12} />
+                </a>
+              ) : (
+                item.org
+              )}
+            </p>
+            <p class="community__detail">{item.detail[locale]}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .community__heading {
+    font-size: var(--step-3);
+    letter-spacing: -0.03em;
+    margin-block-end: 0.75rem;
+  }
+
+  .community__list {
+    margin-block-start: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .community__item {
+    display: grid;
+    gap: 0.4rem;
+    padding-block: 1.1rem;
+    border-block-end: 1px solid var(--line);
+  }
+
+  .community__period {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .community__body {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .community__role {
+    font-size: var(--step-0);
+    font-weight: 600;
+  }
+
+  .community__org {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .community__org a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    text-decoration: none;
+  }
+
+  .community__org a:hover {
+    color: var(--ink);
+  }
+
+  .community__detail {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    line-height: 1.6;
+    max-width: 68ch;
+  }
+
+  @media (min-width: 52rem) {
+    .community__item {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

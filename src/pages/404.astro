@@ -1,0 +1,30 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
+import { UI } from '@/i18n/ui';
+
+const locale = 'en' as const;
+const t = UI[locale];
+---
+
+<BaseLayout title={t['404.title']} description={t['404.body']} alternatePath="/fr/" noindex compactHeader>
+  <section class="notfound">
+    <p class="eyebrow">… /404 …</p>
+    <h1 class="display display--section">404</h1>
+    <p class="lede">{t['404.body']}</p>
+    <p class="cluster">
+      <a class="pill pill--solid" href="/">{t['404.home']}</a>
+      <a class="icon-btn" href="/" aria-label={t['404.home']}>
+        <Icon name="arrow-right" />
+      </a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    display: grid;
+    gap: 1.25rem;
+    padding-block: clamp(3rem, 2rem + 6vw, 8rem);
+  }
+</style>

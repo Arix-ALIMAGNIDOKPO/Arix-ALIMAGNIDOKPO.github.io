@@ -1,0 +1,178 @@
+---
+import { SITE } from '@/data/site';
+import type { Locale } from '@/data/types';
+import { alternateUrl, otherLocale, path, useTranslations } from '@/i18n/utils';
+import type { UIKey } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+  compact?: boolean;
+  /** Where the language toggle points; see BaseLayout's `alternatePath`. */
+  alternateHref?: string;
+}
+
+const { locale, compact = false, alternateHref } = Astro.props;
+const t = useTranslations(locale);
+
+const home = path('/', locale);
+const other = otherLocale(locale);
+
+/** Section anchors resolve against the homepage, so the nav works from any page. */
+const links: { key: UIKey; href: string }[] = [
+  { key: 'nav.about', href: `${home}#about` },
+  { key: 'nav.work', href: `${home}#work` },
+  { key: 'nav.ventures', href: `${home}#ventures` },
+  { key: 'nav.articles', href: path('/articles/', locale) },
+  { key: 'nav.contact', href: `${home}#contact` },
+];
+
+const current = Astro.url.pathname;
+const isCurrent = (href: string): boolean => href === current;
+---
+
+<header class="masthead no-print">
+  <a class="masthead__name mono" href={home} aria-label={t('nav.home')}>
+    <span>{SITE.firstName}</span>
+    <span>{SITE.lastName}</span>
+  </a>
+
+  {
+    !compact && (
+      <nav class="masthead__nav scroller" aria-label={t('nav.menu')}>
+        <ul>
+          {links.map(({ key, href }) => (
+            <li>
+              <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
+                {t(key)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+
+  <div class="masthead__lang" role="group" aria-label={t('lang.switch')}>
+    <span class="is-active mono" aria-current="true">{t(locale === 'en' ? 'lang.en' : 'lang.fr')}</span>
+    <a
+      class="mono"
+      href={alternateHref ?? alternateUrl(Astro.url, other)}
+      hreflang={other}
+      lang={other}
+      rel="alternate"
+      title={t(other === 'fr' ? 'lang.toFrench' : 'lang.toEnglish')}
+    >
+      {t(other === 'en' ? 'lang.en' : 'lang.fr')}
+    </a>
+  </div>
+</header>
+
+<style>
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 1rem 1.5rem;
+    padding-block-end: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+
+  .masthead__name {
+    display: grid;
+    font-size: var(--step--1);
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .masthead__name:hover span:last-child {
+    color: var(--ink-muted);
+  }
+
+  .masthead__nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    /* Fades the last link out so it reads as scrollable, not as cut off. */
+    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 2.5rem), transparent 100%);
+  }
+
+  .masthead__nav ul {
+    display: flex;
+    gap: 0.4rem;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .masthead__nav a {
+    display: block;
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .masthead__nav a:hover {
+    color: var(--ink);
+    background: var(--panel-raised);
+    border-color: var(--line);
+  }
+
+  .masthead__nav a[aria-current='page'] {
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+
+  .masthead__lang {
+    display: grid;
+    justify-items: end;
+    gap: 0.1rem;
+    font-size: var(--step--1);
+    line-height: 1.35;
+  }
+
+  .masthead__lang .is-active {
+    color: var(--ink);
+  }
+
+  .masthead__lang a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .masthead__lang a:hover {
+    color: var(--ink);
+  }
+
+  /* From tablet up, the reference layout puts the nav in the middle. */
+  @media (min-width: 56rem) {
+    .masthead {
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .masthead__nav {
+      grid-column: 2;
+      grid-row: 1;
+      margin-inline: 0;
+      padding-inline: 0;
+      overflow: visible;
+      mask-image: none;
+    }
+
+    .masthead__nav ul {
+      gap: 0.25rem;
+    }
+  }
+</style>

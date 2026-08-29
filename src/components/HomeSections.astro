@@ -1,0 +1,32 @@
+---
+import About from '@/components/About.astro';
+import ArticleRail from '@/components/ArticleRail.astro';
+import Awards from '@/components/Awards.astro';
+import Community from '@/components/Community.astro';
+import Contact from '@/components/Contact.astro';
+import Hero from '@/components/Hero.astro';
+import Projects from '@/components/Projects.astro';
+import Research from '@/components/Research.astro';
+import Ventures from '@/components/Ventures.astro';
+import Work from '@/components/Work.astro';
+import type { Locale } from '@/data/types';
+import { getArticles } from '@/lib/articles';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const articles = (await getArticles(locale)).slice(0, 6);
+---
+
+<Hero locale={locale} />
+<ArticleRail locale={locale} articles={articles} />
+<About locale={locale} />
+<Work locale={locale} />
+<Ventures locale={locale} />
+<Awards locale={locale} />
+<Research locale={locale} />
+<Projects locale={locale} />
+<Community locale={locale} />
+<Contact locale={locale} />

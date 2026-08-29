@@ -1,0 +1,198 @@
+---
+import Icon from '@/components/Icon.astro';
+import { EDUCATION, RESEARCH } from '@/data/profile';
+import type { Locale } from '@/data/types';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="section" id="research" aria-labelledby="research-heading">
+  <div class="section-head">
+    <p class="eyebrow">{t('research.eyebrow')}</p>
+    <div>
+      <h2 id="research-heading" class="research__heading mono">{t('research.label')}</h2>
+      <p class="lede">
+        {
+          locale === 'fr'
+            ? 'Deux travaux où la recherche devait finir en production : un solveur de contraintes pour l’université, et du NLP appliqué à la correspondance diplomatique.'
+            : 'Two pieces of work where the research had to end up in production: a constraint solver for the university, and NLP applied to diplomatic correspondence.'
+        }
+      </p>
+    </div>
+  </div>
+
+  <ol class="research__list">
+    {
+      RESEARCH.map((item) => (
+        <li class="card research__item">
+          <p class="research__period mono">{item.period[locale]}</p>
+
+          <div class="research__body">
+            <h3 class="research__title">{item.title[locale]}</h3>
+            <p class="research__context mono">{item.context[locale]}</p>
+            <p class="research__summary">{item.summary[locale]}</p>
+
+            {item.highlights[locale].length > 0 && (
+              <ul class="research__highlights">
+                {item.highlights[locale].map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            )}
+
+            {item.links !== undefined && (
+              <p class="cluster">
+                {item.links.map((link) => (
+                  <a class="pill" href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                    <Icon name="arrow-up-right" class="pill__icon" />
+                  </a>
+                ))}
+              </p>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h3 class="research__subhead mono">{t('education.label')}</h3>
+
+  <ol class="research__education">
+    {
+      EDUCATION.map((study) => (
+        <li class="research__study">
+          <p class="research__period mono">{study.period[locale]}</p>
+          <div>
+            <h4 class="research__title">{study.degree[locale]}</h4>
+            <p class="research__context mono">
+              {study.schoolUrl !== undefined ? (
+                <a href={study.schoolUrl} target="_blank" rel="noopener noreferrer">
+                  {study.school}
+                </a>
+              ) : (
+                study.school
+              )}
+              <span aria-hidden="true"> · </span>
+              <span class="research__grade">{study.grade[locale]}</span>
+            </p>
+            {study.notes[locale].length > 0 && (
+              <ul class="research__highlights">
+                {study.notes[locale].map((note) => (
+                  <li>{note}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .research__heading {
+    font-size: var(--step-3);
+    letter-spacing: -0.03em;
+    margin-block-end: 0.75rem;
+  }
+
+  .research__list {
+    display: grid;
+    gap: 0.85rem;
+    margin-block-start: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  }
+
+  .research__item {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .research__body {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .research__period {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .research__title {
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+
+  .research__context {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .research__grade {
+    color: var(--accent-b);
+  }
+
+  .research__summary {
+    font-size: var(--step-0);
+    color: var(--ink-dim);
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+
+  .research__highlights {
+    display: grid;
+    gap: 0.4rem;
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+  }
+
+  .research__highlights li {
+    padding-inline-start: 1.1rem;
+    position: relative;
+  }
+
+  .research__highlights li::before {
+    content: '—';
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--ink-faint);
+  }
+
+  .research__subhead {
+    margin-block-start: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    font-size: var(--step-1);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .research__education {
+    display: grid;
+    gap: 1.25rem;
+    margin-block-start: 1.25rem;
+    border-block-start: 1px solid var(--line);
+    padding-block-start: 1.25rem;
+  }
+
+  .research__study {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 52rem) {
+    .research__item,
+    .research__study {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

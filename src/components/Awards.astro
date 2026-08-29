@@ -1,0 +1,115 @@
+---
+import Icon from '@/components/Icon.astro';
+import { AWARDS } from '@/data/profile';
+import type { Locale } from '@/data/types';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="section" id="awards" aria-labelledby="awards-heading">
+  <div class="section-head">
+    <p class="eyebrow">{t('awards.eyebrow')}</p>
+    <div>
+      <h2 id="awards-heading" class="awards__heading mono">{t('awards.label')}</h2>
+      <p class="lede">
+        {
+          locale === 'fr'
+            ? 'Trois compétitions, trois problèmes réels : la langue, les déchets, l’accès aux soins.'
+            : 'Three competitions, three real problems: language, waste, access to healthcare.'
+        }
+      </p>
+    </div>
+  </div>
+
+  <ol class="awards__grid">
+    {
+      AWARDS.map((award) => (
+        <li class="card awards__item">
+          <p class="awards__rank mono">
+            <span>{award.rank[locale]}</span>
+            <span class="awards__year tabular">{award.year}</span>
+          </p>
+
+          <h3 class="awards__title">{award.title[locale]}</h3>
+          <p class="awards__event mono">{award.event}</p>
+          <p class="awards__summary">{award.summary[locale]}</p>
+
+          {award.links !== undefined && (
+            <p class="cluster">
+              {award.links.map((link) => (
+                <a class="pill" href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                  <Icon name="arrow-up-right" class="pill__icon" />
+                </a>
+              ))}
+            </p>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .awards__heading {
+    font-size: var(--step-3);
+    letter-spacing: -0.03em;
+    margin-block-end: 0.75rem;
+  }
+
+  .awards__grid {
+    display: grid;
+    gap: 0.85rem;
+    margin-block-start: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  }
+
+  .awards__item {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+
+  .awards__rank {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: var(--step-1);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .awards__year {
+    font-size: var(--step--2);
+    color: var(--ink-faint);
+  }
+
+  .awards__title {
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .awards__event {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .awards__summary {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+
+  @media (min-width: 52rem) {
+    .awards__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

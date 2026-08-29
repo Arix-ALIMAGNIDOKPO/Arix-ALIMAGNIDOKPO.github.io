@@ -1,0 +1,11 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleIndex from '@/components/ArticleIndex.astro';
+import { UI } from '@/i18n/ui';
+
+const locale = 'en' as const;
+---
+
+<BaseLayout title={UI[locale]['articles.index.title']} description={UI[locale]['articles.index.intro']}>
+  <ArticleIndex locale={locale} />
+</BaseLayout>

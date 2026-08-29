@@ -1,0 +1,271 @@
+---
+import Icon from '@/components/Icon.astro';
+import { ROLES } from '@/data/profile';
+import type { Locale } from '@/data/types';
+import { formatDuration, formatPeriod, isoRange } from '@/lib/dates';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+/**
+ * Presented in the order they are authored in `src/data/profile.ts` rather than
+ * strictly by date: the current company leads, which is what a reader wants
+ * first. Reorder that array to reorder this table.
+ */
+const roles = ROLES;
+const earliest = roles.reduce((min, role) => (role.start < min ? role.start : min), roles[0]?.start ?? '2022-01');
+const totalExperience = formatDuration(earliest, null, locale);
+---
+
+<section class="section" id="work" aria-labelledby="work-heading">
+  <div class="section-head">
+    <p class="eyebrow">{t('work.eyebrow')}</p>
+    <p class="lede work__lede">
+      {
+        locale === 'fr'
+          ? 'Du prototype de hackathon au système en production dans une administration : voici où j’ai travaillé et ce que j’y ai livré.'
+          : 'From hackathon prototype to systems running inside a government: where I have worked, and what I shipped there.'
+      }
+    </p>
+  </div>
+
+  <h2 id="work-heading" class="display display--section section-title">{t('work.label')}</h2>
+
+  <ol class="work__list">
+    {
+      roles.map((role) => (
+        <li>
+          <details class="work__row" name="work">
+            <summary class="work__summary">
+              <span class="work__dates mono">
+                <time datetime={isoRange(role.start, role.end)}>
+                  {formatPeriod(role.start, role.end, locale, role.precision)}
+                </time>
+                <small>{formatDuration(role.start, role.end, locale)}</small>
+              </span>
+
+              <span class="work__org">
+                <strong>{role.org}</strong>
+                <small class="mono">{role.kind[locale]}</small>
+              </span>
+
+              <span class="work__role mono">{role.title[locale]}</span>
+
+              <span class="work__chevron" aria-hidden="true">
+                <Icon name="arrow-right" size={16} />
+              </span>
+            </summary>
+
+            <div class="work__detail">
+              <p class="work__detail-lead">{role.summary[locale]}</p>
+
+              <ul class="work__highlights">
+                {role.highlights[locale].map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+
+              <div class="work__foot">
+                {role.stack !== undefined && (
+                  <p class="tag-row">
+                    {role.stack.map((item) => (
+                      <span class="tag">{item}</span>
+                    ))}
+                  </p>
+                )}
+
+                {role.orgUrl !== undefined && (
+                  <a class="pill" href={role.orgUrl} target="_blank" rel="noopener noreferrer">
+                    {new URL(role.orgUrl).hostname.replace(/^www\./, '')}
+                    <Icon name="arrow-up-right" class="pill__icon" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </details>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="work__total mono">
+    <span>{t('work.total')}</span>
+    <strong>{totalExperience}</strong>
+  </p>
+</section>
+
+<style>
+  .work__lede {
+    max-width: 48ch;
+  }
+
+  .work__list {
+    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .work__row {
+    border-block-end: 1px solid var(--line);
+  }
+
+  .work__summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.35rem 1rem;
+    padding: 1.1rem 1rem;
+    cursor: pointer;
+    list-style: none;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease;
+  }
+
+  .work__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .work__row:hover .work__summary,
+  .work__row[open] .work__summary {
+    background: var(--invert);
+    color: var(--invert-ink);
+    border-radius: 0.6rem;
+  }
+
+  .work__dates {
+    display: grid;
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .work__dates small,
+  .work__org small {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .work__row:hover .work__dates small,
+  .work__row:hover .work__org small,
+  .work__row[open] .work__dates small,
+  .work__row[open] .work__org small {
+    color: rgba(10, 10, 11, 0.6);
+  }
+
+  .work__org {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .work__org strong {
+    font-weight: 600;
+    font-size: var(--step-0);
+  }
+
+  .work__role {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+  }
+
+  .work__row:hover .work__role,
+  .work__row[open] .work__role {
+    color: rgba(10, 10, 11, 0.78);
+  }
+
+  .work__chevron {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0.45;
+    rotate: 90deg;
+    transition: rotate 240ms ease;
+  }
+
+  .work__row[open] .work__chevron {
+    rotate: -90deg;
+  }
+
+  .work__detail {
+    padding: 0.5rem 1rem 1.75rem;
+    display: grid;
+    gap: 1rem;
+    max-width: 62ch;
+  }
+
+  .work__detail-lead {
+    color: var(--ink);
+    font-size: var(--step-0);
+  }
+
+  .work__highlights {
+    display: grid;
+    gap: 0.55rem;
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+
+  .work__highlights li {
+    padding-inline-start: 1.1rem;
+    position: relative;
+  }
+
+  .work__highlights li::before {
+    content: '—';
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--ink-faint);
+  }
+
+  .work__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block-start: 0.25rem;
+  }
+
+  .work__total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+    margin-block-start: 1.25rem;
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+    text-align: right;
+  }
+
+  .work__total strong {
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  @media (min-width: 56rem) {
+    .work__summary {
+      grid-template-columns: 13rem minmax(0, 1fr) minmax(0, 1.1fr) auto;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .work__chevron {
+      grid-column: 4;
+    }
+
+    .work__detail {
+      padding-inline-start: 14.5rem;
+      max-width: 78ch;
+    }
+  }
+</style>

@@ -1,0 +1,200 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '@/components/Icon.astro';
+import type { Locale } from '@/data/types';
+import { getArticles, readingTime } from '@/lib/articles';
+import { formatArticleDate } from '@/lib/dates';
+import { path, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const articles = await getArticles(locale);
+const base = path('/articles/', locale);
+const rss = path('rss.xml', locale).replace(/\/$/, '');
+
+/** Every tag in use, so readers can see the range at a glance. */
+const tags = [...new Set(articles.flatMap((article) => article.data.tags))].sort((a, b) => a.localeCompare(b));
+---
+
+<section class="index">
+  <div class="section-head">
+    <p class="eyebrow">{t('articles.eyebrow')}</p>
+    <div>
+      <h1 class="display display--section index__title">{t('articles.index.title')}</h1>
+      <p class="lede">{t('articles.index.intro')}</p>
+
+      <p class="cluster index__meta">
+        <a class="pill" href={rss}>
+          <Icon name="rss" class="pill__icon" />
+          {t('articles.rss')}
+        </a>
+        {tags.map((tag) => <span class="chip">{tag}</span>)}
+      </p>
+    </div>
+  </div>
+
+  {
+    articles.length === 0 ? (
+      <p class="index__empty mono">{t('articles.empty')}</p>
+    ) : (
+      <ul class="index__list">
+        {articles.map((article) => (
+          <li class="index__item">
+            <article class="index__card">
+              {article.data.cover !== undefined && (
+                <div class="index__media">
+                  <Image
+                    src={article.data.cover}
+                    alt={article.data.coverAlt ?? ''}
+                    widths={[280, 560]}
+                    sizes="(min-width: 52rem) 12rem, 100vw"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
+
+              <div class="index__body">
+                <p class="index__meta mono">
+                  <time datetime={article.data.date.toISOString()}>
+                    {formatArticleDate(article.data.date, locale)}
+                  </time>
+                  <span aria-hidden="true"> · </span>
+                  <span>
+                    {readingTime(article.body)} {t('articles.readingTime')}
+                  </span>
+                </p>
+
+                <h2 class="index__heading mono">
+                  <a href={`${base}${article.id}/`}>
+                    <span class="index__stretch">{article.data.title}</span>
+                  </a>
+                </h2>
+
+                <p class="index__excerpt">{article.data.description}</p>
+
+                {article.data.tags.length > 0 && (
+                  <p class="tag-row">
+                    {article.data.tags.map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </p>
+                )}
+              </div>
+
+              <span class="icon-btn index__go" aria-hidden="true">
+                <Icon name="arrow-up-right" />
+              </span>
+            </article>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>
+
+<style>
+  .index__title {
+    margin-block-end: 1rem;
+  }
+
+  .index__meta {
+    margin-block-start: 1.25rem;
+  }
+
+  .index__empty {
+    margin-block-start: 3rem;
+    color: var(--ink-muted);
+  }
+
+  .index__list {
+    margin-block-start: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .index__item {
+    border-block-end: 1px solid var(--line);
+  }
+
+  .index__card {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    padding-block: 1.5rem;
+    transition: opacity 200ms ease;
+  }
+
+  .index__item:hover .index__card {
+    opacity: 1;
+  }
+
+  .index__media {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .index__media :global(img) {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .index__body {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .index__meta {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .index__heading {
+    font-size: var(--step-2);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+
+  .index__heading a {
+    text-decoration: none;
+  }
+
+  .index__stretch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .index__excerpt {
+    font-size: var(--step-0);
+    color: var(--ink-dim);
+    line-height: 1.6;
+    max-width: 68ch;
+  }
+
+  .index__go {
+    justify-self: start;
+  }
+
+  @media (min-width: 52rem) {
+    .index__card {
+      grid-template-columns: 12rem minmax(0, 1fr) auto;
+      gap: 1.75rem;
+    }
+
+    .index__card:not(:has(.index__media)) {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .index__go {
+      justify-self: end;
+    }
+  }
+</style>

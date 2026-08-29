@@ -1,0 +1,336 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
+import { SITE } from '@/data/site';
+import type { Locale } from '@/data/types';
+import type { Article } from '@/lib/articles';
+import { readingTime } from '@/lib/articles';
+import { formatArticleDate } from '@/lib/dates';
+import { articleSchema } from '@/lib/schema';
+import { absolute, otherLocale, path, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  article: Article;
+  locale: Locale;
+  previous?: Article | undefined;
+  next?: Article | undefined;
+  translation?: Article | undefined;
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { article, locale, previous, next, translation, headings } = Astro.props;
+const t = useTranslations(locale);
+
+const base = path('/articles/', locale);
+const { title, description, date, updated, tags, cover, coverAlt } = article.data;
+const minutes = readingTime(article.body);
+
+/** Only h2s: a two-level table of contents stays readable on a phone. */
+const toc = headings.filter((heading) => heading.depth === 2);
+
+const schema = articleSchema({
+  title,
+  description,
+  url: absolute(`${base}${article.id}/`),
+  datePublished: date,
+  dateModified: updated,
+  locale,
+  tags,
+});
+
+const translationHref =
+  translation === undefined ? undefined : `${path('/articles/', translation.data.lang)}${translation.id}/`;
+
+/**
+ * Article slugs differ between languages, so the mirrored path would 404.
+ * Point the switcher at the real translation, or at that language's index
+ * when this article has none.
+ */
+const alternatePath = translationHref ?? path('/articles/', otherLocale(locale));
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  schema={schema}
+  alternatePath={alternatePath}
+  compactHeader
+>
+  <article class="post">
+    <header class="post__header">
+      <p class="post__crumbs mono">
+        <a href={base}>
+          <Icon name="arrow-left" size={13} />
+          {t('articles.back')}
+        </a>
+      </p>
+
+      <h1 class="post__title mono">{title}</h1>
+      <p class="post__standfirst">{description}</p>
+
+      <div class="post__meta mono">
+        <span>
+          {t('articles.published')}{' '}
+          <time datetime={date.toISOString()}>{formatArticleDate(date, locale)}</time>
+        </span>
+        <span aria-hidden="true">·</span>
+        <span>{minutes} {t('articles.readingTime')}</span>
+        {
+          updated !== undefined && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>
+                {t('articles.updated')} <time datetime={updated.toISOString()}>{formatArticleDate(updated, locale)}</time>
+              </span>
+            </>
+          )
+        }
+        <span aria-hidden="true">·</span>
+        <span>{SITE.name}</span>
+      </div>
+
+      {
+        tags.length > 0 && (
+          <p class="cluster post__tags">
+            {tags.map((tag) => (
+              <span class="chip">{tag}</span>
+            ))}
+          </p>
+        )
+      }
+
+      {
+        translationHref !== undefined && (
+          <p class="post__translation mono">
+            <a href={translationHref} hreflang={translation?.data.lang} lang={translation?.data.lang}>
+              {t('articles.otherLanguage')}
+              <Icon name="arrow-right" size={13} />
+            </a>
+          </p>
+        )
+      }
+    </header>
+
+    {
+      cover !== undefined && (
+        <figure class="post__cover">
+          <Image src={cover} alt={coverAlt ?? ''} widths={[720, 1200]} sizes="(min-width: 62rem) 60rem, 100vw" loading="eager" />
+        </figure>
+      )
+    }
+
+    <div class="post__layout">
+      {
+        toc.length > 1 && (
+          <nav class="post__toc no-print" aria-labelledby="toc-heading">
+            <p id="toc-heading" class="post__toc-title mono">
+              {t('articles.toc')}
+            </p>
+            <ol>
+              {toc.map((heading) => (
+                <li>
+                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+
+    <nav class="post__nav no-print" aria-label={t('articles.label')}>
+      {
+        previous !== undefined && (
+          <a class="post__nav-link" href={`${base}${previous.id}/`} rel="prev">
+            <span class="mono">← {t('articles.prev')}</span>
+            <strong>{previous.data.title}</strong>
+          </a>
+        )
+      }
+      {
+        next !== undefined && (
+          <a class="post__nav-link post__nav-link--next" href={`${base}${next.id}/`} rel="next">
+            <span class="mono">{t('articles.next')} →</span>
+            <strong>{next.data.title}</strong>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    padding-block-start: clamp(0.5rem, 0.2rem + 1.4vw, 1.5rem);
+  }
+
+  .post__header {
+    display: grid;
+    gap: 1rem;
+    max-width: 46rem;
+  }
+
+  .post__crumbs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+
+  .post__crumbs a:hover {
+    color: var(--ink);
+  }
+
+  .post__title {
+    font-size: clamp(1.9rem, 1.1rem + 3.6vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .post__standfirst {
+    font-size: var(--step-1);
+    color: var(--ink-dim);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.6rem;
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .post__meta time {
+    color: var(--ink-dim);
+  }
+
+  .post__tags {
+    --cluster-gap: 0.4rem;
+  }
+
+  .post__translation a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--step--2);
+    color: var(--accent-b);
+    text-decoration: none;
+  }
+
+  .post__cover {
+    margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0 0;
+  }
+
+  .post__cover :global(img) {
+    width: 100%;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--line);
+  }
+
+  .post__layout {
+    display: grid;
+    gap: clamp(2rem, 1.5rem + 2vw, 3rem);
+    margin-block-start: clamp(2.25rem, 1.8rem + 2vw, 3.5rem);
+    align-items: start;
+  }
+
+  .post__toc {
+    position: sticky;
+    top: 2rem;
+    display: grid;
+    gap: 0.6rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--panel-raised);
+  }
+
+  .post__toc-title {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .post__toc ol {
+    display: grid;
+    gap: 0.45rem;
+    counter-reset: toc;
+  }
+
+  .post__toc a {
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    text-decoration: none;
+    line-height: 1.4;
+  }
+
+  .post__toc a:hover {
+    color: var(--ink);
+  }
+
+  .post__nav {
+    display: grid;
+    gap: 0.85rem;
+    margin-block-start: clamp(3rem, 2.4rem + 2.5vw, 4.5rem);
+    padding-block-start: 1.5rem;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .post__nav-link {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--panel-raised);
+    text-decoration: none;
+    transition:
+      border-color 200ms ease,
+      background-color 200ms ease;
+  }
+
+  .post__nav-link:hover {
+    border-color: var(--line-strong);
+    background: var(--panel-hover);
+  }
+
+  .post__nav-link span {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .post__nav-link strong {
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .post__nav-link--next {
+    text-align: right;
+  }
+
+  @media (min-width: 62rem) {
+    .post__layout {
+      grid-template-columns: minmax(0, 1fr) 15rem;
+    }
+
+    .post__toc {
+      order: 2;
+    }
+
+    .post__nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

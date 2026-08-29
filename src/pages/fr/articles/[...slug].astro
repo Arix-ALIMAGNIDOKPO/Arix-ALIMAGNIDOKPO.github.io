@@ -1,0 +1,45 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+import { getArticles, getTranslation, neighbours, type Article } from '@/lib/articles';
+
+export async function getStaticPaths() {
+  const articles = await getArticles('fr');
+
+  return Promise.all(
+    articles.map(async (article) => {
+      const { previous, next } = neighbours(articles, article);
+      return {
+        params: { slug: article.id },
+        props: {
+          article,
+          previous,
+          next,
+          translation: await getTranslation(article),
+        },
+      };
+    }),
+  );
+}
+
+interface Props {
+  article: Article;
+  previous: Article | undefined;
+  next: Article | undefined;
+  translation: Article | undefined;
+}
+
+const { article, previous, next, translation } = Astro.props;
+const { Content, headings } = await render(article);
+---
+
+<ArticleLayout
+  article={article}
+  locale="fr"
+  previous={previous}
+  next={next}
+  translation={translation}
+  headings={headings}
+>
+  <Content />
+</ArticleLayout>

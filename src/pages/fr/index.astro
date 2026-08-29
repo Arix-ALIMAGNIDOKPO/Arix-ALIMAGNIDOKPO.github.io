@@ -1,0 +1,11 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HomeSections from '@/components/HomeSections.astro';
+import { personSchema } from '@/lib/schema';
+
+const locale = 'fr' as const;
+---
+
+<BaseLayout schema={personSchema(locale)}>
+  <HomeSections locale={locale} />
+</BaseLayout>

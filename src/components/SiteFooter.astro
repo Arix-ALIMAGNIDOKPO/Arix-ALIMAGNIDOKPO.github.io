@@ -1,0 +1,103 @@
+---
+import Icon from '@/components/Icon.astro';
+import { SITE, SOCIAL } from '@/data/site';
+import type { Locale } from '@/data/types';
+import { path, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const year = new Date().getUTCFullYear();
+const rss = path('rss.xml', locale).replace(/\/$/, '');
+---
+
+<footer class="foot">
+  <hr class="rule" />
+
+  <div class="foot__grid">
+    <p class="foot__legal mono">
+      © {year} {SITE.name}. {t('footer.rights')}
+    </p>
+
+    <ul class="foot__links">
+      <li>
+        <a class="foot__link mono" href={SOCIAL.github} target="_blank" rel="noopener noreferrer">
+          <Icon name="github" size={15} />
+          {t('social.github')}
+        </a>
+      </li>
+      <li>
+        <a class="foot__link mono" href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer">
+          <Icon name="linkedin" size={15} />
+          {t('social.linkedin')}
+        </a>
+      </li>
+      <li>
+        <a class="foot__link mono" href={SOCIAL.email}>
+          <Icon name="mail" size={15} />
+          {SITE.email}
+        </a>
+      </li>
+      <li>
+        <a class="foot__link mono" href={rss}>
+          <Icon name="rss" size={15} />
+          {t('articles.rss')}
+        </a>
+      </li>
+    </ul>
+
+    <p class="foot__built mono">{t('footer.builtWith')}</p>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    margin-block-start: var(--section-gap);
+  }
+
+  .foot__grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-block-start: 1.5rem;
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .foot__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .foot__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .foot__link:hover {
+    color: var(--ink);
+  }
+
+  .foot__built {
+    flex-basis: 100%;
+    color: var(--ink-faint);
+  }
+
+  @media (min-width: 62rem) {
+    .foot__built {
+      flex-basis: auto;
+      text-align: right;
+    }
+  }
+</style>

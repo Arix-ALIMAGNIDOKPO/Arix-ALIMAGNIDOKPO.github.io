@@ -1,0 +1,85 @@
+---
+import Icon from '@/components/Icon.astro';
+import { SITE, SOCIAL } from '@/data/site';
+import type { Locale } from '@/data/types';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="section" id="contact" aria-labelledby="contact-heading">
+  <div class="section-head">
+    <p class="eyebrow">{t('contact.eyebrow')}</p>
+    <p class="lede">{t('contact.lead')}</p>
+  </div>
+
+  <h2 id="contact-heading" class="display display--section section-title">{t('contact.label')}</h2>
+
+  <div class="contact__panel">
+    <a class="contact__email mono" href={SOCIAL.email}>{SITE.email}</a>
+
+    <div class="cluster contact__actions">
+      <a class="pill pill--solid" href={SOCIAL.email}>{t('contact.emailMe')}</a>
+      <a class="icon-btn" href={SOCIAL.email} aria-label={t('contact.emailMe')}>
+        <Icon name="arrow-right" />
+      </a>
+      <a class="pill" href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer">
+        <Icon name="linkedin" class="pill__icon" />
+        {t('social.linkedin')}
+      </a>
+      <a class="pill" href={SITE.cv} download>
+        <Icon name="download" class="pill__icon" />
+        {t('hero.cv')}
+      </a>
+    </div>
+
+    <p class="contact__location mono">
+      {t('contact.basedIn')} <strong>{SITE.location[locale]}</strong>
+    </p>
+  </div>
+</section>
+
+<style>
+  .contact__panel {
+    display: grid;
+    gap: 1.5rem;
+    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    padding: clamp(1.5rem, 1.1rem + 2vw, 2.75rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--panel-raised);
+  }
+
+  .contact__email {
+    font-size: clamp(1.15rem, 0.6rem + 2.6vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: color 180ms ease;
+  }
+
+  .contact__email:hover {
+    color: var(--accent-b);
+  }
+
+  .contact__actions {
+    --cluster-gap: 0.6rem;
+  }
+
+  .contact__location {
+    font-size: var(--step--2);
+    color: var(--ink-muted);
+  }
+
+  .contact__location strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+</style>
