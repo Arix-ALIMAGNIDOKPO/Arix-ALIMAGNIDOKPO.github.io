@@ -84,6 +84,7 @@ whose month is not actually known.
 | `npm run audit`  | Fail on any high-severity dependency advisory               |
 | `npm run check:links` | Verify every internal link in `dist/` resolves         |
 | `npm run images` | Regenerate `public/og.png` and `public/apple-touch-icon.png`|
+| `npm run deploy:manual` | Publish `dist/` straight to `gh-pages`, bypassing Actions |
 
 Requires Node 20.3+ (CI uses Node 22).
 
@@ -143,10 +144,41 @@ proxy that can (Cloudflare, Netlify) would let those be enforced too.
 
 ## Déploiement
 
+### Normal route — GitHub Actions
+
 Push to `main` → `.github/workflows/deploy.yml` builds and publishes to GitHub Pages.
 Pull requests run the same checks without deploying (`.github/workflows/ci.yml`).
 
-One-time setup: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Requires **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+### Fallback — publishing without Actions
+
+GitHub Actions refuses to run while the account is locked for billing. The site
+is currently published this way instead: the build is produced locally and
+pushed to the `gh-pages` branch, which Pages serves directly.
+
+```bash
+npm run build
+npm run deploy:manual
+```
+
+`public/.nojekyll` is what stops GitHub Pages from deleting the `_astro/`
+folder — without it the site loads with no CSS at all.
+
+If Pages does not pick the push up on its own, force a build:
+
+```bash
+gh api -X POST repos/Arix-ALIMAGNIDOKPO/Arix-ALIMAGNIDOKPO.github.io/pages/builds
+```
+
+### Switching back to Actions once billing is fixed
+
+```bash
+gh api -X PUT repos/Arix-ALIMAGNIDOKPO/Arix-ALIMAGNIDOKPO.github.io/pages -f build_type=workflow
+gh workflow run "Deploy to GitHub Pages" --ref main
+```
+
+The workflow is already committed and needs no changes.
 
 ---
 

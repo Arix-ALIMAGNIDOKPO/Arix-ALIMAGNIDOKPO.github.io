@@ -15,7 +15,8 @@
     "astro": "astro",
     "images": "node scripts/generate-images.mjs",
     "audit": "npm audit --audit-level=high",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "deploy:manual": "node scripts/deploy-gh-pages.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
