@@ -8,6 +8,7 @@ export const UI = {
   en: {
     'nav.about': 'About',
     'nav.work': 'Work',
+    'nav.education': 'Education',
     'nav.ventures': 'AIDA',
     'nav.articles': 'Articles',
     'nav.contact': 'Contact',
@@ -57,6 +58,7 @@ export const UI = {
 
     'about.eyebrow': '… /About me …',
     'about.skillsNote': 'Some of the tools, topics and stacks I work with',
+    'about.skillsHeading': 'What I work with',
     'about.portraitAlt': 'Portrait of Arix ALIMAGNIDOKPO',
 
     'work.label': 'Work',
@@ -89,7 +91,10 @@ export const UI = {
     'projects.more': 'Everything else on GitHub',
 
     'education.label': 'Education',
+    'education.eyebrow': '… /Education …',
     'education.current': 'Current',
+    'education.lead':
+      'A degree in AI from Benin, then a research fellowship in Paris. The thread is the same: languages, and the models that fail on them.',
 
     'community.label': 'Community',
     'community.eyebrow': '… /Community …',
@@ -112,6 +117,7 @@ export const UI = {
   fr: {
     'nav.about': 'À propos',
     'nav.work': 'Parcours',
+    'nav.education': 'Formation',
     'nav.ventures': 'AIDA',
     'nav.articles': 'Articles',
     'nav.contact': 'Contact',
@@ -161,6 +167,7 @@ export const UI = {
 
     'about.eyebrow': '… /À propos …',
     'about.skillsNote': 'Quelques outils, sujets et stacks avec lesquels je travaille',
+    'about.skillsHeading': 'Ce avec quoi je travaille',
     'about.portraitAlt': 'Portrait d’Arix ALIMAGNIDOKPO',
 
     'work.label': 'Parcours',
@@ -193,7 +200,10 @@ export const UI = {
     'projects.more': 'Tout le reste sur GitHub',
 
     'education.label': 'Formation',
+    'education.eyebrow': '… /Formation …',
     'education.current': 'En cours',
+    'education.lead':
+      'Une licence en IA au Bénin, puis une bourse de recherche à Paris. Le fil est le même : les langues, et les modèles qui échouent dessus.',
 
     'community.label': 'Communauté',
     'community.eyebrow': '… /Communauté …',

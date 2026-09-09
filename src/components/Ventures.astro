@@ -142,9 +142,11 @@ const LOGOS: Record<LogoName, ImageMetadata> = {
     gap: 0.85rem;
   }
 
+  /* The AIDA artwork is a wordmark with almost no bleed of its own, so the
+     plate supplies the breathing room instead. */
   .company__logo {
-    --logo-height: 2.4rem;
-    padding-inline: 1.1rem;
+    --logo-height: 2.1rem;
+    padding: 1rem 1.35rem;
   }
 
   .company__role {
@@ -275,7 +277,8 @@ const LOGOS: Record<LogoName, ImageMetadata> = {
   }
 
   .product__logo {
-    --logo-height: 1.9rem;
+    --logo-height: 1.75rem;
+    padding: 0.75rem 1rem;
     flex: none;
   }
 

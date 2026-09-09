@@ -1,6 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
-import { EDUCATION, RESEARCH } from '@/data/profile';
+import { RESEARCH } from '@/data/profile';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
 
@@ -62,42 +62,6 @@ const t = useTranslations(locale);
     }
   </ol>
 
-  <h3 class="research__subhead mono">{t('education.label')}</h3>
-
-  <ol class="research__education">
-    {
-      EDUCATION.map((study) => (
-        <li class:list={['research__study', study.current === true && 'research__study--current']}>
-          <p class="research__period mono">
-            {study.period[locale]}
-            {study.current === true && <span class="chip chip--accent research__now">{t('education.current')}</span>}
-          </p>
-          <div>
-            <h4 class="research__title">{study.degree[locale]}</h4>
-            <p class="research__context mono">
-              {study.schoolUrl !== undefined ? (
-                <a href={study.schoolUrl} target="_blank" rel="noopener noreferrer">
-                  {study.school}
-                </a>
-              ) : (
-                study.school
-              )}
-              <span class="research__place">{study.place}</span>
-              {study.grade !== undefined && <span class="research__grade">{study.grade[locale]}</span>}
-            </p>
-            {study.notes[locale].length > 0 && (
-              <ul class="research__highlights">
-                {study.notes[locale].map((note) => (
-                  <li>{note}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </li>
-      ))
-    }
-  </ol>
-
 </section>
 
 <style>
@@ -142,23 +106,6 @@ const t = useTranslations(locale);
     color: var(--ink-muted);
   }
 
-  .research__place,
-  .research__grade {
-    display: block;
-  }
-
-  .research__grade {
-    color: var(--accent);
-  }
-
-  .research__now {
-    margin-inline-start: 0.5rem;
-  }
-
-  .research__study--current .research__title {
-    color: var(--ink);
-  }
-
   .research__summary {
     font-size: var(--step-0);
     color: var(--ink-dim);
@@ -185,31 +132,7 @@ const t = useTranslations(locale);
     color: var(--ink-faint);
   }
 
-  .research__subhead {
-    margin-block-start: clamp(2.5rem, 2rem + 2vw, 3.5rem);
-    font-size: var(--step-1);
-    color: var(--ink);
-    letter-spacing: -0.02em;
-  }
-
-  .research__education {
-    display: grid;
-    gap: 1.25rem;
-    margin-block-start: 1.25rem;
-    border-block-start: 1px solid var(--line);
-    padding-block-start: 1.25rem;
-  }
-
-  .research__study {
-    display: grid;
-    gap: 0.5rem;
-  }
-
   @media (min-width: 52rem) {
     .research__item,
-    .research__study {
-      grid-template-columns: 11rem minmax(0, 1fr);
-      gap: 1.5rem;
-    }
   }
 </style>

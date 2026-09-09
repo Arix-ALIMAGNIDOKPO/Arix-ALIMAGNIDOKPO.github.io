@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import Icon from '@/components/Icon.astro';
 import portrait from '@/assets/photos/portrait.jpg';
 import { INTRO, RESEARCH_AREAS, SKILLS } from '@/data/profile';
 import { SITE } from '@/data/site';
@@ -29,45 +28,47 @@ const t = useTranslations(locale);
   </div>
 
   <div class="about__body">
-    <div class="about__skills">
-      {
-        SKILLS.map((group) => (
-          <article class:list={['card', 'about__skill', group.emphasis === 'primary' && 'card--invert']}>
-            <h3 class="about__skill-title mono">{group.label[locale]}</h3>
-            <p class="tag-row">
-              {group.items.map((item) => (
-                <span class="tag">{item}</span>
-              ))}
-            </p>
-          </article>
-        ))
-      }
-
-      <p class="about__note">
-        <span class="mono">{t('about.skillsNote')}</span>
-        <span class="icon-btn icon-btn--solid about__badge" aria-hidden="true">
-          <Icon name="arrow-up-right" />
-        </span>
-      </p>
-    </div>
-
+    <!-- On a phone the portrait comes first: a face before a list of tools. -->
     <figure class="about__portrait">
       <Image
         src={portrait}
         alt={t('about.portraitAlt')}
-        widths={[380, 760]}
-        sizes="(min-width: 62rem) 22rem, 70vw"
+        widths={[420, 840]}
+        sizes="(min-width: 62rem) 22rem, 92vw"
         loading="lazy"
         decoding="async"
       />
       <figcaption class="mono">{SITE.location[locale]}</figcaption>
     </figure>
+
+    <div class="about__skills">
+      <h3 class="about__skills-heading mono">{t('about.skillsHeading')}</h3>
+
+      <dl class="skills">
+        {
+          SKILLS.map((group) => (
+            <div class:list={['skills__group', group.emphasis === 'primary' && 'skills__group--primary']}>
+              <dt class="skills__label mono">{group.label[locale]}</dt>
+              <dd class="skills__items">
+                <ul>
+                  {group.items.map((item) => (
+                    <li class="skills__item mono">{item}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <p class="about__note mono">{t('about.skillsNote')}</p>
+    </div>
   </div>
 </section>
 
 <style>
   .about__intro {
-    max-width: 52ch;
+    max-width: 54ch;
   }
 
   .about__areas {
@@ -79,57 +80,12 @@ const t = useTranslations(locale);
 
   .about__body {
     display: grid;
-    gap: clamp(2rem, 1.2rem + 3vw, 3.5rem);
-    margin-block-start: clamp(2.5rem, 1.8rem + 3vw, 4rem);
+    gap: clamp(1.75rem, 1.3rem + 2.2vw, 3.25rem);
+    margin-block-start: clamp(2rem, 1.6rem + 2.4vw, 3.5rem);
     align-items: start;
   }
 
-  .about__skills {
-    display: grid;
-    gap: 0.85rem;
-  }
-
-  /* Cards step inward as they descend, echoing the reference layout.
-     Driven by nth-child rather than an inline style attribute, so the page
-     needs no `unsafe-inline` in its style-src. */
-  .about__skill {
-    margin-inline-start: 0;
-  }
-
-  @media (min-width: 40rem) {
-    .about__skill:nth-child(2) {
-      margin-inline-start: 1rem;
-    }
-
-    .about__skill:nth-child(3) {
-      margin-inline-start: 2rem;
-    }
-
-    .about__skill:nth-child(4) {
-      margin-inline-start: 3rem;
-    }
-  }
-
-  .about__skill-title {
-    font-size: var(--step-1);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    margin-block-end: 0.6rem;
-  }
-
-  .about__note {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-block-start: 0.5rem;
-    font-size: var(--step--2);
-    color: var(--ink-muted);
-    max-width: 34ch;
-  }
-
-  .about__badge {
-    flex: none;
-  }
+  /* ---------- portrait ---------- */
 
   .about__portrait {
     margin: 0;
@@ -137,11 +93,11 @@ const t = useTranslations(locale);
 
   .about__portrait :global(img) {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
-    object-position: center 22%;
+    object-position: center 20%;
     border-radius: var(--radius-card);
-    filter: grayscale(1) contrast(1.06);
+    filter: grayscale(1) contrast(1.05);
     transition: filter 400ms ease;
   }
 
@@ -150,19 +106,107 @@ const t = useTranslations(locale);
   }
 
   .about__portrait figcaption {
-    margin-block-start: 0.75rem;
+    margin-block-start: 0.6rem;
     font-size: var(--step--2);
     color: var(--ink-muted);
-    text-align: right;
   }
 
+  /* ---------- skills ---------- */
+
+  .about__skills-heading {
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-block-end: 1rem;
+  }
+
+  .skills {
+    display: grid;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .skills__group {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: 1rem;
+    border-block-end: 1px solid var(--line);
+  }
+
+  .skills__label {
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .skills__group--primary .skills__label {
+    color: var(--accent);
+  }
+
+  .skills__items {
+    margin: 0;
+  }
+
+  /* One chip per item, so every entry is a separate, readable target rather
+     than a run-on line of slash-separated words. */
+  .skills__items ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .skills__item {
+    padding: 0.24rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--panel-raised);
+    font-size: var(--step--2);
+    color: var(--ink-dim);
+    white-space: nowrap;
+  }
+
+  .skills__group--primary .skills__item {
+    border-color: var(--line-strong);
+    color: var(--ink);
+  }
+
+  .about__note {
+    margin-block-start: 1rem;
+    font-size: var(--step--2);
+    color: var(--ink-faint);
+    max-width: 40ch;
+  }
+
+  @media (min-width: 40rem) {
+    .skills__group {
+      grid-template-columns: 9rem minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: baseline;
+    }
+  }
+
+  /* From desktop up the portrait moves to the right, as in the reference. */
   @media (min-width: 62rem) {
     .about__body {
-      grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+      grid-template-columns: minmax(0, 1fr) minmax(15rem, 21rem);
     }
 
-    .about__note {
-      margin-block-start: 1.5rem;
+    .about__portrait {
+      order: 2;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .about__portrait :global(img) {
+      aspect-ratio: 3 / 4;
+    }
+
+    .about__portrait figcaption {
+      text-align: right;
+    }
+
+    .about__skills {
+      order: 1;
     }
   }
 </style>

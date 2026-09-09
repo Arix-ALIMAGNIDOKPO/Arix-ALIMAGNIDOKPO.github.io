@@ -3,6 +3,7 @@ import About from '@/components/About.astro';
 import ArticleRail from '@/components/ArticleRail.astro';
 import Awards from '@/components/Awards.astro';
 import Community from '@/components/Community.astro';
+import Education from '@/components/Education.astro';
 import Contact from '@/components/Contact.astro';
 import Hero from '@/components/Hero.astro';
 import Projects from '@/components/Projects.astro';
@@ -24,6 +25,7 @@ const articles = (await getArticles(locale)).slice(0, 6);
 <ArticleRail locale={locale} articles={articles} />
 <About locale={locale} />
 <Work locale={locale} />
+<Education locale={locale} />
 <Ventures locale={locale} />
 <Awards locale={locale} />
 <Research locale={locale} />
