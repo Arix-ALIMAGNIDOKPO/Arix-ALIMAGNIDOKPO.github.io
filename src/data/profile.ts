@@ -1,24 +1,29 @@
 import type {
   Award,
   CommunityItem,
+  Company,
   I18nList,
   I18nText,
   Project,
   ResearchItem,
   Role,
-  SkillGroup,
   Study,
-  Venture,
 } from './types';
 
 export const INTRO: I18nText = {
-  en: 'I am Arix — an AI and NLP engineer based in Cotonou. I lead AI work at Benin’s Ministry of Foreign Affairs and I run AIDA, where we build voice and document intelligence for African languages.',
-  fr: 'Je suis Arix — ingénieur IA et NLP basé à Cotonou. Je pilote les projets d’IA au Ministère des Affaires Étrangères du Bénin et je dirige AIDA, où nous construisons l’intelligence vocale et documentaire pour les langues africaines.',
+  en: 'I am Arix, an AI and NLP engineer. I am a student researcher at Université Sorbonne Paris Nord, where an EUR fellowship funds my work on language technology at the LIPN, and I am the founder of AIDA, an AI company building voice and document intelligence for African languages.',
+  fr: 'Je suis Arix, ingénieur IA et NLP. Étudiant-chercheur à l’Université Sorbonne Paris Nord, où une bourse EUR finance mon travail sur les technologies du langage au LIPN, et fondateur d’AIDA, une entreprise d’IA qui construit l’intelligence vocale et documentaire pour les langues africaines.',
 };
 
 export const MISSION: I18nText = {
-  en: 'In Africa, the digital divide is first a language divide. My work is to close it — with models that hear, read and write the languages people actually speak.',
-  fr: 'En Afrique, la fracture numérique est d’abord une fracture linguistique. Mon travail consiste à la refermer — avec des modèles qui entendent, lisent et écrivent les langues que les gens parlent vraiment.',
+  en: 'In Africa, the digital divide is first a language divide. My work is to close it, with models that hear, read and write the languages people actually speak.',
+  fr: 'En Afrique, la fracture numérique est d’abord une fracture linguistique. Mon travail consiste à la refermer, avec des modèles qui entendent, lisent et écrivent les langues que les gens parlent vraiment.',
+};
+
+/** The one-line "what I am doing right now", shown under the hero. */
+export const CURRENT: I18nText = {
+  en: 'Student researcher at the LIPN, Université Sorbonne Paris Nord. Founder of AIDA.',
+  fr: 'Étudiant-chercheur au LIPN, Université Sorbonne Paris Nord. Fondateur d’AIDA.',
 };
 
 export const RESEARCH_AREAS: I18nList = {
@@ -37,44 +42,91 @@ export const RESEARCH_AREAS: I18nList = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Ventures                                                            */
+/* The company and its products                                        */
 /* ------------------------------------------------------------------ */
 
-export const VENTURES: readonly Venture[] = [
-  {
-    name: 'AIDA',
-    domain: 'aida.bj',
-    url: 'https://aida.bj/',
-    role: { en: 'Founder & CEO', fr: 'Fondateur & CEO' },
-    summary: {
-      en: 'Artificial Intelligence for the Development of Africa. Founded in 2022 in Cotonou, AIDA designs AI products rooted in Africa — voice and document intelligence built for the languages and the institutions of the continent.',
-      fr: 'Artificial Intelligence for the Development of Africa. Fondée en 2022 à Cotonou, AIDA conçoit des produits d’intelligence artificielle ancrés en Afrique — intelligence vocale et documentaire pensée pour les langues et les institutions du continent.',
-    },
-    tags: ['Cotonou, BJ', 'Since 2022', 'AI products'],
+export const COMPANY: Company = {
+  name: 'AIDA',
+  fullName: 'Artificial Intelligence for the Development of Africa',
+  logo: 'aida',
+  domain: 'aida.bj',
+  url: 'https://aida.bj/',
+  role: { en: 'Founder & CEO', fr: 'Fondateur & CEO' },
+  founded: '2022',
+  city: { en: 'Cotonou, Benin', fr: 'Cotonou, Bénin' },
+  summary: {
+    en: 'An AI company rooted in Africa. We build the two layers the continent is missing: machines that understand African speech, and institutions that can finally search their own archives.',
+    fr: 'Une entreprise d’IA ancrée en Afrique. Nous construisons les deux couches qui manquent au continent : des machines qui comprennent la parole africaine, et des institutions capables enfin de fouiller leurs propres archives.',
   },
-  {
-    name: 'Ayoka',
-    domain: 'ayoka.aida.bj',
-    url: 'https://ayoka.aida.bj/',
-    role: { en: 'Product', fr: 'Produit' },
-    summary: {
-      en: 'A high-accuracy voice API for African languages. Ayoka provides speech-to-text and text-to-speech for Fon, Yoruba, French and English, targeting 98% accuracy on African languages.',
-      fr: 'Une API vocale haute précision pour les langues africaines. Ayoka propose la transcription (speech-to-text) et la synthèse (text-to-speech) pour le Fon, le Yoruba, le français et l’anglais, avec une précision visée de 98 % sur les langues africaines.',
+  products: [
+    {
+      name: 'Ayoka',
+      logo: 'ayoka',
+      domain: 'ayoka.aida.bj',
+      url: 'https://ayoka.aida.bj/',
+      accent: '#5b6ee1',
+      tagline: {
+        en: 'The voice API for African languages',
+        fr: 'L’API vocale pour les langues africaines',
+      },
+      summary: {
+        en: 'Speech recognition and speech synthesis for languages the big models never learned. Ayoka connects 800 million African speakers to any platform through a single API.',
+        fr: 'Reconnaissance et synthèse vocale pour des langues que les grands modèles n’ont jamais apprises. Ayoka connecte 800 millions de locuteurs africains à n’importe quelle plateforme via une seule API.',
+      },
+      capabilities: {
+        en: ['Speech to text', 'Text to speech', 'Tonal language support', 'REST API'],
+        fr: ['Parole vers texte', 'Texte vers parole', 'Prise en charge des langues à tons', 'API REST'],
+      },
+      facts: [
+        {
+          label: { en: 'Accuracy', fr: 'Précision' },
+          value: { en: '98% target', fr: '98 % visés' },
+        },
+        {
+          label: { en: 'Languages', fr: 'Langues' },
+          value: { en: '15+, incl. Fon, Yoruba, Wolof', fr: '15+, dont fon, yoruba, wolof' },
+        },
+        {
+          label: { en: 'Integration', fr: 'Intégration' },
+          value: { en: '48 hours', fr: '48 heures' },
+        },
+      ],
     },
-    tags: ['Speech-to-Text', 'Text-to-Speech', 'Fon', 'Yoruba', 'Web API'],
-  },
-  {
-    name: 'Sovrean',
-    domain: 'sovrean.aida.bj',
-    url: 'https://sovrean.aida.bj/',
-    role: { en: 'Product', fr: 'Produit' },
-    summary: {
-      en: 'Sovereign document intelligence. Sovrean ingests, structures, classifies and makes documents queryable through OCR, grounded chat and assisted transformations — deployable in the cloud, on-premise, or inside the client’s own infrastructure.',
-      fr: 'Intelligence documentaire souveraine. Sovrean ingère, structure, classe et rend interrogeables vos documents via OCR, chat borné et transformations assistées — en cloud, on-premise ou directement chez le client.',
+    {
+      name: 'Sovrean',
+      logo: 'sovrean',
+      domain: 'sovrean.aida.bj',
+      url: 'https://sovrean.aida.bj/',
+      accent: '#e0447f',
+      tagline: {
+        en: 'Sovereign document intelligence',
+        fr: 'Intelligence documentaire souveraine',
+      },
+      summary: {
+        en: 'Document management and assisted intelligence for West African organisations. Sovrean ingests, structures and classifies archives, then makes them answerable in plain language. Nothing has to leave the building.',
+        fr: 'Gestion documentaire et intelligence assistée pour les organisations d’Afrique de l’Ouest. Sovrean ingère, structure et classe les archives, puis les rend interrogeables en langage naturel. Rien n’a besoin de quitter le bâtiment.',
+      },
+      capabilities: {
+        en: ['OCR on degraded scans', 'Grounded question answering', 'Assisted drafting', 'Validation workflow'],
+        fr: ['OCR sur scans dégradés', 'Réponses sourcées', 'Rédaction assistée', 'Workflow de validation'],
+      },
+      facts: [
+        {
+          label: { en: 'Deployment', fr: 'Déploiement' },
+          value: { en: 'Cloud, on-premise, or client-hosted', fr: 'Cloud, on-premise ou chez le client' },
+        },
+        {
+          label: { en: 'Built for', fr: 'Conçu pour' },
+          value: { en: 'West African organisations', fr: 'Organisations ouest-africaines' },
+        },
+        {
+          label: { en: 'Answers', fr: 'Réponses' },
+          value: { en: 'Always traced to a source document', fr: 'Toujours tracées à un document source' },
+        },
+      ],
     },
-    tags: ['OCR', 'RAG', 'Document AI', 'On-premise'],
-  },
-];
+  ],
+};
 
 /* ------------------------------------------------------------------ */
 /* Experience                                                          */
@@ -82,27 +134,50 @@ export const VENTURES: readonly Venture[] = [
 
 export const ROLES: readonly Role[] = [
   {
+    org: 'LIPN, Université Sorbonne Paris Nord',
+    orgUrl: 'https://lipn.univ-paris13.fr',
+    title: { en: 'Student Researcher, EUR Fellow', fr: 'Étudiant-chercheur, boursier EUR' },
+    kind: { en: 'Research', fr: 'Recherche' },
+    start: '2026-09',
+    end: null,
+    summary: {
+      en: 'Research on language technology at the LIPN, funded by an EUR Graduate School of Research fellowship at Institut Galilée.',
+      fr: 'Recherche sur les technologies du langage au LIPN, financée par une bourse EUR (Graduate School of Research) à l’Institut Galilée.',
+    },
+    highlights: {
+      en: [
+        'Working on natural language processing, with a focus on languages that lack the data the field takes for granted.',
+        'Reading for a Master’s in Computer Science alongside the research work.',
+      ],
+      fr: [
+        'Travaux en traitement automatique du langage, centrés sur les langues privées des données que la discipline tient pour acquises.',
+        'Master en informatique mené en parallèle des travaux de recherche.',
+      ],
+    },
+    stack: ['NLP', 'Research', 'Python'],
+  },
+  {
     org: 'AIDA',
     orgUrl: 'https://aida.bj/',
     title: { en: 'Founder & CEO', fr: 'Fondateur & CEO' },
-    kind: { en: 'Startup', fr: 'Startup' },
+    kind: { en: 'Company', fr: 'Entreprise' },
     start: '2022-01',
     end: null,
     // aida.bj states the founding year, not the month.
     precision: 'year',
     summary: {
-      en: 'Building an African AI company around two products: Ayoka for speech, Sovrean for documents.',
-      fr: 'Construction d’une entreprise d’IA africaine autour de deux produits : Ayoka pour la voix, Sovrean pour les documents.',
+      en: 'Founded and lead an African AI company built around two products: Ayoka for speech, Sovrean for documents.',
+      fr: 'Fondation et direction d’une entreprise d’IA africaine bâtie autour de deux produits : Ayoka pour la voix, Sovrean pour les documents.',
     },
     highlights: {
       en: [
-        'Set the product and research direction for Ayoka — speech-to-text and text-to-speech for Fon, Yoruba, French and English.',
-        'Defined Sovrean’s sovereign deployment model: cloud, on-premise, or hosted inside the client’s own infrastructure.',
+        'Set the product and research direction for Ayoka, a speech recognition and synthesis API covering Fon, Yoruba, Wolof and more than fifteen African languages.',
+        'Defined Sovrean’s sovereign deployment model so that institutions never have to let their archives leave their own infrastructure.',
         'Lead the team, the technical architecture and the commercial roadmap.',
       ],
       fr: [
-        'Définition de la direction produit et recherche d’Ayoka — transcription et synthèse vocale pour le Fon, le Yoruba, le français et l’anglais.',
-        'Conception du modèle de déploiement souverain de Sovrean : cloud, on-premise ou hébergement dans l’infrastructure du client.',
+        'Direction produit et recherche d’Ayoka, une API de reconnaissance et de synthèse vocale couvrant le fon, le yoruba, le wolof et plus de quinze langues africaines.',
+        'Conception du modèle de déploiement souverain de Sovrean, pour que les institutions n’aient jamais à laisser leurs archives quitter leur propre infrastructure.',
         'Pilotage de l’équipe, de l’architecture technique et de la feuille de route commerciale.',
       ],
     },
@@ -114,23 +189,24 @@ export const ROLES: readonly Role[] = [
     title: { en: 'AI Developer & Project Lead', fr: 'Développeur IA & Chef de projet' },
     kind: { en: 'Government', fr: 'Gouvernement' },
     start: '2025-05',
+    // Your CV states this role as ongoing. Set an end date here if it has finished.
     end: null,
     summary: {
-      en: 'Leading the rollout of an internal, AI-powered strategic intelligence capability for Beninese diplomacy.',
+      en: 'Led the rollout of an internal, AI-powered strategic intelligence capability for Beninese diplomacy.',
       fr: 'Pilotage du déploiement d’un dispositif interne de veille stratégique fondé sur l’IA au service de la diplomatie béninoise.',
     },
     highlights: {
       en: [
         'Designed and built a diplomatic document management platform: validation workflow, analytics, diplomatic style assistant and decision support.',
         'Analysed epass.bj data to streamline online passport renewal for Beninese citizens abroad.',
-        'Built Power BI dashboards tracking consular services — passport renewal, consular registration, powers of attorney, laissez-passer.',
+        'Built Power BI dashboards tracking consular services: passport renewal, consular registration, powers of attorney, laissez-passer.',
         'Produced reporting and decision-grade analysis for Benin’s embassies abroad.',
         'Analysed tradux.gouv.bj data to monitor official translation and authentication.',
       ],
       fr: [
         'Conception et développement d’une plateforme de gestion documentaire diplomatique : workflow de validation, analytics, assistant de style diplomatique et aide à la décision.',
         'Analyse des données d’epass.bj pour optimiser le renouvellement en ligne des passeports des Béninois de l’étranger.',
-        'Construction de tableaux de bord Power BI de suivi des services consulaires — renouvellement de passeport, immatriculation consulaire, procuration, laissez-passer.',
+        'Construction de tableaux de bord Power BI de suivi des services consulaires : renouvellement de passeport, immatriculation consulaire, procuration, laissez-passer.',
         'Production de reportings et d’analyses décisionnelles pour les ambassades du Bénin à l’étranger.',
         'Analyse des données de tradux.gouv.bj pour le suivi de la traduction et de l’authentification officielles.',
       ],
@@ -186,10 +262,14 @@ export const ROLES: readonly Role[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Skills — mirrors the stacked cards of the reference layout          */
+/* Skills                                                              */
 /* ------------------------------------------------------------------ */
 
-export const SKILLS: readonly SkillGroup[] = [
+export const SKILLS: readonly {
+  readonly label: I18nText;
+  readonly items: readonly string[];
+  readonly emphasis: 'primary' | 'secondary';
+}[] = [
   {
     label: { en: 'AI & NLP', fr: 'IA & NLP' },
     items: [
@@ -229,28 +309,49 @@ export const SKILLS: readonly SkillGroup[] = [
 export const EDUCATION: readonly Study[] = [
   {
     degree: {
+      en: 'Master’s in Computer Science, and EUR Graduate School of Research fellow',
+      fr: 'Master en Informatique, et boursier EUR (Graduate School of Research)',
+    },
+    school: 'Institut Galilée, Université Sorbonne Paris Nord',
+    schoolUrl: 'https://www.univ-spn.fr',
+    place: 'Paris, France',
+    period: { en: 'Since 2026', fr: 'Depuis 2026' },
+    notes: {
+      en: [
+        'Fellowship-funded research on language technology at the LIPN, the computer science laboratory of Université Sorbonne Paris Nord.',
+      ],
+      fr: [
+        'Recherche financée par la bourse sur les technologies du langage au LIPN, le laboratoire d’informatique de l’Université Sorbonne Paris Nord.',
+      ],
+    },
+    current: true,
+  },
+  {
+    degree: {
       en: 'BSc in Computer Science, Artificial Intelligence track',
       fr: 'Licence en Informatique, spécialisation Intelligence Artificielle',
     },
-    school: 'Université d’Abomey-Calavi (IFRI)',
+    school: 'Institut de Formation et de Recherche en Informatique, Université d’Abomey-Calavi',
     schoolUrl: 'https://uac.bj',
-    period: { en: 'Sep 2022 — Dec 2025', fr: 'Sep. 2022 — Déc. 2025' },
+    place: 'Abomey-Calavi, Benin',
+    period: { en: '2022 – 2025', fr: '2022 – 2025' },
     grade: { en: 'With honours', fr: 'Mention Bien' },
     notes: {
       en: [
-        'Class representative for the AI track (2022–2025).',
-        'Coordinator of the AI & Internet of Things club (2023–2025).',
+        'Class representative for the AI track.',
+        'Coordinator of the AI and Internet of Things club.',
       ],
       fr: [
-        'Délégué de promotion pour la filière Intelligence Artificielle (2022–2025).',
-        'Coordinateur du club d’Intelligence Artificielle et Internet des Objets (2023–2025).',
+        'Délégué de promotion pour la filière Intelligence Artificielle.',
+        'Coordinateur du club d’Intelligence Artificielle et Internet des Objets.',
       ],
     },
   },
   {
     degree: { en: 'Scientific Baccalaureate, Series D', fr: 'Baccalauréat Scientifique, Série D' },
-    school: 'Collège Catholique Père Aupiais, Cotonou',
-    period: { en: 'Sep 2016 — Jun 2022', fr: 'Sep. 2016 — Juin 2022' },
+    school: 'Collège Catholique Père Aupiais',
+    place: 'Cotonou, Benin',
+    period: { en: '2016 – 2022', fr: '2016 – 2022' },
     grade: { en: 'With honours', fr: 'Mention Bien' },
     notes: { en: [], fr: [] },
   },
@@ -260,16 +361,28 @@ export const AWARDS: readonly Award[] = [
   {
     rank: { en: '2nd prize', fr: '2e prix' },
     title: {
-      en: 'Alodometo — multimodal Fon ⇄ French translation',
-      fr: 'Alodometo — traduction multimodale Fon ⇄ français',
+      en: 'Alodometo, multimodal Fon and French translation',
+      fr: 'Alodometo, traduction multimodale fon et français',
     },
     event: 'Hackathon Bénin IA Multimodale et Multilingue (SENIA)',
     date: { en: 'May 2024', fr: 'Mai 2024' },
     year: '2024',
     summary: {
       en: 'A digital-inclusion solution translating between French and Fon across text and speech, so that people who cannot read French are not locked out of digital services.',
-      fr: 'Une solution d’inclusion numérique qui traduit entre le français et le Fon, à l’écrit comme à l’oral, pour que ceux qui ne lisent pas le français ne soient pas exclus des services numériques.',
+      fr: 'Une solution d’inclusion numérique qui traduit entre le français et le fon, à l’écrit comme à l’oral, pour que ceux qui ne lisent pas le français ne soient pas exclus des services numériques.',
     },
+    links: [
+      {
+        label: 'Prototype',
+        href: 'https://lablab.ai/event/benin-multimodal-ai-hackathon/aida/al%C9%94-do-m%C9%9B-t%C9%94-assistant-vocal-multifonctionnel',
+        external: true,
+      },
+      {
+        label: 'Press',
+        href: 'https://asin.bj/article/18/hackathon-challenge-multimodal-multilingue-benin-laureats-competition-presentiel-connus/',
+        external: true,
+      },
+    ],
   },
   {
     rank: { en: '1st prize', fr: '1er prix' },
@@ -284,7 +397,10 @@ export const AWARDS: readonly Award[] = [
       en: 'An autonomous robot that finds, collects and sorts waste using computer vision.',
       fr: 'Un robot autonome qui repère, collecte et trie les déchets grâce à la vision par ordinateur.',
     },
-    links: [{ label: 'trc.tekbot.io', href: 'https://trc.tekbot.io', external: true }],
+    links: [
+      { label: 'Video', href: 'https://www.instagram.com/reel/C16igYCtHJl/', external: true },
+      { label: 'trc.tekbot.io', href: 'https://trc.tekbot.io/', external: true },
+    ],
   },
   {
     rank: { en: '1st prize', fr: '1er prix' },
@@ -309,10 +425,10 @@ export const RESEARCH: readonly ResearchItem[] = [
       fr: 'Système automatisé de planification des soutenances à l’Université d’Abomey-Calavi',
     },
     context: {
-      en: 'Project Lead — Pôle Sud, Benin · funded by ARES Belgium (EUR 20,000)',
-      fr: 'Chef de projet — Pôle Sud, Bénin · financé par l’ARES Belgique (20 000 EUR)',
+      en: 'Project Lead, Pôle Sud Benin · funded by ARES Belgium (EUR 20,000)',
+      fr: 'Chef de projet, Pôle Sud Bénin · financé par l’ARES Belgique (20 000 EUR)',
     },
-    period: { en: 'Oct 2024 — May 2025', fr: 'Oct. 2024 — Mai 2025' },
+    period: { en: 'Oct 2024 – May 2025', fr: 'Oct. 2024 – Mai 2025' },
     summary: {
       en: 'Modelled defence scheduling as a constraint satisfaction problem and shipped a working scheduler for the university.',
       fr: 'Modélisation de la planification des soutenances comme un problème de satisfaction de contraintes, et livraison d’un planificateur opérationnel pour l’université.',
@@ -328,6 +444,11 @@ export const RESEARCH: readonly ResearchItem[] = [
       ],
     },
     links: [
+      {
+        label: 'Report',
+        href: 'https://drive.google.com/file/d/1-Gvfhg6tx0iJ2oLRCQDFB3oLtd_2TlI/view?usp=sharing',
+        external: true,
+      },
       { label: 'ExamOptim', href: 'https://github.com/Arix-ALIMAGNIDOKPO/ExamOptim', external: true },
       {
         label: 'smart-exam-scheduler',
@@ -342,8 +463,8 @@ export const RESEARCH: readonly ResearchItem[] = [
       fr: 'Plateforme intelligente de gestion et de rédaction assistée des notes verbales',
     },
     context: {
-      en: 'BSc thesis — Université d’Abomey-Calavi · case study: Ministry of Foreign Affairs',
-      fr: 'Mémoire de licence — Université d’Abomey-Calavi · cas du Ministère des Affaires Étrangères',
+      en: 'BSc thesis, Université d’Abomey-Calavi · case study: Ministry of Foreign Affairs',
+      fr: 'Mémoire de licence, Université d’Abomey-Calavi · cas du Ministère des Affaires Étrangères',
     },
     period: { en: '2025', fr: '2025' },
     summary: {
@@ -356,58 +477,67 @@ export const RESEARCH: readonly ResearchItem[] = [
 
 export const PROJECTS: readonly Project[] = [
   {
+    name: { en: 'Benin public-services assistant', fr: 'Assistant des services publics béninois' },
+    year: '2025',
+    language: 'Jupyter Notebook',
+    outcome: {
+      en: 'Ask the administration a question in your own words',
+      fr: 'Interroger l’administration avec ses propres mots',
+    },
+    summary: {
+      en: 'A retrieval-augmented assistant over Benin’s public-service documentation. Citizens ask in plain language instead of navigating a portal, and every answer is grounded in a real source page.',
+      fr: 'Un assistant à génération augmentée par récupération, branché sur la documentation des services publics béninois. Les citoyens interrogent en langage naturel au lieu de naviguer dans un portail, et chaque réponse est ancrée dans une vraie page source.',
+    },
+    tags: ['NLP', 'RAG', 'Python'],
+    repo: 'https://github.com/Arix-ALIMAGNIDOKPO/NLP-G7-assistant-services-publics',
+    featured: true,
+  },
+  {
     name: { en: 'Tomato leaf disease detection', fr: 'Détection de maladies foliaires de la tomate' },
     year: '2024',
-    tags: ['YOLOv8', 'Computer Vision', 'Python'],
+    language: 'Python',
+    outcome: { en: 'Real-time detection in the field', fr: 'Détection en temps réel au champ' },
     summary: {
-      en: 'Real-time detection of tomato leaf disease, so growers can act on what is actually happening in the field.',
-      fr: 'Détection en temps réel des maladies foliaires de la tomate, pour que les producteurs agissent sur ce qui se passe réellement au champ.',
+      en: 'A YOLOv8 detector that spots tomato leaf disease from a phone camera, so growers act on what is actually happening in the field rather than on a guess.',
+      fr: 'Un détecteur YOLOv8 qui repère les maladies foliaires de la tomate depuis un téléphone, pour que les producteurs agissent sur la réalité du champ plutôt que sur une intuition.',
     },
+    tags: ['YOLOv8', 'Computer Vision'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/Tomato-Leaf-Disease-Detection-using-Yolov8',
   },
   {
-    name: { en: 'Benin public-services assistant', fr: 'Assistant des services publics béninois' },
+    name: { en: 'Exam and defence scheduler', fr: 'Planificateur d’examens et de soutenances' },
     year: '2025',
-    tags: ['NLP', 'RAG', 'Python'],
+    language: 'Python',
+    outcome: { en: 'Weeks of manual planning down to minutes', fr: 'Des semaines de planification manuelle réduites à quelques minutes' },
     summary: {
-      en: 'A retrieval-augmented chatbot letting citizens ask about Benin’s public services in plain language.',
-      fr: 'Un chatbot à génération augmentée par récupération qui permet aux citoyens d’interroger les services publics béninois en langage naturel.',
+      en: 'The constraint-programming engine behind the ARES-funded scheduling project, exposed as an API: jury availability, room capacity and session order solved together.',
+      fr: 'Le moteur de programmation par contraintes du projet de planification financé par l’ARES, exposé en API : disponibilités du jury, capacité des salles et ordre des sessions résolus ensemble.',
     },
-    repo: 'https://github.com/Arix-ALIMAGNIDOKPO/NLP-G7-assistant-services-publics',
+    tags: ['OR-Tools', 'Flask', 'Optimisation'],
+    repo: 'https://github.com/Arix-ALIMAGNIDOKPO/ExamOptim',
   },
   {
     name: { en: 'IFRI AI chatbot', fr: 'Chatbot IA de l’IFRI' },
     year: '2025',
-    tags: ['NLP', 'RAG', 'Python'],
+    language: 'Python',
+    outcome: { en: 'Answers about the institute, on demand', fr: 'Des réponses sur l’institut, à la demande' },
     summary: {
-      en: 'A conversational assistant answering questions about IFRI, the AI institute where I studied.',
-      fr: 'Un assistant conversationnel qui répond aux questions sur l’IFRI, l’institut où j’ai étudié.',
+      en: 'A conversational assistant for prospective and current students of IFRI, the AI institute where I did my degree.',
+      fr: 'Un assistant conversationnel pour les futurs et actuels étudiants de l’IFRI, l’institut où j’ai fait ma licence.',
     },
+    tags: ['NLP', 'RAG'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/IFRI-AI-Chatbot',
   },
   {
-    name: {
-      en: 'Chronic kidney disease stage prediction',
-      fr: 'Prédiction du stade de la maladie rénale chronique',
-    },
-    year: '2025',
-    tags: ['Machine Learning', 'Healthcare', 'Python'],
-    summary: {
-      en: 'A clinical decision-support model predicting the stage of chronic kidney disease from patient data.',
-      fr: 'Un modèle d’aide au diagnostic prédisant le stade d’évolution de la maladie rénale chronique à partir de données cliniques.',
-    },
-  },
-  {
-    name: {
-      en: 'Math summer camp platform',
-      fr: 'Plateforme des camps d’été de mathématiques',
-    },
+    name: { en: 'Math summer camp platform', fr: 'Plateforme des camps d’été de mathématiques' },
     year: '2026',
-    tags: ['TypeScript', 'Education'],
+    language: 'TypeScript',
+    outcome: { en: 'Registration and logistics for a national camp', fr: 'Inscriptions et logistique d’un camp national' },
     summary: {
-      en: 'The registration and organisation platform behind Benin’s mathematics summer camps for secondary-school students.',
-      fr: 'La plateforme d’inscription et d’organisation derrière les camps d’été de mathématiques pour collégiens au Bénin.',
+      en: 'The platform behind Benin’s mathematics summer camps: registration, cohorts and logistics for the secondary-school students who attend.',
+      fr: 'La plateforme des camps d’été de mathématiques du Bénin : inscriptions, cohortes et logistique pour les collégiens qui y participent.',
     },
+    tags: ['TypeScript', 'Education'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/math-summer-camp-platform',
   },
 ];
@@ -415,21 +545,21 @@ export const PROJECTS: readonly Project[] = [
 export const COMMUNITY: readonly CommunityItem[] = [
   {
     role: { en: 'AI Instructor', fr: 'Instructeur en Intelligence Artificielle' },
-    org: 'AI & IoT Club, IFRI — Université d’Abomey-Calavi',
-    period: { en: 'Jan 2024 — May 2025', fr: 'Jan. 2024 — Mai 2025' },
+    org: 'AI and IoT Club, IFRI, Université d’Abomey-Calavi',
+    period: { en: 'Jan 2024 – May 2025', fr: 'Jan. 2024 – Mai 2025' },
     detail: {
       en: 'Ran weekly workshops on AI and machine learning.',
       fr: 'Animation d’ateliers hebdomadaires sur l’IA et l’apprentissage automatique.',
     },
   },
   {
-    role: { en: 'Instructor — AI tools for diplomacy', fr: 'Instructeur — outils d’IA en diplomatie' },
+    role: { en: 'Instructor, AI tools for diplomacy', fr: 'Instructeur, outils d’IA en diplomatie' },
     org: 'Ministry of Foreign Affairs of Benin',
     orgUrl: 'https://diplomatie.gouv.bj',
-    period: { en: 'Mar 2024 — May 2025', fr: 'Mar. 2024 — Mai 2025' },
+    period: { en: 'Mar 2024 – May 2025', fr: 'Mar. 2024 – Mai 2025' },
     detail: {
-      en: 'Designed and delivered an 8-session programme for the Directorate-General of External Relations.',
-      fr: 'Conception et animation d’une formation en 8 sessions pour la Direction Générale des Relations Extérieures.',
+      en: 'Designed and delivered an eight-session programme for the Directorate-General of External Relations.',
+      fr: 'Conception et animation d’une formation en huit sessions pour la Direction Générale des Relations Extérieures.',
     },
   },
   {
@@ -443,16 +573,16 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Speaker', fr: 'Intervenant' },
-    org: 'Benin Workshop on Artificial Intelligence (BWAI), Cotonou',
+    org: 'Benin Workshop on Artificial Intelligence, Cotonou',
     period: { en: 'Nov 2024', fr: 'Nov. 2024' },
     detail: {
       en: 'Talk on building a speech translation model for local languages, with Fongbe as the case study.',
-      fr: 'Intervention sur le développement d’un modèle de traduction vocale pour les langues locales, cas du Fongbe.',
+      fr: 'Intervention sur le développement d’un modèle de traduction vocale pour les langues locales, cas du fongbé.',
     },
   },
   {
     role: { en: 'Participant', fr: 'Participant' },
-    org: 'Deep Learning Indaba — Kigali, Rwanda',
+    org: 'Deep Learning Indaba, Kigali, Rwanda',
     period: { en: 'Aug 2025', fr: 'Août 2025' },
     detail: {
       en: 'The continent’s flagship machine-learning conference.',
@@ -461,7 +591,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Participant', fr: 'Participant' },
-    org: 'Deep Learning Indaba — Dakar, Senegal',
+    org: 'Deep Learning Indaba, Dakar, Senegal',
     period: { en: 'Sep 2024', fr: 'Sep. 2024' },
     detail: {
       en: 'The continent’s flagship machine-learning conference.',
@@ -469,10 +599,10 @@ export const COMMUNITY: readonly CommunityItem[] = [
     },
   },
   {
-    role: { en: 'Developer & communications', fr: 'Développeur & communication' },
+    role: { en: 'Developer and communications', fr: 'Développeur et communication' },
     org: 'FRIARE Africa',
     orgUrl: 'https://friare.org',
-    period: { en: 'Sep 2023 — Present', fr: 'Sep. 2023 — Aujourd’hui' },
+    period: { en: 'Since Sep 2023', fr: 'Depuis sep. 2023' },
     detail: {
       en: 'Projects and communication for responsible AI in Africa.',
       fr: 'Projets et actions de communication pour une IA responsable en Afrique.',
@@ -482,7 +612,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
     role: { en: 'Training commission coordinator', fr: 'Coordinateur de la commission formation' },
     org: 'Isheero',
     orgUrl: 'https://isheero.com',
-    period: { en: 'Oct 2023 — Present', fr: 'Oct. 2023 — Aujourd’hui' },
+    period: { en: 'Since Oct 2023', fr: 'Depuis oct. 2023' },
     detail: {
       en: 'Planning and running training programmes and workshops.',
       fr: 'Planification, organisation et animation de programmes et d’ateliers de formation.',
@@ -490,8 +620,8 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Volunteer', fr: 'Bénévole' },
-    org: 'Benin Mathematics Summer Camps (IMAC Benin)',
-    period: { en: 'Feb 2025 — Present', fr: 'Fév. 2025 — Aujourd’hui' },
+    org: 'Benin Mathematics Summer Camps, IMAC Benin',
+    period: { en: 'Since Feb 2025', fr: 'Depuis fév. 2025' },
     detail: {
       en: 'An intensive mathematics camp for secondary-school students, with an introduction to technology.',
       fr: 'Un camp intensif de mathématiques pour collégiens, avec une introduction aux nouvelles technologies.',

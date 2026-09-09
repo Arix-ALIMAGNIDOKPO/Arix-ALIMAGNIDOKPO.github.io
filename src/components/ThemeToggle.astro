@@ -1,0 +1,116 @@
+---
+import Icon from '@/components/Icon.astro';
+import type { Locale } from '@/data/types';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<button class="theme-toggle" type="button" data-theme-toggle aria-label={t('theme.toggle')} title={t('theme.toggle')}>
+  <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+    <Icon name="sun" size={16} />
+  </span>
+  <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+    <Icon name="moon" size={16} />
+  </span>
+</button>
+
+<script>
+  /**
+   * The theme is already applied by the blocking snippet in <head>; this only
+   * handles clicks and keeps other open tabs in sync.
+   */
+  const STORAGE_KEY = 'theme';
+  const root = document.documentElement;
+
+  const systemPrefersDark = (): boolean => window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const current = (): 'light' | 'dark' => {
+    const explicit = root.dataset['theme'];
+    if (explicit === 'light' || explicit === 'dark') return explicit;
+    return systemPrefersDark() ? 'dark' : 'light';
+  };
+
+  const apply = (theme: 'light' | 'dark'): void => {
+    root.dataset['theme'] = theme;
+    for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+      button.setAttribute('aria-pressed', String(theme === 'dark'));
+    }
+  };
+
+  apply(current());
+
+  for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+    button.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      apply(next);
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        /* Private mode or blocked storage: the choice simply will not persist. */
+      }
+    });
+  }
+
+  window.addEventListener('storage', (event) => {
+    if (event.key !== STORAGE_KEY) return;
+    if (event.newValue === 'light' || event.newValue === 'dark') apply(event.newValue);
+  });
+</script>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--panel-raised);
+    color: var(--ink-muted);
+    transition:
+      color 160ms ease,
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+
+  .theme-toggle__icon {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+    transition:
+      opacity 200ms ease,
+      rotate 300ms ease;
+  }
+
+  /* Show the icon of the theme you would switch *to*. */
+  .theme-toggle__icon--sun {
+    opacity: 0;
+    rotate: -45deg;
+  }
+
+  .theme-toggle__icon--moon {
+    opacity: 1;
+    rotate: 0deg;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__icon--sun {
+    opacity: 1;
+    rotate: 0deg;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__icon--moon {
+    opacity: 0;
+    rotate: 45deg;
+  }
+</style>

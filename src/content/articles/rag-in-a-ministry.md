@@ -25,13 +25,13 @@ The lesson is unglamorous and total: **retrieval quality is capped by ingestion 
 
 In a commercial product, a hallucination is embarrassing. In diplomatic correspondence, a hallucination is a document that says the state committed to something it did not.
 
-So the assistant is not allowed to be creative. Every answer must be traceable to a passage in a real document, with the reference visible next to the claim. If retrieval returns nothing relevant, the correct output is "I did not find this" — and getting a model to prefer saying nothing over saying something plausible is a real engineering problem, not a prompt.
+So the assistant is not allowed to be creative. Every answer must be traceable to a passage in a real document, with the reference visible next to the claim. If retrieval returns nothing relevant, the correct output is "I did not find this". Getting a model to prefer saying nothing over saying something plausible is a real engineering problem, not a prompt.
 
 We ended up treating groundedness as a hard constraint enforced outside the model: retrieve first, answer only from what came back, and show the source inline so a human can check in two seconds rather than trusting in good faith.
 
 ## The workflow matters more than the model
 
-The feature people actually adopted was not the chatbot. It was the validation workflow — draft, review, approve, archive — with the assistant sitting inside it rather than beside it.
+The feature people actually adopted was not the chatbot. It was the validation workflow (draft, review, approve, archive) with the assistant sitting inside it rather than beside it.
 
 A note verbale passes through several hands before it leaves the building. An AI tool that ignores that chain produces text that then has to be re-entered into the real process. An AI tool that lives inside the chain saves the time the chain was costing.
 
@@ -43,7 +43,7 @@ The documents cannot leave the institution. That single sentence removes most of
 
 It pushes you toward smaller models, on-premise deployment, and an architecture where every component has a local fallback. It costs performance. It buys the only thing that makes the system deployable at all.
 
-That constraint is exactly why [Sovrean](https://sovrean.aida.bj/) is built the way it is: cloud, on-premise, or entirely inside the client's own infrastructure, because for a whole class of institutions the third option is the only one on the table.
+So the architecture bends around the constraint: smaller models, local inference, and a deployment that can sit entirely inside the institution. For a whole class of organisations, that is the only option on the table.
 
 ## What I would tell myself a year ago
 

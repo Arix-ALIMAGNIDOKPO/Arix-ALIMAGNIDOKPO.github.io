@@ -1,4 +1,4 @@
-import { EDUCATION, VENTURES } from '@/data/profile';
+import { COMPANY, EDUCATION } from '@/data/profile';
 import { META_DESCRIPTION, SITE, SOCIAL, TITLE } from '@/data/site';
 import type { Locale } from '@/data/types';
 import { absolute } from '@/i18n/utils';
@@ -19,7 +19,7 @@ export function personSchema(locale: Locale): Record<string, unknown> {
         description: META_DESCRIPTION[locale],
         address: {
           '@type': 'PostalAddress',
-          addressLocality: 'Cotonou',
+          addressLocality: SITE.locationCity,
           addressCountry: SITE.locationCountry,
         },
         alumniOf: EDUCATION.map((study) => ({
@@ -41,20 +41,24 @@ export function personSchema(locale: Locale): Record<string, unknown> {
       {
         '@type': 'Organization',
         '@id': 'https://aida.bj/#organization',
-        name: 'AIDA',
-        alternateName: 'Artificial Intelligence for the Development of Africa',
-        url: 'https://aida.bj',
-        foundingDate: '2022',
+        name: COMPANY.name,
+        alternateName: COMPANY.fullName,
+        url: COMPANY.url,
+        foundingDate: COMPANY.founded,
         founder: { '@id': `${SITE.origin}/#person` },
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Cotonou',
           addressCountry: 'BJ',
         },
-        subOrganization: VENTURES.slice(1).map((venture) => ({
-          '@type': 'SoftwareApplication',
-          name: venture.name,
-          url: venture.url,
+        makesOffer: COMPANY.products.map((product) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'SoftwareApplication',
+            name: product.name,
+            url: product.url,
+            applicationCategory: 'BusinessApplication',
+          },
         })),
       },
       {

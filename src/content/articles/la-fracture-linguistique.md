@@ -1,6 +1,6 @@
 ---
 title: 'La fracture numérique en Afrique est d’abord une fracture linguistique'
-description: 'La connectivité n’est plus le goulot d’étranglement. Le goulot, c’est que la machine ne parle pas fon — et que la personne devant elle ne parle pas français.'
+description: 'La connectivité n’est plus le goulot d’étranglement. Le goulot, c’est que la machine ne parle pas fon, et que la personne devant elle ne parle pas français.'
 date: 2026-02-18
 lang: fr
 tags: [NLP, Langues peu dotées, Inclusion]
@@ -11,7 +11,7 @@ Nous continuons de mesurer l’inclusion numérique en mégabits. Cartes de couv
 
 Et pourtant, une vendeuse de tomates à Dantokpa ne peut pas renouveler sa carte d’identité en ligne.
 
-Non pas faute de connexion. Parce que le formulaire est en français, le SMS de confirmation est en français, le message d’erreur qui lui signale une date de naissance mal saisie est en français — et elle parle fon.
+Non pas faute de connexion. Parce que le formulaire est en français, le SMS de confirmation est en français, le message d’erreur qui lui signale une date de naissance mal saisie est en français. Et elle parle fon.
 
 ## L’écart que personne ne mesure
 
@@ -45,8 +45,8 @@ Trois choses que nous n’attendions pas :
 
 ## La suite
 
-C’est le problème qu’[Ayoka](https://ayoka.aida.bj/) existe pour résoudre : une API vocale pour les langues africaines — transcription et synthèse pour le fon, le yoruba, le français et l’anglais — avec une précision suffisante pour qu’un service se construise dessus, et pas seulement se démontre dessus.
+C’est le problème qu’[Ayoka](https://ayoka.aida.bj/) existe pour résoudre : une API vocale pour les langues africaines, offrant transcription et synthèse pour le fon, le yoruba, le français et l’anglais, avec une précision suffisante pour qu’un service se construise dessus, et pas seulement se démontre dessus.
 
 Le pari est simple. Si l’interface parle la langue, le reste de la pile devient enfin atteignable. Chaque service d’e-administration, chaque parcours bancaire, chaque ligne d’assistance santé qui ne fonctionne aujourd’hui que pour ceux qui lisent le français devient utilisable par tous les autres, sans rien changer au service lui-même.
 
-C’est un problème de langue déguisé en problème d’infrastructure. Il vaut la peine de le nommer correctement, parce qu’on le règle avec des corpus, des modèles et de l’évaluation — pas avec davantage d’antennes.
+C’est un problème de langue déguisé en problème d’infrastructure. Il vaut la peine de le nommer correctement, parce qu’on le règle avec des corpus, des modèles et de l’évaluation, pas avec davantage d’antennes.

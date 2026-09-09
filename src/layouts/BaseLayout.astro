@@ -43,8 +43,8 @@ const {
   alternatePath,
 } = Astro.props;
 
-const siteTitle = `${SITE.name} — ${TITLE[locale]}`;
-const pageTitle = title === undefined ? siteTitle : `${title} — ${SITE.name}`;
+const siteTitle = `${SITE.name}, ${TITLE[locale]}`;
+const pageTitle = title === undefined ? siteTitle : `${title} | ${SITE.name}`;
 
 const canonical = absolute(Astro.url.pathname);
 const other = otherLocale(locale);
@@ -84,7 +84,7 @@ const self = absolute(Astro.url.pathname);
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={`${SITE.name} — ${t('articles.label')}`}
+      title={`${SITE.name}, ${t('articles.label')}`}
       href={absolute(path('rss.xml', locale).replace(/\/$/, ''))}
     />
 
@@ -105,6 +105,22 @@ const self = absolute(Astro.url.pathname);
     <meta name="twitter:image" content={absolute('/og.png')} />
 
     {schema !== undefined && <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />}
+
+    {/*
+      Applies the stored theme before the first paint, so a viewer who chose
+      light never sees a dark flash (or the other way round). Astro hashes this
+      inline script into the page CSP, so no `unsafe-inline` is needed.
+    */}
+    <script is:inline>
+      try {
+        var stored = localStorage.getItem('theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.dataset.theme = stored;
+        }
+      } catch (error) {
+        /* Storage blocked: fall back to the system preference. */
+      }
+    </script>
   </head>
 
   <body>

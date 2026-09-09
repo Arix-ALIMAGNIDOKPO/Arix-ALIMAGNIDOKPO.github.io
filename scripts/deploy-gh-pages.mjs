@@ -29,7 +29,7 @@ try {
 try {
   await stat(join(dist, '.nojekyll'));
 } catch {
-  console.error('dist/.nojekyll is missing — GitHub Pages would drop the _astro/ folder.');
+  console.error('dist/.nojekyll is missing, so GitHub Pages would drop the _astro/ folder.');
   process.exit(1);
 }
 
@@ -53,7 +53,7 @@ try {
 
   const status = execFileSync('git', ['status', '--porcelain'], { cwd: worktree, encoding: 'utf8' });
   if (status.trim() === '') {
-    console.log('Nothing changed — the published site already matches this build.');
+    console.log('Nothing changed. The published site already matches this build.');
   } else {
     execFileSync('git', ['commit', '-m', `Deploy site from ${sha}`], { cwd: worktree, stdio: 'inherit' });
     execFileSync('git', ['push', 'origin', BRANCH], { cwd: worktree, stdio: 'inherit' });

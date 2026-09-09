@@ -47,9 +47,12 @@ export interface Study {
   readonly degree: I18nText;
   readonly school: string;
   readonly schoolUrl?: string;
+  readonly place: string;
   readonly period: I18nText;
-  readonly grade: I18nText;
+  readonly grade?: I18nText;
   readonly notes: I18nList;
+  /** Highlights the current, ongoing course. */
+  readonly current?: boolean;
 }
 
 export interface ResearchItem {
@@ -64,25 +67,45 @@ export interface ResearchItem {
 export interface Project {
   readonly name: I18nText;
   readonly year: string;
-  readonly tags: readonly string[];
+  /** Short, concrete result. Sits under the title in the featured card. */
+  readonly outcome: I18nText;
   readonly summary: I18nText;
+  readonly tags: readonly string[];
+  /** Primary language, shown as a coloured dot the way code hosts do. */
+  readonly language: string;
   readonly repo?: string;
+  /** One project leads the section at full width. */
+  readonly featured?: boolean;
 }
 
-export interface Venture {
+/** Slugs of the logo files in `src/assets/logos/`. */
+export type LogoName = 'aida' | 'ayoka' | 'sovrean';
+
+export interface Product {
   readonly name: string;
+  readonly logo: LogoName;
+  readonly domain: string;
+  readonly url: string;
+  readonly tagline: I18nText;
+  readonly summary: I18nText;
+  readonly capabilities: I18nList;
+  readonly facts: readonly { readonly label: I18nText; readonly value: I18nText }[];
+  /** Brand colour used for the product's accent rule and glow. */
+  readonly accent: string;
+}
+
+/** The one company. Its products hang off it rather than sitting beside it. */
+export interface Company {
+  readonly name: string;
+  readonly fullName: string;
+  readonly logo: LogoName;
   readonly domain: string;
   readonly url: string;
   readonly role: I18nText;
+  readonly founded: string;
+  readonly city: I18nText;
   readonly summary: I18nText;
-  readonly tags: readonly string[];
-}
-
-export interface SkillGroup {
-  readonly label: I18nText;
-  readonly items: readonly string[];
-  /** Visual weight in the stacked-card layout, mirroring the reference design. */
-  readonly emphasis: 'primary' | 'secondary';
+  readonly products: readonly Product[];
 }
 
 export interface CommunityItem {

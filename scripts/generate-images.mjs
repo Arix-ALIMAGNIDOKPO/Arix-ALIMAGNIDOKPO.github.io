@@ -41,7 +41,7 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
     Arix ALIMAGNIDOKPO
   </text>
   <text x="76" y="562" font-family="'Inter','DejaVu Sans',sans-serif" font-size="26" fill="${MUTED}">
-    Founder &amp; CEO, AIDA — Cotonou, Benin
+    Founder &amp; CEO of AIDA · Paris
   </text>
 </svg>`;
 

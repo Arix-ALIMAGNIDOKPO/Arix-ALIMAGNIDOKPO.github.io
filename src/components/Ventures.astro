@@ -1,7 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from '@/components/Icon.astro';
-import { VENTURES } from '@/data/profile';
-import type { Locale } from '@/data/types';
+import aidaLogo from '@/assets/logos/aida.png';
+import ayokaLogo from '@/assets/logos/ayoka.png';
+import sovreanLogo from '@/assets/logos/sovrean.png';
+import { COMPANY } from '@/data/profile';
+import type { Locale, LogoName } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
 
 interface Props {
@@ -11,7 +15,11 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const [company, ...products] = VENTURES;
+const LOGOS: Record<LogoName, ImageMetadata> = {
+  aida: aidaLogo,
+  ayoka: ayokaLogo,
+  sovrean: sovreanLogo,
+};
 ---
 
 <section class="section" id="ventures" aria-labelledby="ventures-heading">
@@ -20,169 +28,325 @@ const [company, ...products] = VENTURES;
     <p class="lede">
       {
         locale === 'fr'
-          ? 'Je dirige AIDA, une entreprise d’IA fondée à Cotonou. Nous construisons deux produits : l’un écoute et parle les langues africaines, l’autre met de l’ordre dans les documents des institutions.'
-          : 'I run AIDA, an AI company founded in Cotonou. We build two products: one that hears and speaks African languages, one that brings order to institutional documents.'
+          ? 'Une entreprise, deux produits. L’un apprend aux machines à entendre les langues africaines. L’autre rend aux institutions le contrôle de leurs archives.'
+          : 'One company, two products. One teaches machines to hear African languages. The other gives institutions back control of their archives.'
       }
     </p>
   </div>
 
   <h2 id="ventures-heading" class="display display--section section-title section-title--left">
-    {t('ventures.label')}
+    {COMPANY.name}
   </h2>
 
-  {
-    company !== undefined && (
-      <article class="venture venture--lead">
-        <div class="venture__head">
-          <h3 class="venture__name mono">{company.name}</h3>
-          <span class="venture__role mono">{company.role[locale]}</span>
+  <!-- The company reads as an editorial masthead rather than another card. -->
+  <div class="company">
+    <div class="company__identity">
+      <span class="logo-plate company__logo">
+        <Image src={LOGOS[COMPANY.logo]} alt={`${COMPANY.name} ${t('ventures.logoAlt')}`} widths={[220, 440]} sizes="180px" loading="lazy" />
+      </span>
+      <span class="chip chip--accent company__role mono">{COMPANY.role[locale]}</span>
+    </div>
+
+    <div class="company__body">
+      <p class="company__fullname mono">{COMPANY.fullName}</p>
+      <p class="company__summary">{COMPANY.summary[locale]}</p>
+
+      <dl class="company__facts mono">
+        <div>
+          <dt>{t('ventures.founded')}</dt>
+          <dd class="tabular">{COMPANY.founded}</dd>
         </div>
-
-        <p class="venture__summary">{company.summary[locale]}</p>
-
-        <div class="venture__foot">
-          <p class="tag-row">
-            {company.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </p>
-
-          <a class="pill" href={company.url} target="_blank" rel="noopener noreferrer">
-            {company.domain}
-            <Icon name="arrow-up-right" class="pill__icon" />
-          </a>
+        <div>
+          <dt>{t('ventures.based')}</dt>
+          <dd>{COMPANY.city[locale]}</dd>
         </div>
-      </article>
-    )
-  }
+        <div>
+          <dt>{t('ventures.products')}</dt>
+          <dd>{COMPANY.products.map((product) => product.name).join(', ')}</dd>
+        </div>
+      </dl>
 
-  <div class="venture__products">
+      <p>
+        <a class="pill pill--solid" href={COMPANY.url} target="_blank" rel="noopener noreferrer">
+          {COMPANY.domain}
+          <Icon name="arrow-up-right" class="pill__icon" />
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <ul class="products">
     {
-      products.map((product) => (
-        <article class="venture venture--product">
-          <div class="venture__head">
-            <h3 class="venture__name mono">{product.name}</h3>
-            <span class="venture__role mono">{product.role[locale]}</span>
+      COMPANY.products.map((product) => (
+        <li class:list={['product', `product--${product.logo}`]}>
+          <div class="product__head">
+            <span class="logo-plate product__logo">
+              <Image
+                src={LOGOS[product.logo]}
+                alt={`${product.name} ${t('ventures.logoAlt')}`}
+                widths={[160, 320]}
+                sizes="120px"
+                loading="lazy"
+              />
+            </span>
+            <div>
+              <h3 class="product__name mono">{product.name}</h3>
+              <p class="product__tagline">{product.tagline[locale]}</p>
+            </div>
           </div>
 
-          <p class="venture__summary">{product.summary[locale]}</p>
+          <p class="product__summary">{product.summary[locale]}</p>
 
-          <div class="venture__foot">
-            <p class="tag-row">
-              {product.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </p>
+          <ul class="product__capabilities mono">
+            {product.capabilities[locale].map((capability) => (
+              <li>{capability}</li>
+            ))}
+          </ul>
 
+          <dl class="product__facts mono">
+            {product.facts.map((fact) => (
+              <div>
+                <dt>{fact.label[locale]}</dt>
+                <dd>{fact.value[locale]}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <p class="product__cta">
             <a class="pill" href={product.url} target="_blank" rel="noopener noreferrer">
               {product.domain}
               <Icon name="arrow-up-right" class="pill__icon" />
             </a>
-          </div>
-        </article>
+          </p>
+        </li>
       ))
     }
-  </div>
+  </ul>
 </section>
 
 <style>
-  .venture {
+  /* ---------- the company ---------- */
+
+  .company {
+    display: grid;
+    gap: clamp(1.25rem, 1rem + 1.6vw, 2.5rem);
+    margin-block-start: clamp(1.25rem, 1rem + 1.6vw, 2.25rem);
+    padding-block-start: clamp(1.25rem, 1rem + 1.6vw, 2rem);
+    border-block-start: 2px solid var(--ink);
+  }
+
+  .company__identity {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .company__logo {
+    --logo-height: 2.4rem;
+    padding-inline: 1.1rem;
+  }
+
+  .company__role {
+    align-self: center;
+  }
+
+  .company__body {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 62ch;
+  }
+
+  .company__fullname {
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .company__summary {
+    font-size: var(--step-2);
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  .company__facts {
+    display: grid;
+    gap: 0.6rem 2rem;
+    font-size: var(--step--2);
+  }
+
+  .company__facts > div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: 0.4rem;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .company__facts dt {
+    color: var(--ink-faint);
+  }
+
+  .company__facts dd {
+    margin: 0;
+    color: var(--ink-dim);
+  }
+
+  @media (min-width: 62rem) {
+    .company {
+      grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .company__identity {
+      flex-direction: column;
+      align-items: flex-start;
+      position: sticky;
+      top: 2rem;
+    }
+  }
+
+  /* ---------- the products ---------- */
+
+  .products {
+    display: grid;
+    gap: clamp(0.85rem, 0.7rem + 0.7vw, 1.25rem);
+    margin-block-start: clamp(1.75rem, 1.4rem + 1.8vw, 3rem);
+  }
+
+  .product {
+    position: relative;
     display: grid;
     gap: 1.1rem;
     align-content: start;
-    padding: clamp(1.25rem, 1rem + 1.4vw, 2.25rem);
+    padding: clamp(1.15rem, 0.95rem + 1.1vw, 2rem);
+    background: var(--panel-raised);
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
-    background: var(--panel-raised);
+    overflow: hidden;
     transition:
       border-color 220ms ease,
       background-color 220ms ease;
   }
 
-  .venture:hover {
+  /* Brand accent as a rule along the top edge plus a soft bloom behind it. */
+  .product::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    height: 3px;
+    background: var(--product-accent);
+  }
+
+  .product::after {
+    content: '';
+    position: absolute;
+    inset-block-start: -6rem;
+    inset-inline-end: -6rem;
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--product-accent), transparent 70%);
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  .product:hover {
     border-color: var(--line-strong);
     background: var(--panel-hover);
   }
 
-  .venture--lead {
-    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-    background: var(--invert);
-    color: var(--invert-ink);
-    border-color: var(--invert);
+  .product--ayoka {
+    --product-accent: #2b3a8f;
   }
 
-  .venture--lead:hover {
-    background: #ffffff;
-    border-color: #ffffff;
+  .product--sovrean {
+    --product-accent: #d81f6a;
   }
 
-  .venture--lead .venture__summary {
-    color: rgba(10, 10, 11, 0.76);
-    font-size: var(--step-1);
-    max-width: 62ch;
-  }
-
-  .venture--lead .venture__role {
-    background: var(--invert-ink);
-    color: var(--invert);
-    border-color: var(--invert-ink);
-  }
-
-  .venture--lead .pill {
-    background: var(--invert-ink);
-    color: var(--invert);
-    border-color: var(--invert-ink);
-  }
-
-  .venture__head {
+  .product__head {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.9rem;
   }
 
-  .venture__name {
+  .product__logo {
+    --logo-height: 1.9rem;
+    flex: none;
+  }
+
+  .product__name {
     font-size: var(--step-2);
     font-weight: 700;
     letter-spacing: -0.03em;
+    line-height: 1.1;
   }
 
-  .venture--lead .venture__name {
-    font-size: var(--step-3);
+  .product__tagline {
+    font-size: var(--step--1);
+    color: var(--ink-muted);
   }
 
-  .venture__role {
-    padding: 0.22rem 0.65rem;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-pill);
-    font-size: var(--step--2);
-    color: var(--ink-dim);
-  }
-
-  .venture__summary {
-    color: var(--ink-dim);
+  .product__summary {
     font-size: var(--step-0);
     line-height: 1.65;
-    max-width: 58ch;
+    color: var(--ink-dim);
+    max-width: 54ch;
   }
 
-  .venture__foot {
+  .product__capabilities {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.85rem;
+    gap: 0.4rem;
+    font-size: var(--step--2);
+  }
+
+  .product__capabilities li {
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--ink-muted);
+  }
+
+  .product__facts {
+    display: grid;
+    font-size: var(--step--2);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .product__facts > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: 0.55rem;
+    border-block-end: 1px solid var(--line);
+  }
+
+  .product__facts dt {
+    color: var(--ink-faint);
+  }
+
+  .product__facts dd {
+    margin: 0;
+    color: var(--ink-dim);
+  }
+
+  .product__cta {
     margin-block-start: auto;
   }
 
-  .venture__products {
-    display: grid;
-    gap: 0.85rem;
-    margin-block-start: 0.85rem;
+  @media (min-width: 30rem) {
+    .product__facts > div {
+      grid-template-columns: 8rem minmax(0, 1fr);
+    }
   }
 
-  @media (min-width: 52rem) {
-    .venture__products {
+  @media (min-width: 58rem) {
+    .products {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

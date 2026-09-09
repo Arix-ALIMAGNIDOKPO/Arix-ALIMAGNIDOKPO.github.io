@@ -7,7 +7,7 @@ const MONTH_FORMAT: Readonly<Record<Locale, Intl.DateTimeFormatOptions>> = {
 
 const BCP47: Readonly<Record<Locale, string>> = { en: 'en-GB', fr: 'fr-FR' };
 
-const PRESENT: Readonly<Record<Locale, string>> = { en: 'Present', fr: 'Aujourd’hui' };
+const SINCE: Readonly<Record<Locale, string>> = { en: 'Since', fr: 'Depuis' };
 
 /** Parses a `YYYY-MM` string into a UTC Date pinned to the first of the month. */
 export function parseMonth(value: string): Date {
@@ -22,7 +22,7 @@ export function formatMonth(value: string, locale: Locale): string {
     .replace('.', '');
 }
 
-/** "May 2025 — Present" / "mai 2025 — Aujourd’hui" */
+/** Ongoing roles read "Since May 2025"; closed ones "Aug 2024 – Apr 2025". */
 export function formatPeriod(
   start: string,
   end: string | null,
@@ -30,8 +30,8 @@ export function formatPeriod(
   precision: 'month' | 'year' = 'month',
 ): string {
   const from = precision === 'year' ? start.slice(0, 4) : formatMonth(start, locale);
-  const to = end === null ? PRESENT[locale] : formatMonth(end, locale);
-  return `${from} — ${to}`;
+  if (end === null) return `${SINCE[locale]} ${from}`;
+  return `${from} – ${formatMonth(end, locale)}`;
 }
 
 /** Whole months between two `YYYY-MM` marks, inclusive of the starting month. */
@@ -42,7 +42,7 @@ export function monthsBetween(start: string, end: string | null, now = new Date(
   return Math.max(months + 1, 1);
 }
 
-/** "1 yr 4 mo" / "1 an 4 mois" — derived so it never goes stale. */
+/** "1 yr 4 mo" / "1 an 4 mois", derived so it never goes stale. */
 export function formatDuration(start: string, end: string | null, locale: Locale, now = new Date()): string {
   const total = monthsBetween(start, end, now);
   const years = Math.floor(total / 12);

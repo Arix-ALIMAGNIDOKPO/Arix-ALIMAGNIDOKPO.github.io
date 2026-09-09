@@ -1,7 +1,7 @@
 ---
 import Icon from '@/components/Icon.astro';
 import { SITE, SOCIAL } from '@/data/site';
-import { MISSION } from '@/data/profile';
+import { CURRENT, MISSION } from '@/data/profile';
 import type { Locale } from '@/data/types';
 import { path, useTranslations } from '@/i18n/utils';
 
@@ -21,7 +21,7 @@ const socials = [
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <h1 id="hero-title" class="visually-hidden">{SITE.name} — {t('hero.line1')} {t('hero.line2')}</h1>
+  <h1 id="hero-title" class="visually-hidden">{SITE.name}, {t('hero.line1')} {t('hero.line2')}</h1>
 
   <div class="hero__grid">
     <div class="hero__row hero__row--top">
@@ -42,12 +42,17 @@ const socials = [
     </div>
   </div>
 
+  <p class="hero__current mono">
+    <span class="hero__dot" aria-hidden="true"></span>
+    {CURRENT[locale]}
+  </p>
+
   <div class="hero__meta">
-    <span class="chip"><span class="hero__dot" aria-hidden="true"></span>{t('hero.available')}</span>
     <a class="pill pill--ghost" href={SITE.cv} download>
       <Icon name="download" class="pill__icon" />
       {t('hero.cv')}
     </a>
+    <span class="hero__place mono">{SITE.location[locale]}</span>
   </div>
 
   <ul class="hero__socials">
@@ -93,22 +98,38 @@ const socials = [
     gap: 0.6rem;
   }
 
+  .hero__current {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+
   .hero__meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
-    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    gap: 0.75rem 1rem;
+    margin-block-start: 1rem;
+  }
+
+  .hero__place {
+    font-size: var(--step--2);
+    color: var(--ink-faint);
   }
 
   .hero__dot {
-    display: inline-block;
+    flex: none;
+    translate: 0 -0.15em;
     width: 6px;
     height: 6px;
-    margin-inline-end: 0.5rem;
     border-radius: 50%;
-    background: var(--accent-b);
-    box-shadow: 0 0 0 3px rgba(127, 227, 208, 0.16);
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
   }
 
   .hero__socials {

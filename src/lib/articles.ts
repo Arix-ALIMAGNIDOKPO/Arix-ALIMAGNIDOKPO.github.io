@@ -14,7 +14,7 @@ export async function getArticles(locale: Locale): Promise<Article[]> {
   return entries.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
-/** Every published article, both locales — used to generate the article routes. */
+/** Every published article, both locales, used to generate the article routes. */
 export async function getAllArticles(): Promise<Article[]> {
   const entries = await getCollection('articles', isPublished);
   return entries.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());

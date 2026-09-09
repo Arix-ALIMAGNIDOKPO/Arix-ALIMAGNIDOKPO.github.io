@@ -8,13 +8,11 @@ export const UI = {
   en: {
     'nav.about': 'About',
     'nav.work': 'Work',
-    'nav.ventures': 'Ventures',
+    'nav.ventures': 'AIDA',
     'nav.articles': 'Articles',
     'nav.contact': 'Contact',
     'nav.skipToContent': 'Skip to content',
     'nav.menu': 'Menu',
-    'nav.openMenu': 'Open the menu',
-    'nav.closeMenu': 'Close the menu',
     'nav.home': 'Home',
 
     'lang.switch': 'Language',
@@ -23,12 +21,15 @@ export const UI = {
     'lang.toFrench': 'Lire en français',
     'lang.toEnglish': 'Read in English',
 
+    'theme.toggle': 'Switch between light and dark',
+    'theme.light': 'Light',
+    'theme.dark': 'Dark',
+
     'hero.line1': 'AI & NLP',
     'hero.line2': 'Engineer',
-    'hero.cta': 'Ventures',
-    'hero.ctaAria': 'Jump to my ventures',
+    'hero.cta': 'My company',
+    'hero.ctaAria': 'Jump to AIDA',
     'hero.cv': 'Download CV',
-    'hero.available': 'Open to research and NLP roles',
 
     'social.github': 'GitHub',
     'social.linkedin': 'LinkedIn',
@@ -53,7 +54,6 @@ export const UI = {
       'Notes on natural language processing, African languages, and building AI that has to work outside the lab.',
     'articles.toc': 'On this page',
     'articles.otherLanguage': 'This article is also available in French.',
-    'articles.notInLocale': 'This article is only available in English.',
 
     'about.eyebrow': '… /About me …',
     'about.skillsNote': 'Some of the tools, topics and stacks I work with',
@@ -63,13 +63,16 @@ export const UI = {
     'work.eyebrow': '… /Experience …',
     'work.total': 'Professional experience',
     'work.present': 'Present',
-    'work.role': 'Role',
-    'work.organisation': 'Organisation',
-    'work.period': 'Period',
 
-    'ventures.label': 'Ventures',
+    'ventures.label': 'AIDA',
     'ventures.eyebrow': '… /What I am building …',
+    'ventures.company': 'The company',
+    'ventures.products': 'The products',
+    'ventures.productCount': 'Two products',
     'ventures.visit': 'Visit',
+    'ventures.founded': 'Founded',
+    'ventures.based': 'Based in',
+    'ventures.logoAlt': 'logo',
 
     'awards.label': 'Awards',
     'awards.eyebrow': '… /Distinctions …',
@@ -80,38 +83,40 @@ export const UI = {
 
     'projects.label': 'Open source',
     'projects.eyebrow': '… /Open source …',
-    'projects.repo': 'Repository',
+    'projects.featured': 'Pick of the bunch',
+    'projects.repo': 'View the code',
     'projects.noRepo': 'Private repository',
+    'projects.more': 'Everything else on GitHub',
 
     'education.label': 'Education',
+    'education.current': 'Current',
+
     'community.label': 'Community',
     'community.eyebrow': '… /Community …',
 
     'contact.label': 'Contact',
     'contact.eyebrow': '… /Get in touch …',
-    'contact.lead': 'Working on language technology, African NLP, or public-sector AI? I would like to hear about it.',
+    'contact.lead':
+      'Working on language technology, African NLP, or public-sector AI? I would like to hear about it.',
     'contact.emailMe': 'Write to me',
     'contact.basedIn': 'Based in',
 
     'footer.builtWith': 'Built with Astro. No trackers, no cookies, no third-party scripts.',
-    'footer.source': 'Source code',
     'footer.rights': 'All rights reserved.',
 
     '404.title': 'Page not found',
-    '404.body': 'That page does not exist — or it no longer does.',
+    '404.body': 'That page does not exist, or it no longer does.',
     '404.home': 'Back to the homepage',
   },
 
   fr: {
     'nav.about': 'À propos',
     'nav.work': 'Parcours',
-    'nav.ventures': 'Entreprises',
+    'nav.ventures': 'AIDA',
     'nav.articles': 'Articles',
     'nav.contact': 'Contact',
     'nav.skipToContent': 'Aller au contenu',
     'nav.menu': 'Menu',
-    'nav.openMenu': 'Ouvrir le menu',
-    'nav.closeMenu': 'Fermer le menu',
     'nav.home': 'Accueil',
 
     'lang.switch': 'Langue',
@@ -120,12 +125,15 @@ export const UI = {
     'lang.toFrench': 'Lire en français',
     'lang.toEnglish': 'Read in English',
 
+    'theme.toggle': 'Basculer entre le mode clair et le mode sombre',
+    'theme.light': 'Clair',
+    'theme.dark': 'Sombre',
+
     'hero.line1': 'Ingénieur',
     'hero.line2': 'IA & NLP',
-    'hero.cta': 'Mes projets',
-    'hero.ctaAria': 'Aller à mes entreprises',
+    'hero.cta': 'Mon entreprise',
+    'hero.ctaAria': 'Aller à AIDA',
     'hero.cv': 'Télécharger le CV',
-    'hero.available': 'Ouvert aux postes en recherche et en NLP',
 
     'social.github': 'GitHub',
     'social.linkedin': 'LinkedIn',
@@ -150,7 +158,6 @@ export const UI = {
       'Des notes sur le traitement du langage naturel, les langues africaines, et la construction d’une IA qui doit fonctionner hors du laboratoire.',
     'articles.toc': 'Sur cette page',
     'articles.otherLanguage': 'Cet article est aussi disponible en anglais.',
-    'articles.notInLocale': 'Cet article n’est disponible qu’en français.',
 
     'about.eyebrow': '… /À propos …',
     'about.skillsNote': 'Quelques outils, sujets et stacks avec lesquels je travaille',
@@ -160,13 +167,16 @@ export const UI = {
     'work.eyebrow': '… /Expérience …',
     'work.total': 'Expérience professionnelle',
     'work.present': 'Aujourd’hui',
-    'work.role': 'Poste',
-    'work.organisation': 'Organisation',
-    'work.period': 'Période',
 
-    'ventures.label': 'Entreprises',
+    'ventures.label': 'AIDA',
     'ventures.eyebrow': '… /Ce que je construis …',
+    'ventures.company': 'L’entreprise',
+    'ventures.products': 'Les produits',
+    'ventures.productCount': 'Deux produits',
     'ventures.visit': 'Visiter',
+    'ventures.founded': 'Fondée en',
+    'ventures.based': 'Basée à',
+    'ventures.logoAlt': 'logo',
 
     'awards.label': 'Distinctions',
     'awards.eyebrow': '… /Distinctions …',
@@ -177,10 +187,14 @@ export const UI = {
 
     'projects.label': 'Open source',
     'projects.eyebrow': '… /Open source …',
-    'projects.repo': 'Dépôt',
+    'projects.featured': 'Le projet à retenir',
+    'projects.repo': 'Voir le code',
     'projects.noRepo': 'Dépôt privé',
+    'projects.more': 'Tout le reste sur GitHub',
 
     'education.label': 'Formation',
+    'education.current': 'En cours',
+
     'community.label': 'Communauté',
     'community.eyebrow': '… /Communauté …',
 
@@ -192,11 +206,10 @@ export const UI = {
     'contact.basedIn': 'Basé à',
 
     'footer.builtWith': 'Construit avec Astro. Aucun traceur, aucun cookie, aucun script tiers.',
-    'footer.source': 'Code source',
     'footer.rights': 'Tous droits réservés.',
 
     '404.title': 'Page introuvable',
-    '404.body': 'Cette page n’existe pas — ou n’existe plus.',
+    '404.body': 'Cette page n’existe pas, ou n’existe plus.',
     '404.home': 'Retour à l’accueil',
   },
 } as const satisfies Record<Locale, Record<string, string>>;

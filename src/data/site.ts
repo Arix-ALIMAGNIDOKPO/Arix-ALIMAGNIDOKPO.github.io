@@ -7,8 +7,9 @@ export const SITE = {
   lastName: 'ALIMAGNIDOKPO',
   legalName: 'Ange Michel Arix ALIMAGNIDOKPO',
   email: 'arixalim@gmail.com',
-  location: { en: 'Cotonou, Benin', fr: 'Cotonou, Bénin' } satisfies I18nText,
-  locationCountry: 'BJ',
+  location: { en: 'Paris, France', fr: 'Paris, France' } satisfies I18nText,
+  locationCity: 'Paris',
+  locationCountry: 'FR',
   cv: '/cv-arix-alimagnidokpo.pdf',
   defaultLocale: 'en' as Locale,
   locales: ['en', 'fr'] as const satisfies readonly Locale[],
@@ -25,8 +26,8 @@ export const TAGLINE = {
 } satisfies I18nText;
 
 export const META_DESCRIPTION = {
-  en: 'Arix ALIMAGNIDOKPO — AI & NLP engineer in Cotonou, Benin. Founder and CEO of AIDA. AI Developer and Project Lead at the Ministry of Foreign Affairs of Benin, working on low-resource language NLP and responsible AI.',
-  fr: 'Arix ALIMAGNIDOKPO — Ingénieur IA & NLP à Cotonou, Bénin. Fondateur et CEO d’AIDA. Développeur IA et chef de projet au Ministère des Affaires Étrangères du Bénin, spécialisé en NLP pour langues peu dotées et IA responsable.',
+  en: 'Arix ALIMAGNIDOKPO, AI and NLP engineer in Paris. Student researcher and EUR fellow at the LIPN, Université Sorbonne Paris Nord, and founder of AIDA. Working on low-resource language NLP, speech, and responsible AI.',
+  fr: 'Arix ALIMAGNIDOKPO, ingénieur IA et NLP à Paris. Étudiant-chercheur et boursier EUR au LIPN, Université Sorbonne Paris Nord, et fondateur d’AIDA. Travaux sur le NLP des langues peu dotées, la parole et l’IA responsable.',
 } satisfies I18nText;
 
 /**
@@ -35,17 +36,7 @@ export const META_DESCRIPTION = {
  */
 export const SOCIAL = {
   github: 'https://github.com/Arix-ALIMAGNIDOKPO',
-  linkedin: 'https://www.linkedin.com/in/arixalimagnidokpo',
+  linkedin: 'https://www.linkedin.com/in/arixalimagnidokpo/',
   email: `mailto:${SITE.email}`,
   aida: 'https://aida.bj',
 } as const;
-
-export type NavKey = 'about' | 'work' | 'ventures' | 'articles' | 'contact';
-
-export const NAV: readonly { key: NavKey; href: string }[] = [
-  { key: 'about', href: '#about' },
-  { key: 'work', href: '#work' },
-  { key: 'ventures', href: '#ventures' },
-  { key: 'articles', href: '#articles' },
-  { key: 'contact', href: '#contact' },
-];

@@ -10,7 +10,7 @@ export async function buildFeed(locale: Locale, site: URL | undefined): Promise<
   const base = path('/articles/', locale);
 
   return rss({
-    title: `${SITE.name} — ${TITLE[locale]}`,
+    title: `${SITE.name}, ${TITLE[locale]}`,
     description: META_DESCRIPTION[locale],
     site: site ?? SITE.origin,
     trailingSlash: true,

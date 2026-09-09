@@ -67,8 +67,11 @@ const t = useTranslations(locale);
   <ol class="research__education">
     {
       EDUCATION.map((study) => (
-        <li class="research__study">
-          <p class="research__period mono">{study.period[locale]}</p>
+        <li class:list={['research__study', study.current === true && 'research__study--current']}>
+          <p class="research__period mono">
+            {study.period[locale]}
+            {study.current === true && <span class="chip chip--accent research__now">{t('education.current')}</span>}
+          </p>
           <div>
             <h4 class="research__title">{study.degree[locale]}</h4>
             <p class="research__context mono">
@@ -79,8 +82,8 @@ const t = useTranslations(locale);
               ) : (
                 study.school
               )}
-              <span aria-hidden="true"> · </span>
-              <span class="research__grade">{study.grade[locale]}</span>
+              <span class="research__place">{study.place}</span>
+              {study.grade !== undefined && <span class="research__grade">{study.grade[locale]}</span>}
             </p>
             {study.notes[locale].length > 0 && (
               <ul class="research__highlights">
@@ -94,6 +97,7 @@ const t = useTranslations(locale);
       ))
     }
   </ol>
+
 </section>
 
 <style>
@@ -138,8 +142,21 @@ const t = useTranslations(locale);
     color: var(--ink-muted);
   }
 
+  .research__place,
   .research__grade {
-    color: var(--accent-b);
+    display: block;
+  }
+
+  .research__grade {
+    color: var(--accent);
+  }
+
+  .research__now {
+    margin-inline-start: 0.5rem;
+  }
+
+  .research__study--current .research__title {
+    color: var(--ink);
   }
 
   .research__summary {
@@ -162,7 +179,7 @@ const t = useTranslations(locale);
   }
 
   .research__highlights li::before {
-    content: '—';
+    content: '›';
     position: absolute;
     inset-inline-start: 0;
     color: var(--ink-faint);

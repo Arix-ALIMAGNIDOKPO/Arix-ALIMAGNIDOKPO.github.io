@@ -1,6 +1,6 @@
 ---
 title: 'The digital divide in Africa is a language divide'
-description: 'Connectivity is not the bottleneck any more. The bottleneck is that the machine does not speak Fon — and the person in front of it does not speak French.'
+description: 'Connectivity is not the bottleneck any more. The bottleneck is that the machine does not speak Fon, and the person in front of it does not speak French.'
 date: 2026-02-18
 lang: en
 tags: [NLP, Low-resource languages, Inclusion]
@@ -11,7 +11,7 @@ We keep measuring digital inclusion in megabits. Coverage maps, subscription rat
 
 And yet a woman selling tomatoes at Dantokpa cannot renew her national ID online.
 
-Not because there is no connection. Because the form is in French, the confirmation SMS is in French, the error message that tells her she typed her birth date wrong is in French — and she speaks Fon.
+Not because there is no connection. Because the form is in French, the confirmation SMS is in French, the error message that tells her she typed her birth date wrong is in French. And she speaks Fon.
 
 ## The gap nobody instruments
 
@@ -45,8 +45,8 @@ Three things we did not expect:
 
 ## Where this goes
 
-This is the problem [Ayoka](https://ayoka.aida.bj/) exists to solve: a voice API for African languages — speech-to-text and text-to-speech for Fon, Yoruba, French and English — with accuracy good enough that a service can be built on top of it rather than demoed on top of it.
+This is the problem [Ayoka](https://ayoka.aida.bj/) exists to solve: a voice API for African languages, offering speech to text and text to speech for Fon, Yoruba, French and English, with accuracy good enough that a service can be built on top of it rather than demoed on top of it.
 
 The bet is simple. If the interface speaks the language, the rest of the stack finally becomes reachable. Every e-government service, every banking flow, every health hotline that currently works only for people who read French becomes usable by everyone else, with no change to the service itself.
 
-That is a language problem wearing an infrastructure costume. It is worth naming it correctly, because you fix it with corpora, models and evaluation — not with more towers.
+That is a language problem wearing an infrastructure costume. It is worth naming it correctly, because you fix it with corpora, models and evaluation, not with more towers.
