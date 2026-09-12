@@ -21,10 +21,9 @@ const tags = [...new Set(articles.flatMap((article) => article.data.tags))].sort
 ---
 
 <section class="index">
-  <div class="section-head">
-    <p class="eyebrow">{t('articles.eyebrow')}</p>
-    <div>
-      <h1 class="display display--section index__title">{t('articles.index.title')}</h1>
+  <header class="index__head">
+    <h1 class="display display--section index__title">{t('articles.index.title')}</h1>
+    <div class="index__aside">
       <p class="lede">{t('articles.index.intro')}</p>
 
       <p class="cluster index__meta">
@@ -35,7 +34,7 @@ const tags = [...new Set(articles.flatMap((article) => article.data.tags))].sort
         {tags.map((tag) => <span class="chip">{tag}</span>)}
       </p>
     </div>
-  </div>
+  </header>
 
   {
     articles.length === 0 ? (
@@ -98,8 +97,31 @@ const tags = [...new Set(articles.flatMap((article) => article.data.tags))].sort
 </section>
 
 <style>
+  .index__head {
+    display: grid;
+  }
+
   .index__title {
-    margin-block-end: 1rem;
+    text-align: right;
+  }
+
+  .index__aside {
+    margin-block-start: clamp(0.75rem, 0.6rem + 0.7vw, 1.25rem);
+  }
+
+  @media (min-width: 48rem) {
+    .index__head {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      column-gap: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
+    }
+
+    .index__title {
+      grid-column: 1 / -1;
+    }
+
+    .index__aside {
+      grid-column: 2;
+    }
   }
 
   .index__meta {

@@ -1,17 +1,16 @@
 ---
 /**
- * The single heading pattern every section uses.
+ * The single heading pattern every section uses: the oversized title, then one
+ * sentence underneath.
  *
- * Order: the small marker and the oversized title share one band, then the
- * standfirst sits underneath. A reader meets the section name before the
- * sentence that explains it, which is the way round that scans.
+ * There is deliberately no "… /Education …" marker any more. With every
+ * section carrying its name in the title, the marker only repeated it, and
+ * baseline-aligning a 12px label against a 96px title looked broken.
  *
  * Every section goes through this component so none can drift into its own
  * format. If the rhythm needs to change, it changes here once.
  */
 interface Props {
-  /** The "… /Work …" marker. */
-  eyebrow: string;
   /** One sentence. Not a paragraph. */
   lede: string;
   /** The oversized title. */
@@ -20,11 +19,10 @@ interface Props {
   headingId: string;
 }
 
-const { eyebrow, lede, title, headingId } = Astro.props;
+const { lede, title, headingId } = Astro.props;
 ---
 
 <header class="head">
-  <p class="eyebrow head__eyebrow">{eyebrow}</p>
   <h2 id={headingId} class="display display--section head__title">{title}</h2>
   <p class="lede head__lede">{lede}</p>
 </header>
@@ -32,41 +30,31 @@ const { eyebrow, lede, title, headingId } = Astro.props;
 <style>
   .head {
     display: grid;
-    gap: 0.5rem;
-  }
-
-  .head__eyebrow {
-    grid-column: 1;
   }
 
   .head__title {
-    margin-block-start: 0.25rem;
+    text-align: right;
   }
 
   .head__lede {
-    margin-block-start: 0.75rem;
-    max-width: 52ch;
+    margin-block-start: clamp(0.75rem, 0.6rem + 0.7vw, 1.25rem);
+    max-width: 54ch;
   }
 
+  /* The sentence sits under the title mass rather than under the whole width,
+     which keeps the asymmetry of the layout without shouting. */
   @media (min-width: 48rem) {
     .head {
-      grid-template-columns: minmax(8rem, 16rem) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
       column-gap: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
-      align-items: baseline;
     }
 
-    /* The marker sits opposite the title, then the sentence drops below it. */
     .head__title {
-      grid-column: 2;
-      grid-row: 1;
-      margin-block-start: 0;
-      text-align: right;
+      grid-column: 1 / -1;
     }
 
     .head__lede {
       grid-column: 2;
-      grid-row: 2;
-      margin-block-start: 1rem;
     }
   }
 </style>

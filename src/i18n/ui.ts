@@ -38,7 +38,6 @@ export const UI = {
     'social.aida': 'aida.bj',
 
     'articles.label': 'Articles',
-    'articles.eyebrow': '… /Writing …',
     'articles.readMore': 'Read more',
     'articles.readingTime': 'min read',
     'articles.all': 'All articles',
@@ -57,20 +56,17 @@ export const UI = {
     'articles.toc': 'On this page',
     'articles.otherLanguage': 'This article is also available in French.',
 
-    'about.eyebrow': '… /About me …',
     'about.label': 'About',
     'about.skillsNote': 'Some of the tools, topics and stacks I work with',
     'about.skillsHeading': 'What I work with',
     'about.portraitAlt': 'Portrait of Arix ALIMAGNIDOKPO',
 
     'work.label': 'Work',
-    'work.eyebrow': '… /Experience …',
     'work.total': 'Professional experience',
     'work.present': 'Present',
     'work.lead': 'From hackathon prototype to systems running inside a government: where I have worked, and what I shipped there.',
 
     'ventures.label': 'AIDA',
-    'ventures.eyebrow': '… /What I am building …',
     'ventures.lead': 'One company, two products: one teaches machines to hear African languages, the other gives institutions back control of their archives.',
     'ventures.company': 'The company',
     'ventures.products': 'The products',
@@ -81,16 +77,13 @@ export const UI = {
     'ventures.logoAlt': 'logo',
 
     'awards.label': 'Awards',
-    'awards.eyebrow': '… /Distinctions …',
     'awards.lead': 'Three competitions, three real problems: language, waste, and access to healthcare.',
 
     'research.label': 'Research',
-    'research.eyebrow': '… /Research …',
     'research.areas': 'Research areas',
     'research.lead': 'Two pieces of work where the research had to end up in production: a constraint solver for a university, and NLP applied to diplomatic correspondence.',
 
     'projects.label': 'Open source',
-    'projects.eyebrow': '… /Open source …',
     'projects.lead': 'Projects built to be used, not just submitted. The code is open.',
     'projects.featured': 'Pick of the bunch',
     'projects.repo': 'View the code',
@@ -98,19 +91,16 @@ export const UI = {
     'projects.more': 'Everything else on GitHub',
 
     'education.label': 'Education',
-    'education.eyebrow': '… /Education …',
     'education.current': 'Current',
     'education.lead':
       'A degree in AI from Benin, then a research fellowship in Paris. The thread is the same: languages, and the models that fail on them.',
 
     'community.label': 'Community',
-    'community.eyebrow': '… /Community …',
     'community.lead': 'Teaching, organising, and giving back to the ecosystem that trained me.',
     'community.ongoing': 'Ongoing',
     'community.past': 'Past',
 
     'contact.label': 'Contact',
-    'contact.eyebrow': '… /Get in touch …',
     'contact.lead':
       'Working on language technology, African NLP, or public-sector AI? I would like to hear about it.',
     'contact.emailMe': 'Write to me',
@@ -157,7 +147,6 @@ export const UI = {
     'social.aida': 'aida.bj',
 
     'articles.label': 'Articles',
-    'articles.eyebrow': '… /Écrits …',
     'articles.readMore': 'Lire',
     'articles.readingTime': 'min de lecture',
     'articles.all': 'Tous les articles',
@@ -176,20 +165,17 @@ export const UI = {
     'articles.toc': 'Sur cette page',
     'articles.otherLanguage': 'Cet article est aussi disponible en anglais.',
 
-    'about.eyebrow': '… /À propos …',
     'about.label': 'À propos',
     'about.skillsNote': 'Quelques outils, sujets et stacks avec lesquels je travaille',
     'about.skillsHeading': 'Ce avec quoi je travaille',
     'about.portraitAlt': 'Portrait d’Arix ALIMAGNIDOKPO',
 
     'work.label': 'Parcours',
-    'work.eyebrow': '… /Expérience …',
     'work.total': 'Expérience professionnelle',
     'work.present': 'Aujourd’hui',
     'work.lead': 'Du prototype de hackathon au système en production dans une administration : voici où j’ai travaillé et ce que j’y ai livré.',
 
     'ventures.label': 'AIDA',
-    'ventures.eyebrow': '… /Ce que je construis …',
     'ventures.lead': 'Une entreprise, deux produits : l’un apprend aux machines à entendre les langues africaines, l’autre rend aux institutions le contrôle de leurs archives.',
     'ventures.company': 'L’entreprise',
     'ventures.products': 'Les produits',
@@ -200,16 +186,13 @@ export const UI = {
     'ventures.logoAlt': 'logo',
 
     'awards.label': 'Distinctions',
-    'awards.eyebrow': '… /Distinctions …',
     'awards.lead': 'Trois compétitions, trois problèmes réels : la langue, les déchets, l’accès aux soins.',
 
     'research.label': 'Recherche',
-    'research.eyebrow': '… /Recherche …',
     'research.areas': 'Domaines de recherche',
     'research.lead': 'Deux travaux où la recherche devait finir en production : un solveur de contraintes pour une université, et du NLP appliqué à la correspondance diplomatique.',
 
     'projects.label': 'Open source',
-    'projects.eyebrow': '… /Open source …',
     'projects.lead': 'Des projets construits pour être utilisés, pas seulement pour être rendus. Le code est ouvert.',
     'projects.featured': 'Le projet à retenir',
     'projects.repo': 'Voir le code',
@@ -217,19 +200,16 @@ export const UI = {
     'projects.more': 'Tout le reste sur GitHub',
 
     'education.label': 'Formation',
-    'education.eyebrow': '… /Formation …',
     'education.current': 'En cours',
     'education.lead':
       'Une licence en IA au Bénin, puis une bourse de recherche à Paris. Le fil est le même : les langues, et les modèles qui échouent dessus.',
 
     'community.label': 'Communauté',
-    'community.eyebrow': '… /Communauté …',
     'community.lead': 'Enseigner, organiser, et rendre à l’écosystème qui m’a formé.',
     'community.ongoing': 'En cours',
     'community.past': 'Passé',
 
     'contact.label': 'Contact',
-    'contact.eyebrow': '… /Me contacter …',
     'contact.lead':
       'Vous travaillez sur les technologies du langage, le NLP africain ou l’IA dans le secteur public ? J’aimerais en entendre parler.',
     'contact.emailMe': 'M’écrire',
