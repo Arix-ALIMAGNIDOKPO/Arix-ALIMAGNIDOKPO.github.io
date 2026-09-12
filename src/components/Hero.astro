@@ -42,36 +42,44 @@ const socials = [
     </div>
   </div>
 
-  <p class="hero__current mono">
-    <span class="hero__dot" aria-hidden="true"></span>
-    {CURRENT[locale]}
-  </p>
+  <!-- The status block stays on the page's left edge; the links fill the
+       space the second headline line leaves empty on the right. -->
+  <div class="hero__foot">
+    <div class="hero__status">
+      <p class="hero__current mono">
+        <span class="hero__dot" aria-hidden="true"></span>
+        {CURRENT[locale]}
+      </p>
 
-  <div class="hero__meta">
-    <a class="pill pill--ghost" href={SITE.cv} download>
-      <Icon name="download" class="pill__icon" />
-      {t('hero.cv')}
-    </a>
-    <span class="hero__place mono">{SITE.location[locale]}</span>
+      <p class="hero__place mono">{SITE.location[locale]}</p>
+
+      <p>
+        <a class="pill pill--ghost" href={SITE.cv} download>
+          <Icon name="download" class="pill__icon" />
+          {t('hero.cv')}
+        </a>
+      </p>
+    </div>
+
+    <ul class="hero__links">
+      {
+        socials.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+            >
+              <Icon name={item.icon} size={15} />
+              <span>{item.label}</span>
+              <Icon name="arrow-up-right" size={14} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 
-  <ul class="hero__socials">
-    {
-      socials.map((item) => (
-        <li>
-          <a
-            class="pill"
-            href={item.href}
-            target={item.external ? '_blank' : undefined}
-            rel={item.external ? 'noopener noreferrer' : undefined}
-          >
-            <Icon name={item.icon} class="pill__icon" />
-            <span>{item.label}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
 </section>
 
 <style>
@@ -98,28 +106,27 @@ const socials = [
     gap: 0.6rem;
   }
 
+  .hero__foot {
+    display: grid;
+    gap: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    align-items: start;
+  }
+
+  .hero__status {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+  }
+
   .hero__current {
     display: flex;
     align-items: baseline;
     gap: 0.6rem;
-    margin-block-start: clamp(1.5rem, 1rem + 2vw, 2.25rem);
     font-size: var(--step--1);
     color: var(--ink-dim);
-    max-width: 58ch;
+    max-width: 52ch;
     text-wrap: pretty;
-  }
-
-  .hero__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1rem;
-    margin-block-start: 1rem;
-  }
-
-  .hero__place {
-    font-size: var(--step--2);
-    color: var(--ink-faint);
   }
 
   .hero__dot {
@@ -132,12 +139,53 @@ const socials = [
     box-shadow: 0 0 0 3px var(--accent-soft);
   }
 
-  .hero__socials {
+  .hero__place {
+    font-size: var(--step--2);
+    color: var(--ink-faint);
+  }
+
+  .hero__status p:last-child {
+    margin-block-start: 0.5rem;
+  }
+
+  /* The links read as a short list, matching the row lists further down the
+     page rather than introducing a fifth kind of button. */
+  .hero__links {
+    display: grid;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .hero__links a {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
     gap: 0.6rem;
-    margin-block-start: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+    padding: 0.7rem 0.15rem;
+    border-block-end: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-dim);
+    text-decoration: none;
+    transition:
+      color 160ms ease,
+      padding-inline-start 160ms ease;
+  }
+
+  .hero__links a:hover {
+    color: var(--ink);
+    padding-inline-start: 0.5rem;
+  }
+
+  /* The label takes the slack so the trailing arrow sits on the right edge. */
+  .hero__links span {
+    flex: 1;
+  }
+
+  .hero__links a :global(svg):last-child {
+    opacity: 0.4;
+  }
+
+  .hero__links a:hover :global(svg):last-child {
+    opacity: 1;
   }
 
   /* Below the breakpoint the rows dissolve so the four pieces stack in a
@@ -195,6 +243,11 @@ const socials = [
 
     .hero__lede {
       padding-block-end: 0.35rem;
+    }
+
+    .hero__foot {
+      grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem);
+      column-gap: clamp(1.5rem, 1rem + 3vw, 4rem);
     }
   }
 </style>

@@ -72,13 +72,16 @@ const rss = path('rss.xml', locale).replace(/\/$/, '');
   .foot__links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
+    gap: 0 1.25rem;
   }
 
   .foot__link {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
+    /* Standalone links, so they need a real tap target, not 19px of text. */
+    min-height: 2.1rem;
+    padding-inline-end: 0.35rem;
     font-size: var(--step--2);
     color: var(--ink-muted);
     text-decoration: none;
