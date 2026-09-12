@@ -145,15 +145,71 @@ const isCurrent = (href: string): boolean => href === current;
     sync();
   }
 
-  /** Marks the header once the page has scrolled, so it can show a hairline. */
+  /**
+   * The header gets out of the way going down the page and comes back on the
+   * way up, so reading is uninterrupted but navigation is always one small
+   * upward scroll away.
+   */
   const header = document.querySelector<HTMLElement>('.masthead');
+
   if (header) {
-    const mark = (): void => {
-      if (window.scrollY > 4) header.setAttribute('data-stuck', '');
-      else header.removeAttribute('data-stuck');
+    /** Movement below this is jitter or a trackpad tremor, not intent. */
+    const THRESHOLD = 6;
+    /** Near the top the header is always shown, whatever the direction. */
+    const ALWAYS_SHOWN = 72;
+
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const menuOpen = (): boolean =>
+      document.querySelector('[data-nav-toggle]')?.getAttribute('aria-expanded') === 'true';
+
+    let lastY = window.scrollY;
+    let pending = false;
+
+    const reveal = (): void => header.removeAttribute('data-hidden');
+
+    const update = (): void => {
+      pending = false;
+      const y = Math.max(window.scrollY, 0);
+      const delta = y - lastY;
+
+      if (y <= ALWAYS_SHOWN) {
+        header.removeAttribute('data-stuck');
+        reveal();
+        lastY = y;
+        return;
+      }
+
+      header.setAttribute('data-stuck', '');
+
+      // Someone who asked for less motion keeps a header that never moves.
+      if (calm.matches) {
+        reveal();
+        lastY = y;
+        return;
+      }
+
+      if (Math.abs(delta) < THRESHOLD) return;
+
+      if (delta > 0 && !menuOpen()) header.setAttribute('data-hidden', '');
+      else reveal();
+
+      lastY = y;
     };
-    window.addEventListener('scroll', mark, { passive: true });
-    mark();
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (pending) return;
+        pending = true;
+        requestAnimationFrame(update);
+      },
+      { passive: true },
+    );
+
+    // Never leave a keyboard user tabbing into a header they cannot see.
+    header.addEventListener('focusin', reveal);
+    calm.addEventListener('change', update);
+    update();
   }
 </script>
 
@@ -174,7 +230,20 @@ const isCurrent = (href: string): boolean => href === current;
     background: color-mix(in srgb, var(--panel) 88%, transparent);
     backdrop-filter: blur(10px);
     border-block-end: 1px solid transparent;
-    transition: border-color 200ms ease;
+    transition:
+      translate 260ms ease,
+      border-color 200ms ease;
+  }
+
+  /* Slid out of view on the way down; the panel's clip hides it. */
+  .masthead[data-hidden] {
+    translate: 0 -100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .masthead {
+      transition: none;
+    }
   }
 
   /* The rule only appears once the page has moved, so it does not draw a line
