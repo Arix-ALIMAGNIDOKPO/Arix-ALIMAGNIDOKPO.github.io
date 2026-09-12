@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import SectionHead from '@/components/SectionHead.astro';
 import { SITE, SOCIAL } from '@/data/site';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
@@ -13,12 +14,12 @@ const t = useTranslations(locale);
 ---
 
 <section class="section" id="contact" aria-labelledby="contact-heading">
-  <div class="section-head">
-    <p class="eyebrow">{t('contact.eyebrow')}</p>
-    <p class="lede">{t('contact.lead')}</p>
-  </div>
-
-  <h2 id="contact-heading" class="display display--section section-title">{t('contact.label')}</h2>
+  <SectionHead
+    eyebrow={t('contact.eyebrow')}
+    lede={t('contact.lead')}
+    title={t('contact.label')}
+    headingId="contact-heading"
+  />
 
   <div class="contact__panel">
     <a class="contact__email mono" href={SOCIAL.email}>{SITE.email}</a>
@@ -66,7 +67,7 @@ const t = useTranslations(locale);
   }
 
   .contact__email:hover {
-    color: var(--accent-b);
+    color: var(--accent);
   }
 
   .contact__actions {

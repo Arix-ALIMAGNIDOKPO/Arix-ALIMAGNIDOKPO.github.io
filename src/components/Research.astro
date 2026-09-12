@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import SectionHead from '@/components/SectionHead.astro';
 import { RESEARCH } from '@/data/profile';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
@@ -13,19 +14,12 @@ const t = useTranslations(locale);
 ---
 
 <section class="section" id="research" aria-labelledby="research-heading">
-  <div class="section-head">
-    <p class="eyebrow">{t('research.eyebrow')}</p>
-    <div>
-      <h2 id="research-heading" class="research__heading mono">{t('research.label')}</h2>
-      <p class="lede">
-        {
-          locale === 'fr'
-            ? 'Deux travaux où la recherche devait finir en production : un solveur de contraintes pour l’université, et du NLP appliqué à la correspondance diplomatique.'
-            : 'Two pieces of work where the research had to end up in production: a constraint solver for the university, and NLP applied to diplomatic correspondence.'
-        }
-      </p>
-    </div>
-  </div>
+  <SectionHead
+    eyebrow={t('research.eyebrow')}
+    lede={t('research.lead')}
+    title={t('research.label')}
+    headingId="research-heading"
+  />
 
   <ol class="research__list">
     {
@@ -65,11 +59,6 @@ const t = useTranslations(locale);
 </section>
 
 <style>
-  .research__heading {
-    font-size: var(--step-3);
-    letter-spacing: -0.03em;
-    margin-block-end: 0.75rem;
-  }
 
   .research__list {
     display: grid;

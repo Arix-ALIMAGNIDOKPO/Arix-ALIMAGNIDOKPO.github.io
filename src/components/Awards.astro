@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import SectionHead from '@/components/SectionHead.astro';
 import { AWARDS } from '@/data/profile';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
@@ -13,19 +14,12 @@ const t = useTranslations(locale);
 ---
 
 <section class="section" id="awards" aria-labelledby="awards-heading">
-  <div class="section-head">
-    <p class="eyebrow">{t('awards.eyebrow')}</p>
-    <div>
-      <h2 id="awards-heading" class="awards__heading mono">{t('awards.label')}</h2>
-      <p class="lede">
-        {
-          locale === 'fr'
-            ? 'Trois compétitions, trois problèmes réels : la langue, les déchets, l’accès aux soins.'
-            : 'Three competitions, three real problems: language, waste, access to healthcare.'
-        }
-      </p>
-    </div>
-  </div>
+  <SectionHead
+    eyebrow={t('awards.eyebrow')}
+    lede={t('awards.lead')}
+    title={t('awards.label')}
+    headingId="awards-heading"
+  />
 
   <ol class="awards__grid">
     {
@@ -57,11 +51,6 @@ const t = useTranslations(locale);
 </section>
 
 <style>
-  .awards__heading {
-    font-size: var(--step-3);
-    letter-spacing: -0.03em;
-    margin-block-end: 0.75rem;
-  }
 
   .awards__grid {
     display: grid;

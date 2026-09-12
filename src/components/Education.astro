@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import SectionHead from '@/components/SectionHead.astro';
 import { EDUCATION } from '@/data/profile';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
@@ -13,12 +14,12 @@ const t = useTranslations(locale);
 ---
 
 <section class="section" id="education" aria-labelledby="education-heading">
-  <div class="section-head">
-    <p class="eyebrow">{t('education.eyebrow')}</p>
-    <p class="lede">{t('education.lead')}</p>
-  </div>
-
-  <h2 id="education-heading" class="display display--section section-title">{t('education.label')}</h2>
+  <SectionHead
+    eyebrow={t('education.eyebrow')}
+    lede={t('education.lead')}
+    title={t('education.label')}
+    headingId="education-heading"
+  />
 
   <ol class="edu">
     {
@@ -82,16 +83,6 @@ const t = useTranslations(locale);
     border-block-end: 1px solid var(--line);
   }
 
-  /* The current course is the one a reader is looking for, so it gets weight. */
-  .edu__item--current {
-    position: relative;
-    padding-inline: clamp(0.85rem, 0.7rem + 0.7vw, 1.35rem);
-    margin-inline: calc(clamp(0.85rem, 0.7rem + 0.7vw, 1.35rem) * -1);
-    border-radius: var(--radius-card);
-    background:
-      radial-gradient(110% 160% at 0% 0%, var(--accent-soft), transparent 60%),
-      var(--panel-raised);
-  }
 
   .edu__when {
     display: flex;
@@ -123,9 +114,6 @@ const t = useTranslations(locale);
     text-wrap: pretty;
   }
 
-  .edu__item--current .edu__degree {
-    font-size: var(--step-2);
-  }
 
   .edu__school {
     font-size: var(--step--1);

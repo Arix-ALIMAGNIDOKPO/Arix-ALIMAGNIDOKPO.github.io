@@ -1,0 +1,28 @@
+---
+/**
+ * The single heading pattern every section uses: a monospace marker on the
+ * left, one sentence of standfirst on the right, then the oversized title.
+ *
+ * Every section goes through this component so no section can drift into its
+ * own format. If the rhythm needs to change, it changes here once.
+ */
+interface Props {
+  /** The "… /Work …" marker. */
+  eyebrow: string;
+  /** One sentence. Not a paragraph. */
+  lede: string;
+  /** The oversized title. */
+  title: string;
+  /** Id for the <h2>, referenced by the section's aria-labelledby. */
+  headingId: string;
+}
+
+const { eyebrow, lede, title, headingId } = Astro.props;
+---
+
+<div class="section-head">
+  <p class="eyebrow">{eyebrow}</p>
+  <p class="lede">{lede}</p>
+</div>
+
+<h2 id={headingId} class="display display--section section-title">{title}</h2>

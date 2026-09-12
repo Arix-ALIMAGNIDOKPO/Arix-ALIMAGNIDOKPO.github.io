@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import SectionHead from '@/components/SectionHead.astro';
 import portrait from '@/assets/photos/portrait.jpg';
 import { INTRO, RESEARCH_AREAS, SKILLS } from '@/data/profile';
 import { SITE } from '@/data/site';
@@ -15,17 +16,18 @@ const t = useTranslations(locale);
 ---
 
 <section class="section" id="about" aria-labelledby="about-heading">
-  <h2 id="about-heading" class="visually-hidden">{t('nav.about')}</h2>
+  <SectionHead
+    eyebrow={t('about.eyebrow')}
+    lede={t('about.lead')}
+    title={t('about.label')}
+    headingId="about-heading"
+  />
 
-  <div class="section-head">
-    <p class="eyebrow">{t('about.eyebrow')}</p>
-    <div>
-      <p class="lede about__intro">{INTRO[locale]}</p>
-      <ul class="about__areas">
-        {RESEARCH_AREAS[locale].map((area) => <li class="chip">{area}</li>)}
-      </ul>
-    </div>
-  </div>
+  <ul class="about__areas">
+    {RESEARCH_AREAS[locale].map((area) => <li class="chip">{area}</li>)}
+  </ul>
+
+  <p class="lede about__intro">{INTRO[locale]}</p>
 
   <div class="about__body">
     <!-- On a phone the portrait comes first: a face before a list of tools. -->

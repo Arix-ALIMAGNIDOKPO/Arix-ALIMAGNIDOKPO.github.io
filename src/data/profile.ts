@@ -544,8 +544,72 @@ export const PROJECTS: readonly Project[] = [
 
 export const COMMUNITY: readonly CommunityItem[] = [
   {
+    role: { en: 'Member', fr: 'Membre' },
+    org: 'Masakhane',
+    orgUrl: 'https://www.masakhane.io/',
+    period: { en: 'Ongoing', fr: 'En cours' },
+    ongoing: true,
+    detail: {
+      en: 'The grassroots research community advancing natural language processing for African languages.',
+      fr: 'La communauté de recherche ouverte qui fait avancer le traitement automatique des langues africaines.',
+    },
+  },
+  {
+    role: { en: 'Developer and communications', fr: 'Développeur et communication' },
+    org: 'FRIARE Africa',
+    orgUrl: 'https://friare.org',
+    period: { en: 'Since Sep 2023', fr: 'Depuis sep. 2023' },
+    ongoing: true,
+    detail: {
+      en: 'Projects and communication for responsible AI in Africa.',
+      fr: 'Projets et actions de communication pour une IA responsable en Afrique.',
+    },
+  },
+  {
+    role: { en: 'Training commission coordinator', fr: 'Coordinateur de la commission formation' },
+    org: 'Isheero',
+    orgUrl: 'https://www.isheero.com/',
+    period: { en: 'Since Oct 2023', fr: 'Depuis oct. 2023' },
+    ongoing: true,
+    detail: {
+      en: 'Planning and running training programmes and workshops.',
+      fr: 'Planification, organisation et animation de programmes et d’ateliers de formation.',
+    },
+  },
+  {
+    role: { en: 'Volunteer', fr: 'Bénévole' },
+    org: 'Benin Mathematics Summer Camps, IMAC Benin',
+    period: { en: 'Since Feb 2025', fr: 'Depuis fév. 2025' },
+    ongoing: true,
+    detail: {
+      en: 'An intensive mathematics camp for secondary-school students, with an introduction to technology.',
+      fr: 'Un camp intensif de mathématiques pour collégiens, avec une introduction aux nouvelles technologies.',
+    },
+  },
+  {
+    role: { en: 'Local organiser', fr: 'Organisateur local' },
+    org: 'Deep Learning IndabaX Benin',
+    orgUrl: 'https://deeplearningindaba.com/indabax/',
+    period: { en: '2025', fr: '2025' },
+    detail: {
+      en: 'Organised the Benin edition of the continent’s largest machine-learning gathering.',
+      fr: 'Organisation de l’édition béninoise du plus grand rassemblement d’apprentissage automatique du continent.',
+    },
+  },
+  {
+    role: { en: 'Participant', fr: 'Participant' },
+    org: 'Deep Learning Indaba, Kigali, Rwanda',
+    orgUrl: 'https://deeplearningindaba.com/',
+    period: { en: 'Aug 2025', fr: 'Août 2025' },
+    detail: {
+      en: 'The continent’s flagship machine-learning conference.',
+      fr: 'La conférence phare d’apprentissage automatique du continent.',
+    },
+  },
+  {
     role: { en: 'AI Instructor', fr: 'Instructeur en Intelligence Artificielle' },
     org: 'AI and IoT Club, IFRI, Université d’Abomey-Calavi',
+    orgUrl: 'https://uac.bj',
     period: { en: 'Jan 2024 – May 2025', fr: 'Jan. 2024 – Mai 2025' },
     detail: {
       en: 'Ran weekly workshops on AI and machine learning.',
@@ -563,15 +627,6 @@ export const COMMUNITY: readonly CommunityItem[] = [
     },
   },
   {
-    role: { en: 'Local organiser', fr: 'Organisateur local' },
-    org: 'Deep Learning IndabaX Benin',
-    period: { en: '2025', fr: '2025' },
-    detail: {
-      en: 'Organised the Benin edition of the continent’s largest machine-learning gathering.',
-      fr: 'Organisation de l’édition béninoise du plus grand rassemblement d’apprentissage automatique du continent.',
-    },
-  },
-  {
     role: { en: 'Speaker', fr: 'Intervenant' },
     org: 'Benin Workshop on Artificial Intelligence, Cotonou',
     period: { en: 'Nov 2024', fr: 'Nov. 2024' },
@@ -582,49 +637,12 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Participant', fr: 'Participant' },
-    org: 'Deep Learning Indaba, Kigali, Rwanda',
-    period: { en: 'Aug 2025', fr: 'Août 2025' },
-    detail: {
-      en: 'The continent’s flagship machine-learning conference.',
-      fr: 'La conférence phare d’apprentissage automatique du continent.',
-    },
-  },
-  {
-    role: { en: 'Participant', fr: 'Participant' },
     org: 'Deep Learning Indaba, Dakar, Senegal',
+    orgUrl: 'https://deeplearningindaba.com/',
     period: { en: 'Sep 2024', fr: 'Sep. 2024' },
     detail: {
       en: 'The continent’s flagship machine-learning conference.',
       fr: 'La conférence phare d’apprentissage automatique du continent.',
-    },
-  },
-  {
-    role: { en: 'Developer and communications', fr: 'Développeur et communication' },
-    org: 'FRIARE Africa',
-    orgUrl: 'https://friare.org',
-    period: { en: 'Since Sep 2023', fr: 'Depuis sep. 2023' },
-    detail: {
-      en: 'Projects and communication for responsible AI in Africa.',
-      fr: 'Projets et actions de communication pour une IA responsable en Afrique.',
-    },
-  },
-  {
-    role: { en: 'Training commission coordinator', fr: 'Coordinateur de la commission formation' },
-    org: 'Isheero',
-    orgUrl: 'https://isheero.com',
-    period: { en: 'Since Oct 2023', fr: 'Depuis oct. 2023' },
-    detail: {
-      en: 'Planning and running training programmes and workshops.',
-      fr: 'Planification, organisation et animation de programmes et d’ateliers de formation.',
-    },
-  },
-  {
-    role: { en: 'Volunteer', fr: 'Bénévole' },
-    org: 'Benin Mathematics Summer Camps, IMAC Benin',
-    period: { en: 'Since Feb 2025', fr: 'Depuis fév. 2025' },
-    detail: {
-      en: 'An intensive mathematics camp for secondary-school students, with an introduction to technology.',
-      fr: 'Un camp intensif de mathématiques pour collégiens, avec une introduction aux nouvelles technologies.',
     },
   },
 ];

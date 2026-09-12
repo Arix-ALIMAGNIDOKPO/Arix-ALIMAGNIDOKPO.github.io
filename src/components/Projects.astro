@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import SectionHead from '@/components/SectionHead.astro';
 import { PROJECTS } from '@/data/profile';
 import { SOCIAL } from '@/data/site';
 import type { Locale } from '@/data/types';
@@ -12,103 +13,68 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const featured = PROJECTS.find((project) => project.featured === true);
-const rest = PROJECTS.filter((project) => project !== featured).sort((a, b) => Number(b.year) - Number(a.year));
+/** No project is singled out: newest first, every card the same weight. */
+const projects = [...PROJECTS].sort((a, b) => Number(b.year) - Number(a.year));
 
-/** Language dot colours follow the conventional per-language palette. */
 const languageSlug = (language: string): string =>
-  language.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  language
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 ---
 
 <section class="section" id="projects" aria-labelledby="projects-heading">
-  <div class="section-head">
-    <p class="eyebrow">{t('projects.eyebrow')}</p>
-    <div>
-      <h2 id="projects-heading" class="section-heading">{t('projects.label')}</h2>
-      <p class="lede">
-        {
-          locale === 'fr'
-            ? 'Des projets construits pour être utilisés, pas seulement pour être rendus. Le code est ouvert.'
-            : 'Projects built to be used, not just submitted. The code is open.'
-        }
-      </p>
-    </div>
-  </div>
+  <SectionHead
+    eyebrow={t('projects.eyebrow')}
+    lede={t('projects.lead')}
+    title={t('projects.label')}
+    headingId="projects-heading"
+  />
 
-  {
-    featured !== undefined && (
-      <article class="feature">
-        <div class="feature__meta mono">
-          <span class="feature__badge">{t('projects.featured')}</span>
-          <span class:list={['lang', `lang--${languageSlug(featured.language)}`]}>
-            <span class="lang__dot" aria-hidden="true" />
-            {featured.language}
-          </span>
-          <span class="tabular">{featured.year}</span>
-        </div>
-
-        <h3 class="feature__name mono">{featured.name[locale]}</h3>
-        <p class="feature__outcome">{featured.outcome[locale]}</p>
-        <p class="feature__summary">{featured.summary[locale]}</p>
-
-        <div class="feature__foot">
-          <p class="tag-row">
-            {featured.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </p>
-
-          {featured.repo !== undefined && (
-            <a class="pill pill--solid" href={featured.repo} target="_blank" rel="noopener noreferrer">
-              <Icon name="github" class="pill__icon" />
-              {t('projects.repo')}
-            </a>
-          )}
-        </div>
-      </article>
-    )
-  }
-
-  <!-- Everything else reads as a list, so the section is not wall-to-wall cards. -->
-  <ol class="repos">
+  <ul class="repos">
     {
-      rest.map((project) => (
+      projects.map((project) => (
         <li class="repo">
-          {project.repo === undefined ? (
-            <div class="repo__inner">
-              <span class="repo__year mono tabular">{project.year}</span>
-              <span class="repo__body">
-                <span class="repo__name mono">{project.name[locale]}</span>
-                <span class="repo__outcome">{project.outcome[locale]}</span>
-              </span>
-              <span class:list={['lang', 'mono', `lang--${languageSlug(project.language)}`]}>
+          <article class="repo__card">
+            <p class="repo__meta mono">
+              <span class:list={['lang', `lang--${languageSlug(project.language)}`]}>
                 <span class="lang__dot" aria-hidden="true" />
                 {project.language}
               </span>
-              <span class="repo__lock mono">{t('projects.noRepo')}</span>
-            </div>
-          ) : (
-            <a class="repo__inner repo__inner--link" href={project.repo} target="_blank" rel="noopener noreferrer">
-              <span class="repo__year mono tabular">{project.year}</span>
-              <span class="repo__body">
-                <span class="repo__name mono">{project.name[locale]}</span>
-                <span class="repo__outcome">{project.outcome[locale]}</span>
-              </span>
-              <span class:list={['lang', 'mono', `lang--${languageSlug(project.language)}`]}>
-                <span class="lang__dot" aria-hidden="true" />
-                {project.language}
-              </span>
-              <span class="repo__go" aria-hidden="true">
-                <Icon name="arrow-up-right" size={16} />
-              </span>
-            </a>
-          )}
+              <span class="tabular">{project.year}</span>
+            </p>
+
+            <h3 class="repo__name mono">
+              {project.repo === undefined ? (
+                project.name[locale]
+              ) : (
+                <a href={project.repo} target="_blank" rel="noopener noreferrer">
+                  <span class="repo__stretch">{project.name[locale]}</span>
+                </a>
+              )}
+            </h3>
+
+            <p class="repo__outcome">{project.outcome[locale]}</p>
+            <p class="repo__summary">{project.summary[locale]}</p>
+
+            <p class="repo__foot mono">
+              {project.repo === undefined ? (
+                <span class="repo__private">{t('projects.noRepo')}</span>
+              ) : (
+                <span class="repo__cta">
+                  <Icon name="github" size={14} />
+                  {t('projects.repo')}
+                  <Icon name="arrow-up-right" size={14} />
+                </span>
+              )}
+            </p>
+          </article>
         </li>
       ))
     }
-  </ol>
+  </ul>
 
-  <p class="projects__all">
+  <p class="repos__all">
     <a class="pill" href={SOCIAL.github} target="_blank" rel="noopener noreferrer">
       <Icon name="github" class="pill__icon" />
       {t('projects.more')}
@@ -118,20 +84,16 @@ const languageSlug = (language: string): string =>
 </section>
 
 <style>
-  /* ---------- language marker ---------- */
-
   .lang {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: var(--step--2);
-    color: var(--ink-muted);
     white-space: nowrap;
   }
 
   .lang__dot {
-    width: 0.55rem;
-    height: 0.55rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
     background: var(--lang-colour, var(--ink-faint));
     flex: none;
@@ -149,186 +111,110 @@ const languageSlug = (language: string): string =>
     --lang-colour: #da5b0b;
   }
 
-  /* ---------- featured project ---------- */
+  .repos {
+    display: grid;
+    gap: clamp(0.75rem, 0.6rem + 0.7vw, 1.1rem);
+    margin-block-start: clamp(1.25rem, 1rem + 1.4vw, 2.25rem);
+  }
 
-  .feature {
+  .repo__card {
     position: relative;
     display: grid;
-    gap: 0.85rem;
-    margin-block-start: clamp(1.5rem, 1.2rem + 1.6vw, 2.5rem);
-    padding: clamp(1.25rem, 1rem + 1.6vw, 2.5rem);
-    border: 1px solid var(--line-strong);
+    gap: 0.55rem;
+    align-content: start;
+    height: 100%;
+    padding: clamp(1.05rem, 0.9rem + 0.8vw, 1.6rem);
+    background: var(--panel-raised);
+    border: 1px solid var(--line);
     border-radius: var(--radius-card);
-    background:
-      radial-gradient(120% 140% at 100% 0%, var(--accent-soft), transparent 55%),
-      var(--panel-raised);
-    overflow: hidden;
+    transition:
+      border-color 200ms ease,
+      background-color 200ms ease,
+      translate 200ms ease;
   }
 
-  .feature__meta {
+  .repo:hover .repo__card {
+    border-color: var(--line-strong);
+    background: var(--panel-hover);
+    translate: 0 -2px;
+  }
+
+  .repo__meta {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 1rem;
-    font-size: var(--step--2);
-    color: var(--ink-faint);
-  }
-
-  .feature__badge {
-    padding: 0.22rem 0.6rem;
-    border-radius: var(--radius-pill);
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-
-  .feature__name {
-    font-size: var(--step-3);
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.1;
-    text-wrap: balance;
-  }
-
-  .feature__outcome {
-    font-size: var(--step-1);
-    font-style: italic;
-    color: var(--ink);
-    max-width: 44ch;
-  }
-
-  .feature__summary {
-    font-size: var(--step-0);
-    line-height: 1.7;
-    color: var(--ink-dim);
-    max-width: 62ch;
-  }
-
-  .feature__foot {
-    display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 0.85rem;
-    margin-block-start: 0.5rem;
-  }
-
-  /* ---------- the rest, as a list ---------- */
-
-  .repos {
-    margin-block-start: clamp(1.25rem, 1rem + 1.2vw, 2rem);
-    border-block-start: 1px solid var(--line);
-  }
-
-  .repo {
-    border-block-end: 1px solid var(--line);
-  }
-
-  .repo__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 0.3rem 1rem;
-    padding: 0.95rem 0.75rem;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 0.6rem;
-    transition:
-      background-color 180ms ease,
-      color 180ms ease;
-  }
-
-  .repo__inner--link:hover {
-    background: var(--invert);
-    color: var(--invert-ink);
-  }
-
-  .repo__year {
-    grid-row: 1;
-    grid-column: 1;
+    gap: 1rem;
     font-size: var(--step--2);
-    color: var(--ink-faint);
-  }
-
-  .repo__inner--link:hover .repo__year,
-  .repo__inner--link:hover .repo__outcome,
-  .repo__inner--link:hover .lang {
-    color: color-mix(in srgb, var(--invert-ink) 65%, transparent);
-  }
-
-  .repo__body {
-    grid-column: 1 / -1;
-    display: grid;
-    gap: 0.15rem;
+    color: var(--ink-muted);
   }
 
   .repo__name {
-    font-size: var(--step-0);
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-size: var(--step-1);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+
+  .repo__name a {
+    text-decoration: none;
+  }
+
+  /* One click target over the whole card, without nesting interactive elements. */
+  .repo__stretch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
   }
 
   .repo__outcome {
     font-size: var(--step--1);
-    color: var(--ink-muted);
+    font-style: italic;
+    color: var(--ink);
   }
 
-  .repo__go {
-    grid-row: 1;
-    grid-column: 2;
-    display: grid;
-    place-items: center;
-    width: 1.85rem;
-    height: 1.85rem;
-    border-radius: 50%;
-    border: 1px solid currentColor;
-    opacity: 0.4;
-    transition: opacity 180ms ease;
+  .repo__summary {
+    font-size: var(--step--1);
+    line-height: 1.6;
+    color: var(--ink-dim);
   }
 
-  .repo__inner--link:hover .repo__go {
-    opacity: 1;
-  }
-
-  .repo__lock {
-    grid-row: 1;
-    grid-column: 2;
+  .repo__foot {
+    display: flex;
+    align-items: center;
+    margin-block-start: auto;
+    padding-block-start: 0.4rem;
     font-size: var(--step--2);
+  }
+
+  .repo__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--ink-muted);
+    transition: color 200ms ease;
+  }
+
+  .repo:hover .repo__cta {
+    color: var(--ink);
+  }
+
+  .repo__private {
     color: var(--ink-faint);
   }
 
-  .projects__all {
+  .repos__all {
     margin-block-start: 1.5rem;
   }
 
-  @media (min-width: 52rem) {
-    .repo__inner {
-      grid-template-columns: 4.5rem minmax(0, 1fr) 11rem auto;
-      gap: 1.5rem;
-      padding-inline: 1rem;
+  @media (min-width: 44rem) {
+    .repos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
 
-    .repo__year,
-    .repo__body,
-    .repo__go {
-      grid-row: 1;
-    }
-
-    .repo__year {
-      grid-column: 1;
-    }
-
-    .repo__body {
-      grid-column: 2;
-    }
-
-    .repo .lang {
-      grid-row: 1;
-      grid-column: 3;
-    }
-
-    .repo__go,
-    .repo__lock {
-      grid-column: 4;
+  @media (min-width: 68rem) {
+    .repos {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>

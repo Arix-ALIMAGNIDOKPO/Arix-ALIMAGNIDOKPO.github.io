@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import SectionHead from '@/components/SectionHead.astro';
 import { ROLES } from '@/data/profile';
 import type { Locale } from '@/data/types';
 import { formatDuration, formatPeriod, isoRange } from '@/lib/dates';
@@ -23,18 +24,12 @@ const totalExperience = formatDuration(earliest, null, locale);
 ---
 
 <section class="section" id="work" aria-labelledby="work-heading">
-  <div class="section-head">
-    <p class="eyebrow">{t('work.eyebrow')}</p>
-    <p class="lede work__lede">
-      {
-        locale === 'fr'
-          ? 'Du prototype de hackathon au système en production dans une administration : voici où j’ai travaillé et ce que j’y ai livré.'
-          : 'From hackathon prototype to systems running inside a government: where I have worked, and what I shipped there.'
-      }
-    </p>
-  </div>
-
-  <h2 id="work-heading" class="display display--section section-title">{t('work.label')}</h2>
+  <SectionHead
+    eyebrow={t('work.eyebrow')}
+    lede={t('work.lead')}
+    title={t('work.label')}
+    headingId="work-heading"
+  />
 
   <ol class="work__list">
     {

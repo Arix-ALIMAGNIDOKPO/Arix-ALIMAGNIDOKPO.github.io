@@ -114,4 +114,6 @@ export interface CommunityItem {
   readonly orgUrl?: string;
   readonly period: I18nText;
   readonly detail: I18nText;
+  /** Ongoing commitments are listed before finished ones. */
+  readonly ongoing?: boolean;
 }

@@ -1,5 +1,4 @@
 ---
-import Icon from '@/components/Icon.astro';
 import ThemeToggle from '@/components/ThemeToggle.astro';
 import { SITE } from '@/data/site';
 import type { Locale } from '@/data/types';
@@ -42,10 +41,12 @@ const isCurrent = (href: string): boolean => href === current;
   <div class="masthead__tools">
     <ThemeToggle locale={locale} />
 
-    <div class="masthead__lang" role="group" aria-label={t('lang.switch')}>
-      <span class="is-active mono" aria-current="true">{t(locale === 'en' ? 'lang.en' : 'lang.fr')}</span>
+    <div class="langs" role="group" aria-label={t('lang.switch')}>
+      <span class="langs__item is-active mono" aria-current="true">
+        {t(locale === 'en' ? 'lang.en' : 'lang.fr')}
+      </span>
       <a
-        class="mono"
+        class="langs__item mono"
         href={alternateHref ?? alternateUrl(Astro.url, other)}
         hreflang={other}
         lang={other}
@@ -83,8 +84,7 @@ const isCurrent = (href: string): boolean => href === current;
           {links.map(({ key, href }) => (
             <li>
               <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
-                <span>{t(key)}</span>
-                <Icon name="arrow-right" size={14} class="masthead__chevron" />
+                {t(key)}
               </a>
             </li>
           ))}
@@ -228,10 +228,7 @@ const isCurrent = (href: string): boolean => href === current;
   }
 
   .masthead__nav a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    display: block;
     padding: 0.85rem 0.25rem;
     border-block-end: 1px solid var(--line);
     font-family: var(--font-mono);
@@ -252,30 +249,40 @@ const isCurrent = (href: string): boolean => href === current;
     color: var(--ink);
   }
 
-  .masthead__chevron {
-    opacity: 0.35;
-    flex: none;
+
+  /* A segmented control rather than two stacked 15px links: every language is
+     a proper tap target on a phone. */
+  .langs {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--panel-raised);
   }
 
-  .masthead__lang {
+  .langs__item {
     display: grid;
-    justify-items: end;
-    gap: 0.05rem;
+    place-items: center;
+    min-width: 2rem;
+    min-height: 1.85rem;
+    padding-inline: 0.5rem;
+    border-radius: var(--radius-pill);
     font-size: var(--step--2);
-    line-height: 1.3;
-  }
-
-  .masthead__lang .is-active {
-    color: var(--ink);
-  }
-
-  .masthead__lang a {
+    line-height: 1;
     color: var(--ink-faint);
     text-decoration: none;
-    transition: color 160ms ease;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
   }
 
-  .masthead__lang a:hover {
+  .langs__item.is-active {
+    background: var(--invert);
+    color: var(--invert-ink);
+  }
+
+  .langs__item:not(.is-active):hover {
     color: var(--ink);
   }
 
@@ -323,9 +330,6 @@ const isCurrent = (href: string): boolean => href === current;
       border-color: var(--line-strong);
     }
 
-    .masthead__chevron {
-      display: none;
-    }
 
     .masthead__tools {
       justify-content: flex-end;
