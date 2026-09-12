@@ -67,7 +67,6 @@ export const UI = {
     'work.lead': 'From hackathon prototype to systems running inside a government: where I have worked, and what I shipped there.',
 
     'ventures.label': 'AIDA',
-    'ventures.lead': 'One company, two products: one teaches machines to hear African languages, the other gives institutions back control of their archives.',
     'ventures.company': 'The company',
     'ventures.products': 'The products',
     'ventures.productCount': 'Two products',
@@ -176,7 +175,6 @@ export const UI = {
     'work.lead': 'Du prototype de hackathon au système en production dans une administration : voici où j’ai travaillé et ce que j’y ai livré.',
 
     'ventures.label': 'AIDA',
-    'ventures.lead': 'Une entreprise, deux produits : l’un apprend aux machines à entendre les langues africaines, l’autre rend aux institutions le contrôle de leurs archives.',
     'ventures.company': 'L’entreprise',
     'ventures.products': 'Les produits',
     'ventures.productCount': 'Deux produits',

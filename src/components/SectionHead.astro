@@ -1,18 +1,18 @@
 ---
 /**
  * The single heading pattern every section uses: the oversized title, then one
- * sentence underneath.
+ * sentence underneath, both starting on the same left edge as the rows below.
  *
- * There is deliberately no "… /Education …" marker any more. With every
- * section carrying its name in the title, the marker only repeated it, and
- * baseline-aligning a 12px label against a 96px title looked broken.
+ * That shared edge is the point. Title, sentence and every row in the section
+ * line up on one vertical, so the page reads as a single column of content
+ * rather than a series of differently aligned blocks.
  *
  * Every section goes through this component so none can drift into its own
  * format. If the rhythm needs to change, it changes here once.
  */
 interface Props {
-  /** One sentence. Not a paragraph. */
-  lede: string;
+  /** One sentence. Not a paragraph. Omit it where the title says enough. */
+  lede?: string;
   /** The oversized title. */
   title: string;
   /** Id for the <h2>, referenced by the section's aria-labelledby. */
@@ -24,37 +24,17 @@ const { lede, title, headingId } = Astro.props;
 
 <header class="head">
   <h2 id={headingId} class="display display--section head__title">{title}</h2>
-  <p class="lede head__lede">{lede}</p>
+  {lede !== undefined && <p class="lede head__lede">{lede}</p>}
 </header>
 
 <style>
   .head {
     display: grid;
-  }
-
-  .head__title {
-    text-align: right;
+    justify-items: start;
   }
 
   .head__lede {
     margin-block-start: clamp(0.75rem, 0.6rem + 0.7vw, 1.25rem);
     max-width: 54ch;
-  }
-
-  /* The sentence sits under the title mass rather than under the whole width,
-     which keeps the asymmetry of the layout without shouting. */
-  @media (min-width: 48rem) {
-    .head {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-      column-gap: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
-    }
-
-    .head__title {
-      grid-column: 1 / -1;
-    }
-
-    .head__lede {
-      grid-column: 2;
-    }
   }
 </style>

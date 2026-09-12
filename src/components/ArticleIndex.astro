@@ -99,29 +99,12 @@ const tags = [...new Set(articles.flatMap((article) => article.data.tags))].sort
 <style>
   .index__head {
     display: grid;
-  }
-
-  .index__title {
-    text-align: right;
+    justify-items: start;
   }
 
   .index__aside {
     margin-block-start: clamp(0.75rem, 0.6rem + 0.7vw, 1.25rem);
-  }
-
-  @media (min-width: 48rem) {
-    .index__head {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-      column-gap: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
-    }
-
-    .index__title {
-      grid-column: 1 / -1;
-    }
-
-    .index__aside {
-      grid-column: 2;
-    }
+    max-width: 54ch;
   }
 
   .index__meta {
