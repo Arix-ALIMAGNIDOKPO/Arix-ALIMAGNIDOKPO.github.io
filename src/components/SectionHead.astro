@@ -1,10 +1,13 @@
 ---
 /**
- * The single heading pattern every section uses: a monospace marker on the
- * left, one sentence of standfirst on the right, then the oversized title.
+ * The single heading pattern every section uses.
  *
- * Every section goes through this component so no section can drift into its
- * own format. If the rhythm needs to change, it changes here once.
+ * Order: the small marker and the oversized title share one band, then the
+ * standfirst sits underneath. A reader meets the section name before the
+ * sentence that explains it, which is the way round that scans.
+ *
+ * Every section goes through this component so none can drift into its own
+ * format. If the rhythm needs to change, it changes here once.
  */
 interface Props {
   /** The "… /Work …" marker. */
@@ -20,9 +23,50 @@ interface Props {
 const { eyebrow, lede, title, headingId } = Astro.props;
 ---
 
-<div class="section-head">
-  <p class="eyebrow">{eyebrow}</p>
-  <p class="lede">{lede}</p>
-</div>
+<header class="head">
+  <p class="eyebrow head__eyebrow">{eyebrow}</p>
+  <h2 id={headingId} class="display display--section head__title">{title}</h2>
+  <p class="lede head__lede">{lede}</p>
+</header>
 
-<h2 id={headingId} class="display display--section section-title">{title}</h2>
+<style>
+  .head {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .head__eyebrow {
+    grid-column: 1;
+  }
+
+  .head__title {
+    margin-block-start: 0.25rem;
+  }
+
+  .head__lede {
+    margin-block-start: 0.75rem;
+    max-width: 52ch;
+  }
+
+  @media (min-width: 48rem) {
+    .head {
+      grid-template-columns: minmax(8rem, 16rem) minmax(0, 1fr);
+      column-gap: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
+      align-items: baseline;
+    }
+
+    /* The marker sits opposite the title, then the sentence drops below it. */
+    .head__title {
+      grid-column: 2;
+      grid-row: 1;
+      margin-block-start: 0;
+      text-align: right;
+    }
+
+    .head__lede {
+      grid-column: 2;
+      grid-row: 2;
+      margin-block-start: 1rem;
+    }
+  }
+</style>

@@ -59,7 +59,6 @@ export const UI = {
 
     'about.eyebrow': '… /About me …',
     'about.label': 'About',
-    'about.lead': 'An AI and NLP engineer from Cotonou, now doing research in Paris on the languages the field keeps leaving out.',
     'about.skillsNote': 'Some of the tools, topics and stacks I work with',
     'about.skillsHeading': 'What I work with',
     'about.portraitAlt': 'Portrait of Arix ALIMAGNIDOKPO',
@@ -179,7 +178,6 @@ export const UI = {
 
     'about.eyebrow': '… /À propos …',
     'about.label': 'À propos',
-    'about.lead': 'Ingénieur IA et NLP venu de Cotonou, aujourd’hui en recherche à Paris sur les langues que la discipline laisse de côté.',
     'about.skillsNote': 'Quelques outils, sujets et stacks avec lesquels je travaille',
     'about.skillsHeading': 'Ce avec quoi je travaille',
     'about.portraitAlt': 'Portrait d’Arix ALIMAGNIDOKPO',

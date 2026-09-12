@@ -13,12 +13,9 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 
 /** Ongoing commitments lead; the order inside each group is the authored one. */
-const ongoing = COMMUNITY.filter((item) => item.ongoing === true);
-const past = COMMUNITY.filter((item) => item.ongoing !== true);
-
 const groups = [
-  { key: 'ongoing' as const, label: t('community.ongoing'), items: ongoing },
-  { key: 'past' as const, label: t('community.past'), items: past },
+  { key: 'ongoing' as const, label: t('community.ongoing'), items: COMMUNITY.filter((i) => i.ongoing === true) },
+  { key: 'past' as const, label: t('community.past'), items: COMMUNITY.filter((i) => i.ongoing !== true) },
 ].filter((group) => group.items.length > 0);
 ---
 
@@ -33,38 +30,41 @@ const groups = [
   {
     groups.map((group) => (
       <div class="com__group">
-        <h3 class="com__group-label mono">
+        <h3 class="com__label mono">
           {group.key === 'ongoing' && <span class="com__dot" aria-hidden="true" />}
           {group.label}
         </h3>
 
-        <ul class="com__list">
-          {group.items.map((item) => (
-            <li class="com__item">
-              {item.orgUrl === undefined ? (
-                <div class="com__inner">
-                  <p class="com__period mono">{item.period[locale]}</p>
-                  <div class="com__body">
-                    <h4 class="com__role">{item.role[locale]}</h4>
-                    <p class="com__org mono">{item.org}</p>
-                    <p class="com__detail">{item.detail[locale]}</p>
+        <ul class="rows com__rows">
+          {group.items.map((item) => {
+            const aside = <p class="row__aside">{item.period[locale]}</p>;
+            const main = (
+              <div class="row__main">
+                <h4 class="row__title">{item.role[locale]}</h4>
+                <p class="row__context">{item.org}</p>
+                <p class="row__text">{item.detail[locale]}</p>
+              </div>
+            );
+
+            return (
+              <li class="row">
+                {item.orgUrl === undefined ? (
+                  <div class="row__inner">
+                    {aside}
+                    {main}
                   </div>
-                </div>
-              ) : (
-                <a class="com__inner com__inner--link" href={item.orgUrl} target="_blank" rel="noopener noreferrer">
-                  <p class="com__period mono">{item.period[locale]}</p>
-                  <div class="com__body">
-                    <h4 class="com__role">{item.role[locale]}</h4>
-                    <p class="com__org mono">{item.org}</p>
-                    <p class="com__detail">{item.detail[locale]}</p>
-                  </div>
-                  <span class="com__go" aria-hidden="true">
-                    <Icon name="arrow-up-right" size={15} />
-                  </span>
-                </a>
-              )}
-            </li>
-          ))}
+                ) : (
+                  <a class="row__inner row__inner--link" href={item.orgUrl} target="_blank" rel="noopener noreferrer">
+                    {aside}
+                    {main}
+                    <span class="row__go" aria-hidden="true">
+                      <Icon name="arrow-up-right" size={15} />
+                    </span>
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     ))
@@ -72,14 +72,15 @@ const groups = [
 </section>
 
 <style>
-  .com__group {
-    margin-block-start: clamp(1.5rem, 1.2rem + 1.4vw, 2.5rem);
+  .com__group + .com__group {
+    margin-block-start: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
   }
 
-  .com__group-label {
+  .com__label {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-block-start: clamp(1.25rem, 1rem + 1.4vw, 2.25rem);
     font-size: var(--step--2);
     color: var(--ink-muted);
     letter-spacing: 0.06em;
@@ -94,110 +95,7 @@ const groups = [
     box-shadow: 0 0 0 3px var(--accent-soft);
   }
 
-  .com__list {
-    margin-block-start: 0.85rem;
-    border-block-start: 1px solid var(--line);
-  }
-
-  .com__item {
-    border-block-end: 1px solid var(--line);
-  }
-
-  .com__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.35rem 1rem;
-    padding: 1rem 0.75rem;
-    color: inherit;
-    text-decoration: none;
-    border-radius: 0.6rem;
-    transition:
-      background-color 180ms ease,
-      color 180ms ease;
-  }
-
-  .com__inner--link:hover {
-    background: var(--invert);
-    color: var(--invert-ink);
-  }
-
-  .com__period {
-    grid-row: 1;
-    grid-column: 1;
-    font-size: var(--step--2);
-    color: var(--ink-faint);
-    white-space: nowrap;
-  }
-
-  .com__body {
-    grid-column: 1 / -1;
-    display: grid;
-    gap: 0.2rem;
-  }
-
-  .com__role {
-    font-size: var(--step-0);
-    font-weight: 600;
-    line-height: 1.35;
-  }
-
-  .com__org {
-    font-size: var(--step--2);
-    color: var(--ink-muted);
-  }
-
-  .com__detail {
-    font-size: var(--step--1);
-    color: var(--ink-dim);
-    line-height: 1.6;
-    max-width: 66ch;
-  }
-
-  .com__inner--link:hover .com__period,
-  .com__inner--link:hover .com__org,
-  .com__inner--link:hover .com__detail {
-    color: color-mix(in srgb, var(--invert-ink) 68%, transparent);
-  }
-
-  .com__go {
-    grid-row: 1;
-    grid-column: 2;
-    display: grid;
-    place-items: center;
-    width: 1.85rem;
-    height: 1.85rem;
-    border-radius: 50%;
-    border: 1px solid currentColor;
-    opacity: 0.35;
-    transition: opacity 180ms ease;
-  }
-
-  .com__inner--link:hover .com__go {
-    opacity: 1;
-  }
-
-  @media (min-width: 52rem) {
-    .com__inner {
-      grid-template-columns: 10rem minmax(0, 1fr) auto;
-      gap: 1.5rem;
-      align-items: start;
-      padding-inline: 1rem;
-    }
-
-    .com__period {
-      grid-row: 1;
-      grid-column: 1;
-      padding-block-start: 0.15rem;
-    }
-
-    .com__body {
-      grid-row: 1;
-      grid-column: 2;
-    }
-
-    .com__go {
-      grid-row: 1;
-      grid-column: 3;
-    }
+  .com__rows {
+    margin-block-start: 0.75rem;
   }
 </style>

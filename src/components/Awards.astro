@@ -21,29 +21,33 @@ const t = useTranslations(locale);
     headingId="awards-heading"
   />
 
-  <ol class="awards__grid">
+  <ol class="rows">
     {
       AWARDS.map((award) => (
-        <li class="card awards__item">
-          <p class="awards__rank mono">
-            <span>{award.rank[locale]}</span>
-            <span class="awards__year tabular">{award.year}</span>
-          </p>
-
-          <h3 class="awards__title">{award.title[locale]}</h3>
-          <p class="awards__event mono">{award.event}</p>
-          <p class="awards__summary">{award.summary[locale]}</p>
-
-          {award.links !== undefined && (
-            <p class="cluster">
-              {award.links.map((link) => (
-                <a class="pill" href={link.href} target="_blank" rel="noopener noreferrer">
-                  {link.label}
-                  <Icon name="arrow-up-right" class="pill__icon" />
-                </a>
-              ))}
+        <li class="row">
+          <div class="row__inner">
+            <p class="row__aside">
+              <span class="award__rank">{award.rank[locale]}</span>
+              <span>{award.date[locale]}</span>
             </p>
-          )}
+
+            <div class="row__main">
+              <h3 class="row__title">{award.title[locale]}</h3>
+              <p class="row__context">{award.event}</p>
+              <p class="row__text">{award.summary[locale]}</p>
+
+              {award.links !== undefined && (
+                <p class="row__links">
+                  {award.links.map((link) => (
+                    <a class="pill" href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                      <Icon name="arrow-up-right" class="pill__icon" />
+                    </a>
+                  ))}
+                </p>
+              )}
+            </div>
+          </div>
         </li>
       ))
     }
@@ -51,54 +55,11 @@ const t = useTranslations(locale);
 </section>
 
 <style>
-
-  .awards__grid {
-    display: grid;
-    gap: 0.85rem;
-    margin-block-start: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
-  }
-
-  .awards__item {
-    display: grid;
-    gap: 0.6rem;
-    align-content: start;
-  }
-
-  .awards__rank {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    font-size: var(--step-1);
-    color: var(--ink);
-    letter-spacing: -0.02em;
-  }
-
-  .awards__year {
-    font-size: var(--step--2);
-    color: var(--ink-faint);
-  }
-
-  .awards__title {
-    font-size: var(--step-0);
-    font-weight: 600;
-    line-height: 1.35;
-  }
-
-  .awards__event {
-    font-size: var(--step--2);
-    color: var(--ink-muted);
-  }
-
-  .awards__summary {
-    font-size: var(--step--1);
-    color: var(--ink-dim);
-    line-height: 1.6;
-  }
-
-  @media (min-width: 52rem) {
-    .awards__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+  .award__rank {
+    padding: 0.18rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent-soft);
+    color: var(--accent);
+    white-space: nowrap;
   }
 </style>

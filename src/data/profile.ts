@@ -55,8 +55,8 @@ export const COMPANY: Company = {
   founded: '2022',
   city: { en: 'Cotonou, Benin', fr: 'Cotonou, Bénin' },
   summary: {
-    en: 'An AI company rooted in Africa. We build the two layers the continent is missing: machines that understand African speech, and institutions that can finally search their own archives.',
-    fr: 'Une entreprise d’IA ancrée en Afrique. Nous construisons les deux couches qui manquent au continent : des machines qui comprennent la parole africaine, et des institutions capables enfin de fouiller leurs propres archives.',
+    en: 'Founded in Cotonou in 2022, AIDA builds the layer the continent is missing. Most of the world’s models were trained on text that Africa never wrote, in languages most Africans do not speak. We build the other half: systems that hear Fon and Yoruba as clearly as they hear French, and that let an institution search its own archives without handing them to anyone.',
+    fr: 'Fondée à Cotonou en 2022, AIDA construit la couche qui manque au continent. La plupart des modèles du monde ont été entraînés sur des textes que l’Afrique n’a jamais écrits, dans des langues que la plupart des Africains ne parlent pas. Nous construisons l’autre moitié : des systèmes qui entendent le fon et le yoruba aussi clairement que le français, et qui permettent à une institution de fouiller ses propres archives sans les confier à personne.',
   },
   products: [
     {

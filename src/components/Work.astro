@@ -147,7 +147,7 @@ const totalExperience = formatDuration(earliest, null, locale);
   .work__row:hover .work__org small,
   .work__row[open] .work__dates small,
   .work__row[open] .work__org small {
-    color: rgba(10, 10, 11, 0.6);
+    color: color-mix(in srgb, var(--invert-ink) 62%, transparent);
   }
 
   .work__org {
@@ -167,7 +167,7 @@ const totalExperience = formatDuration(earliest, null, locale);
 
   .work__row:hover .work__role,
   .work__row[open] .work__role {
-    color: rgba(10, 10, 11, 0.78);
+    color: color-mix(in srgb, var(--invert-ink) 78%, transparent);
   }
 
   .work__chevron {

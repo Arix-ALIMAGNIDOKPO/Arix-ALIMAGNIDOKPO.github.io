@@ -13,7 +13,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-/** No project is singled out: newest first, every card the same weight. */
+/** No project is singled out: newest first, every row the same weight. */
 const projects = [...PROJECTS].sort((a, b) => Number(b.year) - Number(a.year));
 
 const languageSlug = (language: string): string =>
@@ -31,48 +31,49 @@ const languageSlug = (language: string): string =>
     headingId="projects-heading"
   />
 
-  <ul class="repos">
+  <ol class="rows">
     {
-      projects.map((project) => (
-        <li class="repo">
-          <article class="repo__card">
-            <p class="repo__meta mono">
-              <span class:list={['lang', `lang--${languageSlug(project.language)}`]}>
-                <span class="lang__dot" aria-hidden="true" />
-                {project.language}
-              </span>
-              <span class="tabular">{project.year}</span>
-            </p>
+      projects.map((project) => {
+        const aside = (
+          <p class="row__aside">
+            <span class="tabular">{project.year}</span>
+            <span class:list={['lang', `lang--${languageSlug(project.language)}`]}>
+              <span class="lang__dot" aria-hidden="true" />
+              {project.language}
+            </span>
+          </p>
+        );
 
-            <h3 class="repo__name mono">
-              {project.repo === undefined ? (
-                project.name[locale]
-              ) : (
-                <a href={project.repo} target="_blank" rel="noopener noreferrer">
-                  <span class="repo__stretch">{project.name[locale]}</span>
-                </a>
-              )}
-            </h3>
+        const main = (
+          <div class="row__main">
+            <h3 class="row__title">{project.name[locale]}</h3>
+            <p class="row__context">{project.outcome[locale]}</p>
+            <p class="row__text">{project.summary[locale]}</p>
+          </div>
+        );
 
-            <p class="repo__outcome">{project.outcome[locale]}</p>
-            <p class="repo__summary">{project.summary[locale]}</p>
-
-            <p class="repo__foot mono">
-              {project.repo === undefined ? (
-                <span class="repo__private">{t('projects.noRepo')}</span>
-              ) : (
-                <span class="repo__cta">
-                  <Icon name="github" size={14} />
-                  {t('projects.repo')}
-                  <Icon name="arrow-up-right" size={14} />
+        return (
+          <li class="row">
+            {project.repo === undefined ? (
+              <div class="row__inner">
+                {aside}
+                {main}
+                <span class="repo__private mono">{t('projects.noRepo')}</span>
+              </div>
+            ) : (
+              <a class="row__inner row__inner--link" href={project.repo} target="_blank" rel="noopener noreferrer">
+                {aside}
+                {main}
+                <span class="row__go" aria-hidden="true">
+                  <Icon name="arrow-up-right" size={15} />
                 </span>
-              )}
-            </p>
-          </article>
-        </li>
-      ))
+              </a>
+            )}
+          </li>
+        );
+      })
     }
-  </ul>
+  </ol>
 
   <p class="repos__all">
     <a class="pill" href={SOCIAL.github} target="_blank" rel="noopener noreferrer">
@@ -111,110 +112,13 @@ const languageSlug = (language: string): string =>
     --lang-colour: #da5b0b;
   }
 
-  .repos {
-    display: grid;
-    gap: clamp(0.75rem, 0.6rem + 0.7vw, 1.1rem);
-    margin-block-start: clamp(1.25rem, 1rem + 1.4vw, 2.25rem);
-  }
-
-  .repo__card {
-    position: relative;
-    display: grid;
-    gap: 0.55rem;
-    align-content: start;
-    height: 100%;
-    padding: clamp(1.05rem, 0.9rem + 0.8vw, 1.6rem);
-    background: var(--panel-raised);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-card);
-    transition:
-      border-color 200ms ease,
-      background-color 200ms ease,
-      translate 200ms ease;
-  }
-
-  .repo:hover .repo__card {
-    border-color: var(--line-strong);
-    background: var(--panel-hover);
-    translate: 0 -2px;
-  }
-
-  .repo__meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    font-size: var(--step--2);
-    color: var(--ink-muted);
-  }
-
-  .repo__name {
-    font-size: var(--step-1);
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.025em;
-  }
-
-  .repo__name a {
-    text-decoration: none;
-  }
-
-  /* One click target over the whole card, without nesting interactive elements. */
-  .repo__stretch::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .repo__outcome {
-    font-size: var(--step--1);
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  .repo__summary {
-    font-size: var(--step--1);
-    line-height: 1.6;
-    color: var(--ink-dim);
-  }
-
-  .repo__foot {
-    display: flex;
-    align-items: center;
-    margin-block-start: auto;
-    padding-block-start: 0.4rem;
-    font-size: var(--step--2);
-  }
-
-  .repo__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--ink-muted);
-    transition: color 200ms ease;
-  }
-
-  .repo:hover .repo__cta {
-    color: var(--ink);
-  }
-
   .repo__private {
+    font-size: var(--step--2);
     color: var(--ink-faint);
+    white-space: nowrap;
   }
 
   .repos__all {
     margin-block-start: 1.5rem;
-  }
-
-  @media (min-width: 44rem) {
-    .repos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 68rem) {
-    .repos {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
   }
 </style>

@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import SectionHead from '@/components/SectionHead.astro';
 import portrait from '@/assets/photos/portrait.jpg';
-import { INTRO, RESEARCH_AREAS, SKILLS } from '@/data/profile';
+import { INTRO, SKILLS } from '@/data/profile';
 import { SITE } from '@/data/site';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
@@ -18,16 +18,10 @@ const t = useTranslations(locale);
 <section class="section" id="about" aria-labelledby="about-heading">
   <SectionHead
     eyebrow={t('about.eyebrow')}
-    lede={t('about.lead')}
+    lede={INTRO[locale]}
     title={t('about.label')}
     headingId="about-heading"
   />
-
-  <ul class="about__areas">
-    {RESEARCH_AREAS[locale].map((area) => <li class="chip">{area}</li>)}
-  </ul>
-
-  <p class="lede about__intro">{INTRO[locale]}</p>
 
   <div class="about__body">
     <!-- On a phone the portrait comes first: a face before a list of tools. -->
@@ -69,16 +63,7 @@ const t = useTranslations(locale);
 </section>
 
 <style>
-  .about__intro {
-    max-width: 54ch;
-  }
 
-  .about__areas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-block-start: 1.25rem;
-  }
 
   .about__body {
     display: grid;
