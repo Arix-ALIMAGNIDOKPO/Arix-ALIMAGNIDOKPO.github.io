@@ -339,9 +339,10 @@ a {
    Section scaffolding
    ------------------------------------------------------------------------- */
 
+/* No scroll-margin here: `scroll-padding-top` on the scroll container already
+   offsets every anchor landing. Setting both makes the two add up. */
 .section {
   margin-block-start: var(--section-gap);
-  scroll-margin-top: 6.5rem;
 }
 
 /* -------------------------------------------------------------------------
@@ -608,7 +609,6 @@ a {
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin-block-start: 2.2em;
-  scroll-margin-top: 6.5rem;
 }
 
 .prose h2 {

@@ -14,11 +14,7 @@ const t = useTranslations(locale);
 ---
 
 <section class="section" id="contact" aria-labelledby="contact-heading">
-  <SectionHead
-    lede={t('contact.lead')}
-    title={t('contact.label')}
-    headingId="contact-heading"
-  />
+  <SectionHead title={t('contact.label')} headingId="contact-heading" />
 
   <div class="contact__panel">
     <a class="contact__email mono" href={SOCIAL.email}>{SITE.email}</a>

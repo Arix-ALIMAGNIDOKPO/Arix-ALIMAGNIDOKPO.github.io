@@ -52,7 +52,6 @@ export const UI = {
     'articles.index.title': 'Articles',
     'articles.index.intro':
       'Notes on natural language processing, African languages, and building AI that has to work outside the lab.',
-    'articles.lead': 'Notes on natural language processing, African languages, and building AI that has to work outside the lab.',
     'articles.toc': 'On this page',
     'articles.otherLanguage': 'This article is also available in French.',
 
@@ -64,7 +63,6 @@ export const UI = {
     'work.label': 'Work',
     'work.total': 'Professional experience',
     'work.present': 'Present',
-    'work.lead': 'From hackathon prototype to systems running inside a government: where I have worked, and what I shipped there.',
 
     'ventures.label': 'AIDA',
     'ventures.company': 'The company',
@@ -76,14 +74,11 @@ export const UI = {
     'ventures.logoAlt': 'logo',
 
     'awards.label': 'Awards',
-    'awards.lead': 'Three competitions, three real problems: language, waste, and access to healthcare.',
 
     'research.label': 'Research',
     'research.areas': 'Research areas',
-    'research.lead': 'Two pieces of work where the research had to end up in production: a constraint solver for a university, and NLP applied to diplomatic correspondence.',
 
     'projects.label': 'Open source',
-    'projects.lead': 'Projects built to be used, not just submitted. The code is open.',
     'projects.featured': 'Pick of the bunch',
     'projects.repo': 'View the code',
     'projects.noRepo': 'Private repository',
@@ -91,17 +86,12 @@ export const UI = {
 
     'education.label': 'Education',
     'education.current': 'Current',
-    'education.lead':
-      'A degree in AI from Benin, then a research fellowship in Paris. The thread is the same: languages, and the models that fail on them.',
 
     'community.label': 'Community',
-    'community.lead': 'Teaching, organising, and giving back to the ecosystem that trained me.',
     'community.ongoing': 'Ongoing',
     'community.past': 'Past',
 
     'contact.label': 'Contact',
-    'contact.lead':
-      'Working on language technology, African NLP, or public-sector AI? I would like to hear about it.',
     'contact.emailMe': 'Write to me',
     'contact.basedIn': 'Based in',
 
@@ -160,7 +150,6 @@ export const UI = {
     'articles.index.title': 'Articles',
     'articles.index.intro':
       'Des notes sur le traitement du langage naturel, les langues africaines, et la construction d’une IA qui doit fonctionner hors du laboratoire.',
-    'articles.lead': 'Des notes sur le traitement du langage naturel, les langues africaines, et la construction d’une IA qui doit fonctionner hors du laboratoire.',
     'articles.toc': 'Sur cette page',
     'articles.otherLanguage': 'Cet article est aussi disponible en anglais.',
 
@@ -172,7 +161,6 @@ export const UI = {
     'work.label': 'Parcours',
     'work.total': 'Expérience professionnelle',
     'work.present': 'Aujourd’hui',
-    'work.lead': 'Du prototype de hackathon au système en production dans une administration : voici où j’ai travaillé et ce que j’y ai livré.',
 
     'ventures.label': 'AIDA',
     'ventures.company': 'L’entreprise',
@@ -184,14 +172,11 @@ export const UI = {
     'ventures.logoAlt': 'logo',
 
     'awards.label': 'Distinctions',
-    'awards.lead': 'Trois compétitions, trois problèmes réels : la langue, les déchets, l’accès aux soins.',
 
     'research.label': 'Recherche',
     'research.areas': 'Domaines de recherche',
-    'research.lead': 'Deux travaux où la recherche devait finir en production : un solveur de contraintes pour une université, et du NLP appliqué à la correspondance diplomatique.',
 
     'projects.label': 'Open source',
-    'projects.lead': 'Des projets construits pour être utilisés, pas seulement pour être rendus. Le code est ouvert.',
     'projects.featured': 'Le projet à retenir',
     'projects.repo': 'Voir le code',
     'projects.noRepo': 'Dépôt privé',
@@ -199,17 +184,12 @@ export const UI = {
 
     'education.label': 'Formation',
     'education.current': 'En cours',
-    'education.lead':
-      'Une licence en IA au Bénin, puis une bourse de recherche à Paris. Le fil est le même : les langues, et les modèles qui échouent dessus.',
 
     'community.label': 'Communauté',
-    'community.lead': 'Enseigner, organiser, et rendre à l’écosystème qui m’a formé.',
     'community.ongoing': 'En cours',
     'community.past': 'Passé',
 
     'contact.label': 'Contact',
-    'contact.lead':
-      'Vous travaillez sur les technologies du langage, le NLP africain ou l’IA dans le secteur public ? J’aimerais en entendre parler.',
     'contact.emailMe': 'M’écrire',
     'contact.basedIn': 'Basé à',
 

@@ -22,8 +22,8 @@ export const MISSION: I18nText = {
 
 /** The one-line "what I am doing right now", shown under the hero. */
 export const CURRENT: I18nText = {
-  en: 'Student researcher at the LIPN, Université Sorbonne Paris Nord. Founder of AIDA.',
-  fr: 'Étudiant-chercheur au LIPN, Université Sorbonne Paris Nord. Fondateur d’AIDA.',
+  en: 'Student researcher at Université Sorbonne Paris Nord. Founder of AIDA.',
+  fr: 'Étudiant-chercheur à l’Université Sorbonne Paris Nord. Fondateur d’AIDA.',
 };
 
 export const RESEARCH_AREAS: I18nList = {
@@ -55,8 +55,8 @@ export const COMPANY: Company = {
   founded: '2022',
   city: { en: 'Cotonou, Benin', fr: 'Cotonou, Bénin' },
   summary: {
-    en: 'Founded in Cotonou in 2022, AIDA builds the layer the continent is missing. Most of the world’s models were trained on text that Africa never wrote, in languages most Africans do not speak. We build the other half: systems that hear Fon and Yoruba as clearly as they hear French, and that let an institution search its own archives without handing them to anyone.',
-    fr: 'Fondée à Cotonou en 2022, AIDA construit la couche qui manque au continent. La plupart des modèles du monde ont été entraînés sur des textes que l’Afrique n’a jamais écrits, dans des langues que la plupart des Africains ne parlent pas. Nous construisons l’autre moitié : des systèmes qui entendent le fon et le yoruba aussi clairement que le français, et qui permettent à une institution de fouiller ses propres archives sans les confier à personne.',
+    en: 'Founded in Cotonou, AIDA builds the layer the continent is missing. Most of the world’s models were trained on text that Africa never wrote, in languages most Africans do not speak. We build the other half: systems that hear Fon and Yoruba as clearly as they hear French, and that let an institution search its own archives without handing them to anyone.',
+    fr: 'Fondée à Cotonou, AIDA construit la couche qui manque au continent. La plupart des modèles du monde ont été entraînés sur des textes que l’Afrique n’a jamais écrits, dans des langues que la plupart des Africains ne parlent pas. Nous construisons l’autre moitié : des systèmes qui entendent le fon et le yoruba aussi clairement que le français, et qui permettent à une institution de fouiller ses propres archives sans les confier à personne.',
   },
   products: [
     {
@@ -186,7 +186,7 @@ export const ROLES: readonly Role[] = [
   {
     org: { en: 'Ministry of Foreign Affairs of Benin', fr: 'Ministère des Affaires Étrangères du Bénin' },
     orgUrl: 'https://diplomatie.gouv.bj',
-    title: { en: 'AI Developer & Project Lead', fr: 'Développeur IA & Chef de projet' },
+    title: { en: 'AI Engineer', fr: 'Ingénieur en IA' },
     kind: { en: 'Government', fr: 'Gouvernement' },
     start: '2025-05',
     // Your CV states this role as ongoing. Set an end date here if it has finished.
@@ -563,14 +563,14 @@ export const COMMUNITY: readonly CommunityItem[] = [
     },
   },
   {
-    role: { en: 'Developer and communications', fr: 'Développeur et communication' },
+    role: { en: 'Developer, communications team', fr: 'Développeur, pôle communication' },
     org: { en: 'FRIARE Africa', fr: 'FRIARE Africa' },
     orgUrl: 'https://friare.org',
     period: { en: 'Since Sep 2023', fr: 'Depuis sep. 2023' },
     ongoing: true,
     detail: {
-      en: 'Projects and communication for responsible AI in Africa.',
-      fr: 'Projets et actions de communication pour une IA responsable en Afrique.',
+      en: 'I build the tools and help run the campaigns behind the organisation’s case for responsible AI in Africa.',
+      fr: 'Je construis les outils et participe aux campagnes qui portent le plaidoyer de l’organisation pour une IA responsable en Afrique.',
     },
   },
   {

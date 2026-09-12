@@ -24,8 +24,6 @@ const tags = [...new Set(articles.flatMap((article) => article.data.tags))].sort
   <header class="index__head">
     <h1 class="display display--section index__title">{t('articles.index.title')}</h1>
     <div class="index__aside">
-      <p class="lede">{t('articles.index.intro')}</p>
-
       <p class="cluster index__meta">
         <a class="pill" href={rss}>
           <Icon name="rss" class="pill__icon" />

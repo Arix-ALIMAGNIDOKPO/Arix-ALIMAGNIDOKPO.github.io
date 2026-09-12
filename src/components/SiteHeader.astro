@@ -211,6 +211,66 @@ const isCurrent = (href: string): boolean => href === current;
     calm.addEventListener('change', update);
     update();
   }
+
+  /**
+   * Marks the nav item for the section you are actually reading. Without this
+   * nothing in the header ever lights up on the homepage, because the links
+   * are fragments and the pathname never changes.
+   */
+  const anchors = [...document.querySelectorAll<HTMLAnchorElement>('#site-nav a[href*="#"]')];
+  const sections = anchors
+    .map((link) => {
+      const id = link.href.split('#')[1];
+      const section = id === undefined ? null : document.getElementById(id);
+      return section === null ? null : { link, section };
+    })
+    .filter((entry): entry is { link: HTMLAnchorElement; section: HTMLElement } => entry !== null);
+
+  if (sections.length > 0) {
+    /**
+     * Where the eye sits: comfortably below both the header and the landing
+     * position of a clicked anchor, so the section you jumped to is the one
+     * that lights up.
+     */
+    const LINE = 200;
+    let marked: HTMLAnchorElement | null = null;
+    let queued = false;
+
+    const spy = (): void => {
+      queued = false;
+      let current: HTMLAnchorElement | null = null;
+
+      const atBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+
+      if (atBottom) {
+        // The last section can never reach the spy line, because the page runs
+        // out of scroll before it gets there. Mark it anyway.
+        current = sections[sections.length - 1]?.link ?? null;
+      } else {
+        for (const { link, section } of sections) {
+          if (section.getBoundingClientRect().top <= LINE) current = link;
+        }
+      }
+
+      if (current === marked) return;
+      if (marked !== null) marked.removeAttribute('aria-current');
+      if (current !== null) current.setAttribute('aria-current', 'true');
+      marked = current;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(spy);
+      },
+      { passive: true },
+    );
+    window.addEventListener('resize', spy, { passive: true });
+    spy();
+  }
 </script>
 
 <style>
@@ -345,8 +405,9 @@ const isCurrent = (href: string): boolean => href === current;
     padding-inline-start: 0.6rem;
   }
 
-  .masthead__nav a[aria-current='page'] {
+  .masthead__nav a[aria-current] {
     color: var(--ink);
+    font-weight: 600;
   }
 
 
@@ -428,8 +489,16 @@ const isCurrent = (href: string): boolean => href === current;
       color: var(--ink);
     }
 
-    .masthead__nav a[aria-current='page'] {
-      border-color: var(--line-strong);
+    .masthead__nav a[aria-current] {
+      color: var(--invert-ink);
+      background: var(--invert);
+      border-color: var(--invert);
+    }
+
+    .masthead__nav a[aria-current]:hover {
+      color: var(--invert-ink);
+      background: var(--invert);
+      border-color: var(--invert);
     }
 
 
