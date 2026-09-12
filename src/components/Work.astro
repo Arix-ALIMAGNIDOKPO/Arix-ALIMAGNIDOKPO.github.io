@@ -44,7 +44,7 @@ const totalExperience = formatDuration(earliest, null, locale);
               </span>
 
               <span class="work__org">
-                <strong>{role.org}</strong>
+                <strong>{role.org[locale]}</strong>
                 <small class="mono">{role.kind[locale]}</small>
               </span>
 
@@ -107,16 +107,34 @@ const totalExperience = formatDuration(earliest, null, locale);
     border-block-end: 1px solid var(--line);
   }
 
+  /* On a phone the three pieces stack in one column with the disclosure
+     control beside them. Without the explicit placement below, the role
+     auto-placed into the second column and collided with the organisation. */
   .work__summary {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.35rem 1rem;
-    padding: 1.1rem 1rem;
+    gap: 0.3rem 1rem;
+    padding: 1.1rem 0.75rem;
     cursor: pointer;
     list-style: none;
     transition:
       background-color 200ms ease,
       color 200ms ease;
+  }
+
+  .work__dates {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .work__org {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .work__role {
+    grid-column: 1;
+    grid-row: 3;
   }
 
   .work__summary::-webkit-details-marker {
@@ -131,9 +149,16 @@ const totalExperience = formatDuration(earliest, null, locale);
   }
 
   .work__dates {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.5rem;
     font-size: var(--step--1);
     font-variant-numeric: tabular-nums;
+  }
+
+  .work__dates time {
+    white-space: nowrap;
   }
 
   .work__dates small,
@@ -171,7 +196,7 @@ const totalExperience = formatDuration(earliest, null, locale);
 
   .work__chevron {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 1 / -1;
     align-self: center;
     display: grid;
     place-items: center;
@@ -251,10 +276,28 @@ const totalExperience = formatDuration(earliest, null, locale);
       grid-template-columns: 13rem minmax(0, 1fr) minmax(0, 1.1fr) auto;
       align-items: center;
       gap: 1.5rem;
+      padding-inline: 1rem;
+    }
+
+    .work__dates {
+      display: grid;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .work__org {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .work__role {
+      grid-column: 3;
+      grid-row: 1;
     }
 
     .work__chevron {
       grid-column: 4;
+      grid-row: 1;
     }
 
     .work__detail {

@@ -135,7 +135,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6.5rem;
 }
 
 body {
@@ -260,6 +260,8 @@ a {
   border-radius: var(--radius-panel);
   padding-inline: var(--gutter);
   padding-block: clamp(1.1rem, 0.8rem + 1.6vw, 2.25rem) clamp(1.75rem, 1.3rem + 2.6vw, 3.5rem);
+  /* `clip` rather than `hidden`: it contains the bleeding rails without
+     creating a scroll container, which would break the sticky header. */
   overflow: clip;
   box-shadow: var(--shadow-card);
   transition:
@@ -339,7 +341,7 @@ a {
 
 .section {
   margin-block-start: var(--section-gap);
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 6.5rem;
 }
 
 /* -------------------------------------------------------------------------
@@ -606,7 +608,7 @@ a {
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin-block-start: 2.2em;
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 6.5rem;
 }
 
 .prose h2 {

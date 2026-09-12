@@ -134,7 +134,7 @@ export const COMPANY: Company = {
 
 export const ROLES: readonly Role[] = [
   {
-    org: 'LIPN, Université Sorbonne Paris Nord',
+    org: { en: 'LIPN, Université Sorbonne Paris Nord', fr: 'LIPN, Université Sorbonne Paris Nord' },
     orgUrl: 'https://lipn.univ-paris13.fr',
     title: { en: 'Student Researcher, EUR Fellow', fr: 'Étudiant-chercheur, boursier EUR' },
     kind: { en: 'Research', fr: 'Recherche' },
@@ -157,7 +157,7 @@ export const ROLES: readonly Role[] = [
     stack: ['NLP', 'Research', 'Python'],
   },
   {
-    org: 'AIDA',
+    org: { en: 'AIDA', fr: 'AIDA' },
     orgUrl: 'https://aida.bj/',
     title: { en: 'Founder & CEO', fr: 'Fondateur & CEO' },
     kind: { en: 'Company', fr: 'Entreprise' },
@@ -184,7 +184,7 @@ export const ROLES: readonly Role[] = [
     stack: ['Speech', 'NLP', 'RAG', 'Product'],
   },
   {
-    org: 'Ministry of Foreign Affairs of Benin',
+    org: { en: 'Ministry of Foreign Affairs of Benin', fr: 'Ministère des Affaires Étrangères du Bénin' },
     orgUrl: 'https://diplomatie.gouv.bj',
     title: { en: 'AI Developer & Project Lead', fr: 'Développeur IA & Chef de projet' },
     kind: { en: 'Government', fr: 'Gouvernement' },
@@ -214,7 +214,7 @@ export const ROLES: readonly Role[] = [
     stack: ['Python', 'NLP', 'Power BI', 'Product'],
   },
   {
-    org: 'Ministry of Foreign Affairs of Benin',
+    org: { en: 'Ministry of Foreign Affairs of Benin', fr: 'Ministère des Affaires Étrangères du Bénin' },
     orgUrl: 'https://diplomatie.gouv.bj',
     title: { en: 'Data Analyst Intern', fr: 'Stagiaire en analyse de données' },
     kind: { en: 'Internship', fr: 'Stage' },
@@ -237,7 +237,7 @@ export const ROLES: readonly Role[] = [
     stack: ['Power BI', 'SQL', 'DAX'],
   },
   {
-    org: 'ICT Consulting',
+    org: { en: 'ICT Consulting', fr: 'ICT Consulting' },
     orgUrl: 'https://ict-consulting.tech',
     title: { en: 'Data Science Intern', fr: 'Stagiaire en science des données' },
     kind: { en: 'Internship', fr: 'Stage' },
@@ -312,9 +312,9 @@ export const EDUCATION: readonly Study[] = [
       en: 'Master’s in Computer Science, and EUR Graduate School of Research fellow',
       fr: 'Master en Informatique, et boursier EUR (Graduate School of Research)',
     },
-    school: 'Institut Galilée, Université Sorbonne Paris Nord',
+    school: { en: 'Institut Galilée, Université Sorbonne Paris Nord', fr: 'Institut Galilée, Université Sorbonne Paris Nord' },
     schoolUrl: 'https://www.univ-spn.fr',
-    place: 'Paris, France',
+    place: { en: 'Paris, France', fr: 'Paris, France' },
     period: { en: 'Since 2026', fr: 'Depuis 2026' },
     notes: {
       en: [
@@ -331,9 +331,9 @@ export const EDUCATION: readonly Study[] = [
       en: 'BSc in Computer Science, Artificial Intelligence track',
       fr: 'Licence en Informatique, spécialisation Intelligence Artificielle',
     },
-    school: 'Institut de Formation et de Recherche en Informatique, Université d’Abomey-Calavi',
+    school: { en: 'Institut de Formation et de Recherche en Informatique, Université d’Abomey-Calavi', fr: 'Institut de Formation et de Recherche en Informatique, Université d’Abomey-Calavi' },
     schoolUrl: 'https://uac.bj',
-    place: 'Abomey-Calavi, Benin',
+    place: { en: 'Abomey-Calavi, Benin', fr: 'Abomey-Calavi, Bénin' },
     period: { en: '2022 – 2025', fr: '2022 – 2025' },
     grade: { en: 'With honours', fr: 'Mention Bien' },
     notes: {
@@ -349,8 +349,8 @@ export const EDUCATION: readonly Study[] = [
   },
   {
     degree: { en: 'Scientific Baccalaureate, Series D', fr: 'Baccalauréat Scientifique, Série D' },
-    school: 'Collège Catholique Père Aupiais',
-    place: 'Cotonou, Benin',
+    school: { en: 'Collège Catholique Père Aupiais', fr: 'Collège Catholique Père Aupiais' },
+    place: { en: 'Cotonou, Benin', fr: 'Cotonou, Bénin' },
     period: { en: '2016 – 2022', fr: '2016 – 2022' },
     grade: { en: 'With honours', fr: 'Mention Bien' },
     notes: { en: [], fr: [] },
@@ -364,7 +364,7 @@ export const AWARDS: readonly Award[] = [
       en: 'Alodometo, multimodal Fon and French translation',
       fr: 'Alodometo, traduction multimodale fon et français',
     },
-    event: 'Hackathon Bénin IA Multimodale et Multilingue (SENIA)',
+    event: { en: 'Hackathon Bénin IA Multimodale et Multilingue (SENIA)', fr: 'Hackathon Bénin IA Multimodale et Multilingue (SENIA)' },
     date: { en: 'May 2024', fr: 'Mai 2024' },
     year: '2024',
     summary: {
@@ -390,7 +390,7 @@ export const AWARDS: readonly Award[] = [
       en: 'Autonomous waste collection and sorting robot',
       fr: 'Robot autonome de collecte et de tri des déchets',
     },
-    event: 'Tekbot Robotics Challenge',
+    event: { en: 'Tekbot Robotics Challenge', fr: 'Tekbot Robotics Challenge' },
     date: { en: 'Jan 2024', fr: 'Jan. 2024' },
     year: '2024',
     summary: {
@@ -408,7 +408,7 @@ export const AWARDS: readonly Award[] = [
       en: 'AI-assisted medical appointment scheduling',
       fr: 'Planification de rendez-vous médicaux assistée par IA',
     },
-    event: 'Hackathon Deep Learning IndabaX Benin',
+    event: { en: 'Hackathon Deep Learning IndabaX Benin', fr: 'Hackathon Deep Learning IndabaX Bénin' },
     date: { en: 'Dec 2023', fr: 'Déc. 2023' },
     year: '2023',
     summary: {
@@ -477,75 +477,83 @@ export const RESEARCH: readonly ResearchItem[] = [
 
 export const PROJECTS: readonly Project[] = [
   {
-    name: { en: 'Benin public-services assistant', fr: 'Assistant des services publics béninois' },
+    name: {
+      en: 'Retrieval assistant for Benin’s public services',
+      fr: 'Assistant de recherche pour les services publics béninois',
+    },
     year: '2025',
     language: 'Jupyter Notebook',
     outcome: {
-      en: 'Ask the administration a question in your own words',
-      fr: 'Interroger l’administration avec ses propres mots',
+      en: 'Every answer cites the official page it came from',
+      fr: 'Chaque réponse cite la page officielle dont elle vient',
     },
     summary: {
-      en: 'A retrieval-augmented assistant over Benin’s public-service documentation. Citizens ask in plain language instead of navigating a portal, and every answer is grounded in a real source page.',
-      fr: 'Un assistant à génération augmentée par récupération, branché sur la documentation des services publics béninois. Les citoyens interrogent en langage naturel au lieu de naviguer dans un portail, et chaque réponse est ancrée dans une vraie page source.',
+      en: 'I scraped and chunked the service-public.bj documentation, embedded the passages, and put a retrieval layer in front of the generator so no answer can be invented. A citizen asks what they need to renew a passport in their own words, instead of guessing which of forty pages applies to them.',
+      fr: 'J’ai collecté et découpé la documentation de service-public.bj, vectorisé les passages, puis placé une couche de récupération devant le générateur pour qu’aucune réponse ne puisse être inventée. Un citoyen demande ce qu’il faut pour renouveler un passeport avec ses propres mots, au lieu de deviner laquelle des quarante pages le concerne.',
     },
-    tags: ['NLP', 'RAG', 'Python'],
+    tags: ['RAG', 'Embeddings', 'Python'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/NLP-G7-assistant-services-publics',
-    featured: true,
   },
   {
-    name: { en: 'Tomato leaf disease detection', fr: 'Détection de maladies foliaires de la tomate' },
+    name: {
+      en: 'Tomato leaf disease detection with YOLOv8',
+      fr: 'Détection de maladies foliaires de la tomate avec YOLOv8',
+    },
     year: '2024',
     language: 'Python',
-    outcome: { en: 'Real-time detection in the field', fr: 'Détection en temps réel au champ' },
-    summary: {
-      en: 'A YOLOv8 detector that spots tomato leaf disease from a phone camera, so growers act on what is actually happening in the field rather than on a guess.',
-      fr: 'Un détecteur YOLOv8 qui repère les maladies foliaires de la tomate depuis un téléphone, pour que les producteurs agissent sur la réalité du champ plutôt que sur une intuition.',
+    outcome: {
+      en: 'A diagnosis from a phone camera, in the field, without a network',
+      fr: 'Un diagnostic depuis un téléphone, au champ, sans réseau',
     },
-    tags: ['YOLOv8', 'Computer Vision'],
+    summary: {
+      en: 'I trained a YOLOv8 detector on annotated leaf images and tuned it for what a grower actually has: a mid-range phone, uneven light, no connection. It localises the affected area rather than labelling the whole photo, which is what tells someone whether to treat one plant or the entire row.',
+      fr: 'J’ai entraîné un détecteur YOLOv8 sur des images de feuilles annotées, puis l’ai réglé pour les conditions réelles d’un producteur : téléphone milieu de gamme, lumière inégale, pas de connexion. Il localise la zone atteinte au lieu d’étiqueter la photo entière, ce qui permet de savoir s’il faut traiter un pied ou toute la rangée.',
+    },
+    tags: ['YOLOv8', 'Computer Vision', 'Edge'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/Tomato-Leaf-Disease-Detection-using-Yolov8',
   },
   {
-    name: { en: 'Exam and defence scheduler', fr: 'Planificateur d’examens et de soutenances' },
+    name: {
+      en: 'ExamOptim, a constraint solver for exam timetables',
+      fr: 'ExamOptim, un solveur de contraintes pour les plannings d’examens',
+    },
     year: '2025',
     language: 'Python',
-    outcome: { en: 'Weeks of manual planning down to minutes', fr: 'Des semaines de planification manuelle réduites à quelques minutes' },
-    summary: {
-      en: 'The constraint-programming engine behind the ARES-funded scheduling project, exposed as an API: jury availability, room capacity and session order solved together.',
-      fr: 'Le moteur de programmation par contraintes du projet de planification financé par l’ARES, exposé en API : disponibilités du jury, capacité des salles et ordre des sessions résolus ensemble.',
+    outcome: {
+      en: 'A university timetable that took weeks, solved in minutes',
+      fr: 'Un planning universitaire qui prenait des semaines, résolu en minutes',
     },
-    tags: ['OR-Tools', 'Flask', 'Optimisation'],
+    summary: {
+      en: 'The engine behind the ARES-funded scheduling project at Université d’Abomey-Calavi. I modelled jury availability, room capacity and session order as one constraint satisfaction problem, solved it with OR-Tools, and exposed it as an API so the registry can re-run it after every change instead of redrawing the grid by hand.',
+      fr: 'Le moteur du projet de planification financé par l’ARES à l’Université d’Abomey-Calavi. J’ai modélisé les disponibilités du jury, la capacité des salles et l’ordre des sessions comme un seul problème de satisfaction de contraintes, résolu avec OR-Tools, puis exposé en API pour que la scolarité puisse le relancer à chaque changement au lieu de refaire la grille à la main.',
+    },
+    tags: ['OR-Tools', 'Constraint programming', 'Flask'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/ExamOptim',
   },
   {
-    name: { en: 'IFRI AI chatbot', fr: 'Chatbot IA de l’IFRI' },
+    name: {
+      en: 'Conversational assistant for IFRI',
+      fr: 'Assistant conversationnel pour l’IFRI',
+    },
     year: '2025',
     language: 'Python',
-    outcome: { en: 'Answers about the institute, on demand', fr: 'Des réponses sur l’institut, à la demande' },
-    summary: {
-      en: 'A conversational assistant for prospective and current students of IFRI, the AI institute where I did my degree.',
-      fr: 'Un assistant conversationnel pour les futurs et actuels étudiants de l’IFRI, l’institut où j’ai fait ma licence.',
+    outcome: {
+      en: 'The admissions questions the office answers a hundred times a year',
+      fr: 'Les questions d’admission auxquelles le secrétariat répond cent fois par an',
     },
-    tags: ['NLP', 'RAG'],
+    summary: {
+      en: 'A retrieval-based assistant for the AI institute where I took my degree. I built the corpus from the institute’s own course catalogue, admission rules and fee schedule, so an applicant gets the requirement that applies to their case rather than a generic paragraph, and the office stops answering the same question by email.',
+      fr: 'Un assistant fondé sur la récupération, pour l’institut d’IA où j’ai fait ma licence. J’ai construit le corpus à partir du catalogue de cours, du règlement d’admission et de la grille de frais de l’institut, pour qu’un candidat obtienne la règle qui s’applique à son cas plutôt qu’un paragraphe générique, et que le secrétariat cesse de répondre à la même question par courriel.',
+    },
+    tags: ['RAG', 'NLP', 'Python'],
     repo: 'https://github.com/Arix-ALIMAGNIDOKPO/IFRI-AI-Chatbot',
-  },
-  {
-    name: { en: 'Math summer camp platform', fr: 'Plateforme des camps d’été de mathématiques' },
-    year: '2026',
-    language: 'TypeScript',
-    outcome: { en: 'Registration and logistics for a national camp', fr: 'Inscriptions et logistique d’un camp national' },
-    summary: {
-      en: 'The platform behind Benin’s mathematics summer camps: registration, cohorts and logistics for the secondary-school students who attend.',
-      fr: 'La plateforme des camps d’été de mathématiques du Bénin : inscriptions, cohortes et logistique pour les collégiens qui y participent.',
-    },
-    tags: ['TypeScript', 'Education'],
-    repo: 'https://github.com/Arix-ALIMAGNIDOKPO/math-summer-camp-platform',
   },
 ];
 
 export const COMMUNITY: readonly CommunityItem[] = [
   {
     role: { en: 'Member', fr: 'Membre' },
-    org: 'Masakhane',
+    org: { en: 'Masakhane', fr: 'Masakhane' },
     orgUrl: 'https://www.masakhane.io/',
     period: { en: 'Ongoing', fr: 'En cours' },
     ongoing: true,
@@ -556,7 +564,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Developer and communications', fr: 'Développeur et communication' },
-    org: 'FRIARE Africa',
+    org: { en: 'FRIARE Africa', fr: 'FRIARE Africa' },
     orgUrl: 'https://friare.org',
     period: { en: 'Since Sep 2023', fr: 'Depuis sep. 2023' },
     ongoing: true,
@@ -567,7 +575,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Training commission coordinator', fr: 'Coordinateur de la commission formation' },
-    org: 'Isheero',
+    org: { en: 'Isheero', fr: 'Isheero' },
     orgUrl: 'https://www.isheero.com/',
     period: { en: 'Since Oct 2023', fr: 'Depuis oct. 2023' },
     ongoing: true,
@@ -578,7 +586,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Volunteer', fr: 'Bénévole' },
-    org: 'Benin Mathematics Summer Camps, IMAC Benin',
+    org: { en: 'Benin Mathematics Summer Camps, IMAC Benin', fr: 'Camps d’été de mathématiques du Bénin, IMAC Bénin' },
     period: { en: 'Since Feb 2025', fr: 'Depuis fév. 2025' },
     ongoing: true,
     detail: {
@@ -588,7 +596,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Local organiser', fr: 'Organisateur local' },
-    org: 'Deep Learning IndabaX Benin',
+    org: { en: 'Deep Learning IndabaX Benin', fr: 'Deep Learning IndabaX Bénin' },
     orgUrl: 'https://deeplearningindaba.com/indabax/',
     period: { en: '2025', fr: '2025' },
     detail: {
@@ -598,7 +606,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Participant', fr: 'Participant' },
-    org: 'Deep Learning Indaba, Kigali, Rwanda',
+    org: { en: 'Deep Learning Indaba, Kigali, Rwanda', fr: 'Deep Learning Indaba, Kigali, Rwanda' },
     orgUrl: 'https://deeplearningindaba.com/',
     period: { en: 'Aug 2025', fr: 'Août 2025' },
     detail: {
@@ -608,7 +616,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'AI Instructor', fr: 'Instructeur en Intelligence Artificielle' },
-    org: 'AI and IoT Club, IFRI, Université d’Abomey-Calavi',
+    org: { en: 'AI and IoT Club, IFRI, Université d’Abomey-Calavi', fr: 'Club IA et IoT, IFRI, Université d’Abomey-Calavi' },
     orgUrl: 'https://uac.bj',
     period: { en: 'Jan 2024 – May 2025', fr: 'Jan. 2024 – Mai 2025' },
     detail: {
@@ -618,7 +626,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Instructor, AI tools for diplomacy', fr: 'Instructeur, outils d’IA en diplomatie' },
-    org: 'Ministry of Foreign Affairs of Benin',
+    org: { en: 'Ministry of Foreign Affairs of Benin', fr: 'Ministère des Affaires Étrangères du Bénin' },
     orgUrl: 'https://diplomatie.gouv.bj',
     period: { en: 'Mar 2024 – May 2025', fr: 'Mar. 2024 – Mai 2025' },
     detail: {
@@ -628,7 +636,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Speaker', fr: 'Intervenant' },
-    org: 'Benin Workshop on Artificial Intelligence, Cotonou',
+    org: { en: 'Benin Workshop on Artificial Intelligence, Cotonou', fr: 'Benin Workshop on Artificial Intelligence, Cotonou' },
     period: { en: 'Nov 2024', fr: 'Nov. 2024' },
     detail: {
       en: 'Talk on building a speech translation model for local languages, with Fongbe as the case study.',
@@ -637,7 +645,7 @@ export const COMMUNITY: readonly CommunityItem[] = [
   },
   {
     role: { en: 'Participant', fr: 'Participant' },
-    org: 'Deep Learning Indaba, Dakar, Senegal',
+    org: { en: 'Deep Learning Indaba, Dakar, Senegal', fr: 'Deep Learning Indaba, Dakar, Sénégal' },
     orgUrl: 'https://deeplearningindaba.com/',
     period: { en: 'Sep 2024', fr: 'Sep. 2024' },
     detail: {

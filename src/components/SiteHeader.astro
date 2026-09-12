@@ -144,15 +144,43 @@ const isCurrent = (href: string): boolean => href === current;
     wide.addEventListener('change', sync);
     sync();
   }
+
+  /** Marks the header once the page has scrolled, so it can show a hairline. */
+  const header = document.querySelector<HTMLElement>('.masthead');
+  if (header) {
+    const mark = (): void => {
+      if (window.scrollY > 4) header.setAttribute('data-stuck', '');
+      else header.removeAttribute('data-stuck');
+    };
+    window.addEventListener('scroll', mark, { passive: true });
+    mark();
+  }
 </script>
 
 <style>
   .masthead {
+    position: sticky;
+    top: 0;
+    z-index: 40;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.75rem 1.25rem;
-    padding-block-end: clamp(1.25rem, 0.9rem + 1.8vw, 2.5rem);
+    /* Bleeds to the panel edges so the blur covers the full width, then pulls
+       its own gutter back in. */
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-block: clamp(0.75rem, 0.6rem + 0.7vw, 1.1rem);
+    background: color-mix(in srgb, var(--panel) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-block-end: 1px solid transparent;
+    transition: border-color 200ms ease;
+  }
+
+  /* The rule only appears once the page has moved, so it does not draw a line
+     across the top of the hero at rest. */
+  .masthead[data-stuck] {
+    border-block-end-color: var(--line);
   }
 
   .masthead__name {
@@ -220,6 +248,9 @@ const isCurrent = (href: string): boolean => href === current;
   .masthead__nav {
     grid-column: 1 / -1;
     grid-row: 2;
+    max-height: calc(100svh - 8rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .masthead__nav ul {
@@ -300,6 +331,8 @@ const isCurrent = (href: string): boolean => href === current;
     .masthead__nav {
       grid-column: 2;
       grid-row: 1;
+      max-height: none;
+      overflow: visible;
     }
 
     .masthead__nav ul {

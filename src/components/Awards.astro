@@ -32,7 +32,7 @@ const t = useTranslations(locale);
 
             <div class="row__main">
               <h3 class="row__title">{award.title[locale]}</h3>
-              <p class="row__context">{award.event}</p>
+              <p class="row__context">{award.event[locale]}</p>
               <p class="row__text">{award.summary[locale]}</p>
 
               {award.links !== undefined && (

@@ -35,17 +35,17 @@ const t = useTranslations(locale);
 
               <p class="row__context">
                 {study.schoolUrl === undefined ? (
-                  study.school
+                  study.school[locale]
                 ) : (
                   <a class="edu__school" href={study.schoolUrl} target="_blank" rel="noopener noreferrer">
-                    {study.school}
+                    {study.school[locale]}
                     <Icon name="arrow-up-right" size={12} />
                   </a>
                 )}
               </p>
 
               <p class="row__context">
-                {study.place}
+                {study.place[locale]}
                 {study.grade !== undefined && (
                   <>
                     <span class="edu__sep" aria-hidden="true">

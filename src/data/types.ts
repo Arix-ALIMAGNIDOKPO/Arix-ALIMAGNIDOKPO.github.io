@@ -15,7 +15,7 @@ export interface Link {
 }
 
 export interface Role {
-  readonly org: string;
+  readonly org: I18nText;
   readonly orgUrl?: string;
   readonly title: I18nText;
   readonly kind: I18nText;
@@ -36,7 +36,7 @@ export interface Role {
 export interface Award {
   readonly rank: I18nText;
   readonly title: I18nText;
-  readonly event: string;
+  readonly event: I18nText;
   readonly date: I18nText;
   readonly year: string;
   readonly summary: I18nText;
@@ -45,9 +45,9 @@ export interface Award {
 
 export interface Study {
   readonly degree: I18nText;
-  readonly school: string;
+  readonly school: I18nText;
   readonly schoolUrl?: string;
-  readonly place: string;
+  readonly place: I18nText;
   readonly period: I18nText;
   readonly grade?: I18nText;
   readonly notes: I18nList;
@@ -110,7 +110,7 @@ export interface Company {
 
 export interface CommunityItem {
   readonly role: I18nText;
-  readonly org: string;
+  readonly org: I18nText;
   readonly orgUrl?: string;
   readonly period: I18nText;
   readonly detail: I18nText;

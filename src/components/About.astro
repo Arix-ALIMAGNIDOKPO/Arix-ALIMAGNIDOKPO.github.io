@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import SectionHead from '@/components/SectionHead.astro';
 import portrait from '@/assets/photos/portrait.jpg';
 import { INTRO, SKILLS } from '@/data/profile';
-import { SITE } from '@/data/site';
 import type { Locale } from '@/data/types';
 import { useTranslations } from '@/i18n/utils';
 
@@ -24,7 +23,7 @@ const t = useTranslations(locale);
 
   <div class="about__body">
     <!-- On a phone the portrait comes first: a face before a list of tools. -->
-    <figure class="about__portrait">
+    <div class="about__portrait">
       <Image
         src={portrait}
         alt={t('about.portraitAlt')}
@@ -33,8 +32,7 @@ const t = useTranslations(locale);
         loading="lazy"
         decoding="async"
       />
-      <figcaption class="mono">{SITE.location[locale]}</figcaption>
-    </figure>
+    </div>
 
     <div class="about__skills">
       <h3 class="about__skills-heading mono">{t('about.skillsHeading')}</h3>
@@ -91,11 +89,6 @@ const t = useTranslations(locale);
     filter: grayscale(0) contrast(1);
   }
 
-  .about__portrait figcaption {
-    margin-block-start: 0.6rem;
-    font-size: var(--step--2);
-    color: var(--ink-muted);
-  }
 
   /* ---------- skills ---------- */
 
@@ -187,9 +180,6 @@ const t = useTranslations(locale);
       aspect-ratio: 3 / 4;
     }
 
-    .about__portrait figcaption {
-      text-align: right;
-    }
 
     .about__skills {
       order: 1;
