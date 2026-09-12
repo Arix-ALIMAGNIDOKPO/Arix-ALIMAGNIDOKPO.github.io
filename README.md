@@ -63,7 +63,7 @@ Everything outside the articles lives in typed data files. Edit the data, not th
 | Company and products (AIDA, Ayoka, Sovrean)        | `COMPANY` in `src/data/profile.ts` |
 | Brand logos                                        | `src/assets/logos/`         |
 | Social preview image and app icon                  | `npm run images`            |
-| CV PDF                                             | `public/cv-arix-alimagnidokpo.pdf` |
+| CV PDF, one per language                           | `public/cv-arix-alimagnidokpo-{en,fr}.pdf` |
 
 Every content field is a `{ en, fr }` pair, TypeScript reports a missing
 translation as a build error, so the two languages cannot drift apart.

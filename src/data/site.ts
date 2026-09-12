@@ -10,7 +10,11 @@ export const SITE = {
   location: { en: 'Paris, France', fr: 'Paris, France' } satisfies I18nText,
   locationCity: 'Paris',
   locationCountry: 'FR',
-  cv: '/cv-arix-alimagnidokpo.pdf',
+  /** One CV per language: a French reader should not download an English CV. */
+  cv: {
+    en: '/cv-arix-alimagnidokpo-en.pdf',
+    fr: '/cv-arix-alimagnidokpo-fr.pdf',
+  } satisfies I18nText,
   defaultLocale: 'en' as Locale,
   locales: ['en', 'fr'] as const satisfies readonly Locale[],
 } as const;

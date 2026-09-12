@@ -472,6 +472,13 @@ export const RESEARCH: readonly ResearchItem[] = [
       fr: 'Application du NLP à un goulot d’étranglement administratif concret : la rédaction, la validation et la recherche de la correspondance diplomatique. Évalué 17,5/20, mention Très bien.',
     },
     highlights: { en: [], fr: [] },
+    links: [
+      {
+        label: 'Thesis',
+        href: 'https://drive.google.com/file/d/1RjoT2IvoL8U8OARSyLbbabX8h0pnDMS-/view',
+        external: true,
+      },
+    ],
   },
 ];
 
